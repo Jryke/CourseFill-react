@@ -21,6 +21,7 @@ import Tables from "./views/examples/Tables.jsx";
 import Signup from "./views/examples/Signup.jsx";
 import AdminRegister from "./views/examples/AdminRegister.jsx";
 import StudentRegister from "./views/examples/StudentRegister.jsx";
+import CourseEdit from "./views/examples/CourseEdit.jsx";
 import CourseInfo from "./views/examples/CourseInfo.jsx";
 
 
@@ -77,7 +78,7 @@ var routes = [
 		path: "/:course",
 		name: "Class Info",
 		icon: "ni ni-single-02 text-yellow",
-		component: CourseInfo,
+		component: CourseEdit,
 		layout: "/admin",
 		invisible: true
 	},
