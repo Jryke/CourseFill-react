@@ -48,7 +48,7 @@ class ClassesTable extends React.Component {
 	}
 
 	componentDidMount() {
-	axios.get(`${process.env.REACT_APP_API_PORT}/admin/classes`)
+	axios.get(`${process.env.REACT_APP_API_PORT}/admin/courses`)
 			.then(res => {
 					const data = res.data;
 					console.log(data)
