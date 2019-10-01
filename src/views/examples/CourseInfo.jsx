@@ -139,6 +139,18 @@ class ClassInfo extends React.Component {
 			}
 		]
 	}
+
+	componentDidMount() {
+	axios.get(`${process.env.REACT_APP_API_PORT}/courses/:id`)
+			.then(res => {
+					const data = res.data;
+					console.log(data)
+					this.setState({data: data})
+			}).catch(err => {
+				console.log("Error")
+			})
+}
+
   render() {
     return (
       <>
@@ -313,7 +325,7 @@ class ClassInfo extends React.Component {
                     </div>
 
 										<Schedule />
-										
+
 										<hr className="my-4" />
                     {/* Students */}
                     <h6 className="heading-small text-muted mb-4">
