@@ -1,0 +1,150 @@
+/*!
+
+=========================================================
+* Argon Dashboard React - v1.0.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*/
+import React from "react";
+
+// reactstrap components
+import {
+  Badge,
+  DropdownMenu,
+  DropdownItem,
+  UncontrolledDropdown,
+  DropdownToggle,
+  Progress,
+  // UncontrolledTooltip
+} from "reactstrap";
+import { Link } from "react-router-dom"
+// core components
+
+class SubjectsTable extends React.Component {
+	orderList = () => {
+		let orderedList = this.props.courses.sort((a,b) => {
+			var subjA = a.subject.toUpperCase()
+			var subjB = b.subject.toUpperCase()
+			return subjA < subjB ? -1 : subjA > subjB ? 1 : 0
+		})
+		return orderedList
+	}
+  render() {
+    return (
+			<>
+				{
+					this.orderList().map((course, key) => {
+						return(
+							<tr key={key}>
+
+								<td>
+									<Link to={course.subject}>
+										{course.subject}
+									</Link>
+								</td>
+
+								<td>
+									<Link to={course.name}>
+										{course.name}
+									</Link>
+								</td>
+
+								<td>{course.shortDescription}</td>
+
+								<td>
+									{
+										course.teachers.map((teacher, key) => {
+											return(
+												<div className="avatar-group" key={key}>
+													<Link to={teacher.name}>
+														<span className="avatar avatar-sm" >
+															<img
+																alt="..."
+																className="rounded-circle"
+																src={teacher.img.src}
+															/>
+														</span>
+														<span>{teacher.name}</span>
+													</Link>
+												</div>
+											)
+										})
+									}
+								</td>
+
+								<td>
+									<div className="d-flex align-items-center">
+										<span className="mr-2">{`${course.registration.registered / course.registration.limit * 100}%`}</span>
+										<div>
+											<Progress
+												max={course.registration.limit}
+												value={course.registration.registered}
+												barClassName="bg-danger"
+											/>
+										</div>
+									</div>
+								</td>
+
+								<td>
+									<Badge color="" className="badge-dot mr-4">
+										<i className="bg-warning" />
+										pending
+									</Badge>
+								</td>
+
+								<td>${course.price}</td>
+
+								<td className="text-right">
+									<UncontrolledDropdown>
+										<DropdownToggle
+											className="btn-icon-only text-light"
+											href="#pablo"
+											role="button"
+											size="sm"
+											color=""
+											onClick={e => e.preventDefault()}
+										>
+											<i className="fas fa-ellipsis-v" />
+										</DropdownToggle>
+										<DropdownMenu className="dropdown-menu-arrow" right>
+											<DropdownItem
+												href="#pablo"
+												onClick={e => e.preventDefault()}
+											>
+												Add to cart
+											</DropdownItem>
+											<DropdownItem
+												href="#pablo"
+												onClick={e => e.preventDefault()}
+											>
+												Add to cart and register
+											</DropdownItem>
+											<DropdownItem
+												href="#pablo"
+												onClick={e => e.preventDefault()}
+											>
+												Something else here
+											</DropdownItem>
+										</DropdownMenu>
+									</UncontrolledDropdown>
+								</td>
+							</tr>
+						)
+					})
+				}
+			</>
+    );
+  }
+}
+
+export default SubjectsTable;
