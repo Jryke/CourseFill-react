@@ -53,17 +53,17 @@ class CoursesTable extends React.Component {
 						return(
 							<tr key={key}>
 									<td>
-										<Link to={course.name}>
+										<Link to={`course/${course.name}`}>
 											{course.name}
 										</Link>
 									</td>
 									<td>
-										<Link to={course.subject}>
+										<Link to={`subject/${course.subject}`}>
 											{course.subject}
 										</Link>
 									</td>
 									<td>
-										<Link to={`/admin/${course.name}`}>
+										<Link to={`course/${course.name}`}>
 											{course.shortDescription}
 										</Link></td>
 									<td>
@@ -71,7 +71,7 @@ class CoursesTable extends React.Component {
 											course.teachers.map((teacher, key) => {
 												return(
 													<div className="avatar-group" key={key}>
-														<Link to={teacher.name}>
+														<Link to={`teacher/${teacher.name}`}>
 															<span className="avatar avatar-sm" >
 																<img
 																	alt="..."
@@ -88,7 +88,7 @@ class CoursesTable extends React.Component {
 									</td>
 
 									<td>
-										<Link to={course.name}>
+										<Link to={`course/${course.name}`}>
 											<div className="d-flex align-items-center">
 												<span className="mr-2">{`${course.registration.registered / course.registration.limit * 100}%`}</span>
 												<div>
@@ -103,7 +103,7 @@ class CoursesTable extends React.Component {
 									</td>
 
 									<td>
-										<Link to={`/admin/${course.name}`}>
+										<Link to={`course/${course.name}`}>
 											<Badge color="" className="badge-dot mr-4">
 												<i className="bg-warning" />
 												pending
@@ -112,7 +112,7 @@ class CoursesTable extends React.Component {
 									</td>
 
 									<td>
-										<Link to={`/admin/${course.name}`}>
+										<Link to={`course/${course.name}`}>
 											${course.price}
 										</Link>
 									</td>

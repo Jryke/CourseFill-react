@@ -46,27 +46,30 @@ class SubjectsTable extends React.Component {
 					this.orderList().map((course, key) => {
 						return(
 							<tr key={key}>
-
 								<td>
-									<Link to={course.subject}>
+									<Link to={`subject/${course.subject}`}>
 										{course.subject}
 									</Link>
 								</td>
 
 								<td>
-									<Link to={course.name}>
+									<Link to={`course/${course.name}`}>
 										{course.name}
 									</Link>
 								</td>
 
-								<td>{course.shortDescription}</td>
+								<td>
+									<Link to={`subject/${course.subject}`}>
+										{course.shortDescription}
+									</Link>
+								</td>
 
 								<td>
 									{
 										course.teachers.map((teacher, key) => {
 											return(
 												<div className="avatar-group" key={key}>
-													<Link to={teacher.name}>
+													<Link to={`teacher/${teacher.name}`}>
 														<span className="avatar avatar-sm" >
 															<img
 																alt="..."
@@ -83,26 +86,34 @@ class SubjectsTable extends React.Component {
 								</td>
 
 								<td>
-									<div className="d-flex align-items-center">
-										<span className="mr-2">{`${course.registration.registered / course.registration.limit * 100}%`}</span>
-										<div>
-											<Progress
-												max={course.registration.limit}
-												value={course.registration.registered}
-												barClassName="bg-danger"
-											/>
+									<Link to={`subject/${course.subject}`}>
+										<div className="d-flex align-items-center">
+											<span className="mr-2">{`${course.registration.registered / course.registration.limit * 100}%`}</span>
+											<div>
+												<Progress
+													max={course.registration.limit}
+													value={course.registration.registered}
+													barClassName="bg-danger"
+												/>
+											</div>
 										</div>
-									</div>
+									</Link>
 								</td>
 
 								<td>
-									<Badge color="" className="badge-dot mr-4">
-										<i className="bg-warning" />
-										pending
-									</Badge>
+									<Link to={`subject/${course.subject}`}>
+										<Badge color="" className="badge-dot mr-4">
+											<i className="bg-warning" />
+											pending
+										</Badge>
+									</Link>
 								</td>
 
-								<td>${course.price}</td>
+								<td>
+									<Link to={`subject/${course.subject}`}>
+										${course.price}
+									</Link>
+								</td>
 
 								<td className="text-right">
 									<UncontrolledDropdown>

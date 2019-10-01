@@ -49,7 +49,7 @@ class StudentsTable extends React.Component {
 								<td>
 									<Media className="align-items-center">
 										<Link
-											to={student.name}
+											to={`student/${student.name}`}
 											className="avatar rounded-circle mr-3"
 										>
 											<img
@@ -59,7 +59,7 @@ class StudentsTable extends React.Component {
 										</Link>
 										<Media>
 											<span className="mb-0 text-sm">
-												<Link to={student.name}>
+												<Link to={`student/${student.name}`}>
 													{student.name}
 												</Link>
 											</span>
@@ -72,7 +72,7 @@ class StudentsTable extends React.Component {
 									student.courses.map((course, key) => {
 										return(
 											<div key={key}>
-												<Link to={course}>
+												<Link to={`course/${course}`}>
 													{course}
 												</Link>
 											</div>
@@ -83,7 +83,7 @@ class StudentsTable extends React.Component {
 									student.teachers.map((teacher, key) => {
 										return(
 											<div className="avatar-group" key={key}>
-												<Link to={teacher.name}>
+												<Link to={`teacher/${teacher.name}`}>
 													<span className="avatar avatar-sm" >
 														<img
 															alt="..."

@@ -23,9 +23,12 @@ import AdminRegister from "./views/examples/AdminRegister.jsx";
 import StudentRegister from "./views/examples/StudentRegister.jsx";
 import CourseEdit from "./views/examples/CourseEdit.jsx";
 import CourseInfo from "./views/examples/CourseInfo.jsx";
-
+import SubjectInfo from "./views/examples/SubjectInfo.jsx";
+import TeacherInfo from "./views/examples/TeacherInfo.jsx";
+import StudentInfo from "./views/examples/StudentInfo.jsx";
 
 var routes = [
+	// Teacher Links
   {
     path: "/classes",
     name: "Classes",
@@ -67,21 +70,38 @@ var routes = [
 		invisible: false
 	},
 	{
-		path: "/teacher/:teacher",
-		name: "Teacher Info",
-		icon: "ni ni-single-02 text-yellow",
-		component: Profile,
-		layout: "/admin",
-		invisible: true
-	},
-	{
-		path: "/:course",
+		path: "/course/:course",
 		name: "Class Info",
 		icon: "ni ni-single-02 text-yellow",
 		component: CourseEdit,
 		layout: "/admin",
 		invisible: true
 	},
+	{
+		path: "/subject/:subject",
+		name: "Subject Info",
+		icon: "ni ni-single-02 text-yellow",
+		component: SubjectInfo,
+		layout: "/admin",
+		invisible: true
+	},
+	{
+		path: "/teacher/:teacher",
+		name: "Teacher Info",
+		icon: "ni ni-single-02 text-yellow",
+		component: TeacherInfo,
+		layout: "/admin",
+		invisible: true
+	},
+	{
+		path: "/student/:student",
+		name: "Student Info",
+		icon: "ni ni-single-02 text-yellow",
+		component: StudentInfo,
+		layout: "/admin",
+		invisible: true
+	},
+	// Student Links
 	{
     path: "/classes",
     name: "Classes",
@@ -115,7 +135,7 @@ var routes = [
 		invisible: false
   },
 	{
-		path: "/:course",
+		path: "/course/:course",
 		name: "Class Info",
 		icon: "ni ni-single-02 text-yellow",
 		component: CourseInfo,
@@ -123,13 +143,30 @@ var routes = [
 		invisible: true
 	},
 	{
-		path: "/:teacher",
-		name: "Teacher Info",
+		path: "/subject/:subject",
+		name: "Subject Info",
 		icon: "ni ni-single-02 text-yellow",
-		component: Profile,
+		component: SubjectInfo,
 		layout: "/student",
 		invisible: true
 	},
+	{
+		path: "/teacher/:teacher",
+		name: "Teacher Info",
+		icon: "ni ni-single-02 text-yellow",
+		component: TeacherInfo,
+		layout: "/student",
+		invisible: true
+	},
+	{
+		path: "/student/:student",
+		name: "Student Info",
+		icon: "ni ni-single-02 text-yellow",
+		component: StudentInfo,
+		layout: "/student",
+		invisible: true
+	},
+	// Auth Links
   {
     path: "/login",
     name: "Login",

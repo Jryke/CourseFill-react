@@ -43,7 +43,7 @@ class TeachersTable extends React.Component {
 			return(
 				<td>
 					<div>
-						<Link to={teacher.name}>
+						<Link to={`teacher/${teacher.name}`}>
 							{teacher.students.length} students
 						</Link>
 					</div>
@@ -67,7 +67,7 @@ class TeachersTable extends React.Component {
 								<td>
 									<Media className="align-items-center">
 										<Link
-											to={teacher.name}
+											to={`teacher/${teacher.name}`}
 											className="avatar rounded-circle mr-3"
 										>
 											<img
@@ -77,7 +77,7 @@ class TeachersTable extends React.Component {
 										</Link>
 										<Media>
 											<span className="mb-0 text-sm">
-												<Link to={teacher.name}>
+												<Link to={`teacher/${teacher.name}`}>
 													{teacher.name}
 												</Link>
 											</span>
@@ -89,7 +89,7 @@ class TeachersTable extends React.Component {
 										teacher.courses.map((course, key) => {
 											return(
 												<div key={key}>
-													<Link to={course.name}>
+													<Link to={`course/${course.name}`}>
 														{course.name}
 													</Link>
 												</div>
@@ -101,7 +101,7 @@ class TeachersTable extends React.Component {
 									teacher.courses.map((course, key) => {
 										return(
 											<div key={key}>
-												<Link to={course.subject} onClick={e => {
+												<Link to={`subject/${course.subject}`} onClick={e => {
 														e.stopPropagation()
 													}}>
 													{course.subject}
