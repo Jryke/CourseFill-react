@@ -32,7 +32,7 @@ import {
 // core components
 import Header from "../../components/Headers/Header.jsx";
 import TableHead from "./TableHead.jsx"
-import ClassesTable from "./ClassesTable.jsx"
+import CoursesTable from "./CoursesTable.jsx"
 import SubjectsTable from "./SubjectsTable.jsx"
 import TeachersTable from "./TeachersTable.jsx"
 import StudentsTable from "./StudentsTable.jsx"
@@ -334,7 +334,7 @@ class Tables extends React.Component {
 	}
 	renderTableData = () => {
 		if (this.props.location.pathname === "/admin/classes" || this.props.location.pathname === "/student/classes") {
-			return <ClassesTable courses={this.state.courses} {...this.props} />
+			return <CoursesTable courses={this.state.courses} {...this.props} />
 		} else if (this.props.location.pathname === "/admin/subjects" || this.props.location.pathname === "/student/subjects") {
 			return <SubjectsTable courses={this.state.courses} {...this.props} />
 		} else if (this.props.location.pathname === "/admin/teachers" || this.props.location.pathname === "/student/teachers") {

@@ -31,7 +31,7 @@ import {
 import { Link } from "react-router-dom"
 // core components
 
-class ClassesTable extends React.Component {
+class CoursesTable extends React.Component {
 	orderList = () => {
 		let orderedList = this.props.courses.sort((a,b) => {
 			var nameA = a.name.toUpperCase()
@@ -151,7 +151,6 @@ class ClassesTable extends React.Component {
 										</UncontrolledDropdown>
 									</td>
 							</tr>
-
 						)
 					})
 				}
@@ -160,4 +159,4 @@ class ClassesTable extends React.Component {
   }
 }
 
-export default ClassesTable;
+export default CoursesTable;
