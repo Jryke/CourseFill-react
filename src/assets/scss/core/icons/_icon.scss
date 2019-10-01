@@ -10,12 +10,7 @@
 		font-size: $icon-size - .75;
 	}
 
-    + .icon-text {
-    	padding-left: 1rem;
-			{/*
-    	width: calc(100% - #{$icon-size} - 1);
-			*/}
-    }
+
 }
 
 
@@ -29,11 +24,7 @@
 		font-size: $icon-size-xl - .75;
 	}
 
-    + .icon-text {
-			{/*
-    	width: calc(100% - $icon-size-xl - 1);
-			*/}
-    }
+
 }
 
 
@@ -47,11 +38,7 @@
 		font-size: $icon-size-lg - .75;
 	}
 
-    + .icon-text {
-			{/*
-    	width: calc(100% - $icon-size-lg - 1);
-			*/}
-    }
+
 }
 
 
@@ -65,9 +52,5 @@
 		font-size: $icon-size-sm - .75;
 	}
 
-    + .icon-text {
-			{/*
-    	width: calc(100% - $icon-size-sm - 1);
-			*/}
-    }
+
 }
