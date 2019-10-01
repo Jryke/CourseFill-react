@@ -140,25 +140,49 @@ class ClassInfo extends React.Component {
 			}
 		]
 	}
+	renderEditButton = () => {
+		let courseName = this.props.match.params.course
+		if (this.props.location.pathname === `/admin/course/${courseName}`) {
+			return(
+				<Col className="text-right" xs="4">
+					<Button
+						color="primary"
+						href="#pablo"
+						onClick={e => {
+							e.preventDefault()
+							this.props.history.push({
+								pathname: `/admin/course-edit/${courseName}`,
+							})
+						}}
+						size="sm"
+					>
+						Edit
+					</Button>
+				</Col>
+			)
+		}
+	}
+	renderEditView = () => {
+
+	}
   render() {
+		console.log(this.props)
     return (
       <>
         <ClassHeader {...this.props}/>
         {/* Page content */}
         <Container className="mt--7" fluid>
           <Row>
-            <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
-
-							<TeacherCard />
-
-            </Col>
-            <Col className="order-xl-1" xl="8">
+            <Col className="order-xl-1 mb-6" xl="8">
               <Card className="bg-secondary shadow">
                 <CardHeader className="bg-white border-0">
                   <Row className="align-items-center">
                     <Col xs="8">
                       <h3 className="mb-0">Course Name</h3>
                     </Col>
+
+										{this.renderEditButton()}
+
                   </Row>
                 </CardHeader>
                 <CardBody>
@@ -219,6 +243,9 @@ class ClassInfo extends React.Component {
 									</Row>
                 </CardBody>
               </Card>
+            </Col>
+						<Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
+							<TeacherCard />
             </Col>
           </Row>
         </Container>

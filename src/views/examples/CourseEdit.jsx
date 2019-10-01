@@ -141,18 +141,14 @@ class ClassInfo extends React.Component {
 		]
 	}
   render() {
+		console.log(this.props)
     return (
       <>
         <ClassHeader {...this.props}/>
         {/* Page content */}
         <Container className="mt--7" fluid>
           <Row>
-            <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
-
-							<TeacherCard />
-
-            </Col>
-            <Col className="order-xl-1" xl="8">
+            <Col className="order-xl-1 mb-6" xl="8">
               <Card className="bg-secondary shadow">
                 <CardHeader className="bg-white border-0">
                   <Row className="align-items-center">
@@ -166,7 +162,7 @@ class ClassInfo extends React.Component {
                         onClick={e => e.preventDefault()}
                         size="sm"
                       >
-                        Settings
+                        Save changes
                       </Button>
                     </Col>
                   </Row>
@@ -262,6 +258,9 @@ class ClassInfo extends React.Component {
                   </Form>
                 </CardBody>
               </Card>
+            </Col>
+						<Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
+							<TeacherCard />
             </Col>
           </Row>
         </Container>

@@ -73,6 +73,14 @@ var routes = [
 		path: "/course/:course",
 		name: "Class Info",
 		icon: "ni ni-single-02 text-yellow",
+		component: CourseInfo,
+		layout: "/admin",
+		invisible: true
+	},
+	{
+		path: "/course-edit/:course",
+		name: "Class Edit",
+		icon: "ni ni-single-02 text-yellow",
 		component: CourseEdit,
 		layout: "/admin",
 		invisible: true
