@@ -81,6 +81,7 @@ class Sidebar extends React.Component {
   // creates the links that appear in the left menu / Sidebar
   createLinks = routes => {
     return routes.map((prop, key) => {
+			console.log(prop)
 			if (this.props.location.pathname.includes('admin/') && prop.layout === "/admin" && !prop.invisible) {
 				return (
 	        <NavItem key={key}>
@@ -95,7 +96,7 @@ class Sidebar extends React.Component {
 	          </NavLink>
 	        </NavItem>
 	      );
-			} else if (this.props.location.pathname.includes('student/') && prop.layout === "/student" && !prop.invisible) {
+			} else if (this.props.location.pathname.includes('student/') && prop.layout === "/student" && !prop.invisible && !this.props.location.pathname.includes('admin/')) {
 				return (
 	        <NavItem key={key}>
 	          <NavLink
