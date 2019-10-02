@@ -23,9 +23,6 @@ import {
   Card,
   CardHeader,
   CardBody,
-  FormGroup,
-  Form,
-  Input,
   Container,
   Row,
   Col
@@ -35,7 +32,6 @@ import axios from 'axios'
 // core components
 import DetailsHeader from "../../components/Headers/DetailsHeader.jsx";
 import TeacherCard from "./TeacherCard.jsx"
-import Schedule from "./Schedule.jsx";
 
 class ClassInfo extends React.Component {
 	state = {
@@ -164,7 +160,6 @@ class ClassInfo extends React.Component {
 		}
 	}
   render() {
-		console.log(this.props)
     return (
       <>
         <DetailsHeader title={"Course Name"} subtitle={"Course Subject"} info={"Course Description"} />

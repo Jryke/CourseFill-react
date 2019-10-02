@@ -37,7 +37,6 @@ import {
 
 class AdminNavbar extends React.Component {
   render() {
-		console.log(this.props)
     return (
       <>
         <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">

@@ -141,7 +141,6 @@ class ClassInfo extends React.Component {
 		]
 	}
   render() {
-		console.log(this.props)
     return (
       <>
         <DetailsHeader title={"Course Name"} subtitle={"Course Subject"} info={"Course Description"} />
