@@ -18,7 +18,15 @@ class Schedule extends React.Component {
 		this.setState({dates})
 		this.toggleDisabled()
 	}
-	render() {
+	renderDaysDefault = (day) => {
+		if (this.props.data.schedule.days.includes(day)) {
+			return true
+		} else {
+			return false
+		}
+	}
+ 	render() {
+		console.log(this.props)
 		return (
 			<>
 				<hr className="my-4" />
@@ -64,9 +72,9 @@ class Schedule extends React.Component {
 								</label>
 								<Input
 									className="form-control-alternative"
-									defaultValue="9:00am"
+									defaultValue={this.props.data.schedule.startTime}
 									id="input-start-time"
-									placeholder="9:00am"
+									placeholder={this.props.data.schedule.startTime}
 									type="datetime-local"
 								/>
 							</FormGroup>
@@ -79,9 +87,9 @@ class Schedule extends React.Component {
 								</label>
 								<Input
 									className="form-control-alternative"
-									defaultValue="9:50am"
+									defaultValue={this.props.data.schedule.endTime}
 									id="input-end-time"
-									placeholder="9:50am"
+									placeholder={this.props.data.schedule.endTime}
 									type="datetime-local"
 								/>
 							</FormGroup>
@@ -98,7 +106,7 @@ class Schedule extends React.Component {
 										return (
 											<div className="custom-checkbox" key={key}>
 												<label>
-													<input type="checkbox" />
+													<input type="checkbox" checked={this.renderDaysDefault(day)} onChange={e => e.preventDefault()} />
 													{day}
 												</label>
 											</div>

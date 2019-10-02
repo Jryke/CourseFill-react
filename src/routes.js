@@ -74,7 +74,7 @@ var routes = [
 		invisible: false
 	},
 	{
-		path: "/course/:course",
+		path: "/course/:id",
 		name: "Class Info",
 		icon: "ni ni-single-02 text-yellow",
 		component: CourseInfo,
@@ -82,7 +82,7 @@ var routes = [
 		invisible: true
 	},
 	{
-		path: "/course-edit/:course",
+		path: "/course-edit/:id",
 		name: "Class Edit",
 		icon: "ni ni-single-02 text-yellow",
 		component: CourseEdit,
@@ -90,7 +90,7 @@ var routes = [
 		invisible: true
 	},
 	{
-		path: "/subject/:subject",
+		path: "/subject/:id",
 		name: "Subject Info",
 		icon: "ni ni-single-02 text-yellow",
 		component: SubjectInfo,
@@ -98,7 +98,7 @@ var routes = [
 		invisible: true
 	},
 	{
-		path: "/subject-edit/:subject",
+		path: "/subject-edit/:id",
 		name: "Subject Edit",
 		icon: "ni ni-single-02 text-yellow",
 		component: SubjectEdit,
@@ -106,7 +106,7 @@ var routes = [
 		invisible: true
 	},
 	{
-		path: "/teacher/:teacher",
+		path: "/teacher/:id",
 		name: "Teacher Info",
 		icon: "ni ni-single-02 text-yellow",
 		component: TeacherInfo,
@@ -114,7 +114,7 @@ var routes = [
 		invisible: true
 	},
 	{
-		path: "/teacher-edit/:teacher",
+		path: "/teacher-edit/:id",
 		name: "Teacher Edit",
 		icon: "ni ni-single-02 text-yellow",
 		component: TeacherEdit,
@@ -122,7 +122,7 @@ var routes = [
 		invisible: true
 	},
 	{
-		path: "/student/:student",
+		path: "/student/:id",
 		name: "Student Info",
 		icon: "ni ni-single-02 text-yellow",
 		component: StudentInfo,
@@ -130,7 +130,7 @@ var routes = [
 		invisible: true
 	},
 	{
-		path: "/student-edit/:student",
+		path: "/student-edit/:id",
 		name: "Student Edit",
 		icon: "ni ni-single-02 text-yellow",
 		component: StudentEdit,
@@ -171,7 +171,7 @@ var routes = [
 		invisible: false
   },
 	{
-		path: "/course/:course",
+		path: "/course/:id",
 		name: "Class Info",
 		icon: "ni ni-single-02 text-yellow",
 		component: CourseInfo,
@@ -179,7 +179,7 @@ var routes = [
 		invisible: true
 	},
 	{
-		path: "/subject/:subject",
+		path: "/subject/:id",
 		name: "Subject Info",
 		icon: "ni ni-single-02 text-yellow",
 		component: SubjectInfo,
@@ -187,7 +187,7 @@ var routes = [
 		invisible: true
 	},
 	{
-		path: "/teacher/:teacher",
+		path: "/teacher/:id",
 		name: "Teacher Info",
 		icon: "ni ni-single-02 text-yellow",
 		component: TeacherInfo,

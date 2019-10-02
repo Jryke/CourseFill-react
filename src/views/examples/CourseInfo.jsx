@@ -43,10 +43,18 @@ class ClassInfo extends React.Component {
 			teachers: []
 		}
 	}
-
+	componentDidMount() {
+		axios.get(`${process.env.REACT_APP_API_PORT}/courses/${this.props.match.params.id}`)
+				.then(res => {
+						const data = res.data
+						this.setState({data: data})
+				}).catch(err => {
+					console.log("Error")
+				})
+	}
 	renderEditButton = () => {
-		let courseName = this.props.match.params.course
-		if (this.props.location.pathname === `/admin/course/${courseName}`) {
+		let courseId = this.state.data._id
+		if (this.props.location.pathname === `/admin/course/${courseId}`) {
 			return(
 				<Col className="text-right" xs="4">
 					<Button
@@ -55,7 +63,7 @@ class ClassInfo extends React.Component {
 						onClick={e => {
 							e.preventDefault()
 							this.props.history.push({
-								pathname: `/admin/course-edit/${courseName}`,
+								pathname: `/admin/course-edit/${courseId}`,
 							})
 						}}
 						size="sm"
@@ -66,19 +74,8 @@ class ClassInfo extends React.Component {
 			)
 		}
 	}
-
-	componentDidMount() {
-		axios.get(`${process.env.REACT_APP_API_PORT}/courses/5d9327187f0e99bef3e00aef`)
-				.then(res => {
-						const data = res.data
-						this.setState({data: data})
-						console.log(data)
-				}).catch(err => {
-					console.log("Error")
-				})
-	}
-
   render() {
+		console.log(this.state)
     return (
       <>
         <DetailsHeader title={this.state.data.name} subtitle={this.state.data.subject} info={this.state.data.description} />
@@ -92,8 +89,9 @@ class ClassInfo extends React.Component {
                     <Col xs="8">
                       <h3 className="mb-0">COURSE INFORMATION</h3>
                     </Col>
-										{this.renderEditButton()}
-
+										{
+											this.renderEditButton()
+										}
                   </Row>
                 </CardHeader>
                 <CardBody>
@@ -144,32 +142,54 @@ class ClassInfo extends React.Component {
 		                  </div>
 										</Col>
 									</Row>
+
+
+									<Row>
+										<Col lg="4">
+											<div>
+												<small className="form-control-label">Registration limit</small>
+												<h2>*# of seats*</h2>
+											</div>
+										</Col>
+										<Col lg="4">
+											<div className="pl-lg-4">
+												<small className="form-control-label">Currently registered</small>
+												<h2>*# of registered students*</h2>
+											</div>
+										</Col>
+										<Col lg="4">
+											<div>
+												<small className="form-control-label">Cost</small>
+												<h2>*$COST*</h2>
+											</div>
+										</Col>
+									</Row>
+
+
 									<hr className="my-4" />
 									{/* Teachers */}
 									<h6 className="heading-small text-muted mb-4">
 										Teachers
 									</h6>
 									<div className="pl-lg-4">
-										{/*
 										{
-											this.state.teachers.map((teacher, key) => {
+											this.state.data.teachers.map((teacher, key) => {
 												return(
 													<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
-														<Link to={teacher.name}>
+														<Link to={teacher.first_name}>
 															<span className="avatar avatar-sm" >
 																<img
 																	alt="..."
 																	className="rounded-circle"
-																	src={teacher.img.src}
+																	src={teacher.avatar}
 																/>
 															</span>
-															<span>{teacher.name}</span>
+															<span>{teacher.first_name}</span>
 														</Link>
 													</div>
 												)
 											})
 										}
-										*/}
 									</div>
 									<hr className="my-4" />
 									{/* Students */}

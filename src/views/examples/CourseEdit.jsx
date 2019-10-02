@@ -31,6 +31,7 @@ import {
   Col
 } from "reactstrap";
 import { Link } from "react-router-dom"
+import axios from 'axios'
 // core components
 import DetailsHeader from "../../components/Headers/DetailsHeader.jsx";
 import TeacherCard from "./TeacherCard.jsx"
@@ -38,109 +39,25 @@ import Schedule from "./Schedule.jsx";
 
 class ClassInfo extends React.Component {
 	state = {
-		students: [
-			{
-				name: "John",
-				href: "#pablo",
-				id: "tooltip804044742",
-				img: {
-					alt: "...",
-					src: require("../../assets/img/theme/team-3-800x800.jpg")
-				},
-				teachers: [
-					{
-						name: "The Jesus",
-						href: "#pablo",
-						id: "tooltip804044742",
-						img: {
-							alt: "...",
-							src: require("../../assets/img/theme/team-3-800x800.jpg")
-						},
-						courses: ["Bowling", "Throwing Strikes", "Fashion Style"],
-						students: ["The Dude", "Walter", "Donnie"]
-					},
-					{
-						name: "Splinter",
-						href: "#pablo",
-						id: "tooltip742438047",
-						img: {
-							alt: "...",
-							src: require("../../assets/img/theme/team-2-800x800.jpg")
-						},
-						courses: ["Ninjitsu", "Skateboarding", "Meditation"],
-						students: ["Leonardo","Donatello", "Michaelangelo", "Raphael"]
-					}
-				],
-				courses: [
-					"Spanish 1",
-					"Spanish 2"
-				]
+		data: {
+			schedule: {
+				days: []
 			},
-			{
-				name: "Chris",
-				href: "#pablo",
-				id: "tooltip941738690",
-				img: {
-					alt: "...",
-					src: require("../../assets/img/theme/team-1-800x800.jpg")
-				},
-				teachers: [
-					{
-						name: "Ali",
-						href: "#pablo",
-						id: "tooltip941738690",
-						img: {
-							alt: "...",
-							src: require("../../assets/img/theme/team-1-800x800.jpg")
-						},
-						courses: ["One Round Knockouts", "12 Punch combination", "Being The Greatest"],
-						students: ["Tyson","Mayweather", "Butterbean", "Holyfield"]
-					}
-				],
-				courses: [
-					"English 1",
-					"English 2"
-				]
-			},
-			{
-				name: "Sarah",
-				href: "#pablo",
-				id: "tooltip742438047",
-				img: {
-					alt: "...",
-					src: require("../../assets/img/theme/team-2-800x800.jpg")
-				},
-				teachers: [
-					{
-						name: "Splinter",
-						href: "#pablo",
-						id: "tooltip742438047",
-						img: {
-							alt: "...",
-							src: require("../../assets/img/theme/team-2-800x800.jpg")
-						},
-						courses: ["Ninjitsu", "Skateboarding", "Meditation"],
-						students: ["Leonardo","Donatello", "Michaelangelo", "Raphael"]
-					},
-					{
-						name: "Ali",
-						href: "#pablo",
-						id: "tooltip941738690",
-						img: {
-							alt: "...",
-							src: require("../../assets/img/theme/team-1-800x800.jpg")
-						},
-						courses: ["One Round Knockouts", "12 Punch combination", "Being The Greatest"],
-						students: ["Tyson","Mayweather", "Butterbean", "Holyfield"]
-					}
-				],
-				courses: [
-					"Mandarin 3"
-				]
-			}
-		]
+			students: [],
+			teachers: []
+		}
+	}
+	componentDidMount() {
+		axios.get(`${process.env.REACT_APP_API_PORT}/courses/${this.props.match.params.id}`)
+				.then(res => {
+						const data = res.data
+						this.setState({data: data})
+				}).catch(err => {
+					console.log("Error")
+				})
 	}
   render() {
+		console.log(this.state.data.description)
     return (
       <>
         <DetailsHeader title={"Course Name"} subtitle={"Course Subject"} info={"Course Description"} />
@@ -183,9 +100,9 @@ class ClassInfo extends React.Component {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              defaultValue="Course name"
+                              defaultValue={this.state.data.name}
                               id="input-course-name"
-                              placeholder="Course name"
+                              placeholder={this.state.data.name}
                               type="text"
                             />
                           </FormGroup>
@@ -200,8 +117,9 @@ class ClassInfo extends React.Component {
                             </label>
                             <Input
                               className="form-control-alternative"
+															defaultValue={this.state.data.subject}
                               id="input-subject"
-                              placeholder="Course subject"
+                              placeholder={this.state.data.subject}
                               type="text"
                             />
                           </FormGroup>
@@ -218,7 +136,7 @@ class ClassInfo extends React.Component {
 		                        <label>Description</label>
 		                        <Input
 		                          className="form-control-alternative"
-		                          placeholder="A few words about the class ..."
+															defaultValue={this.state.data.description}
 		                          rows="4"
 		                          type="textarea"
 		                        />
@@ -227,35 +145,79 @@ class ClassInfo extends React.Component {
 											</Row>
                     </div>
 
-										<Schedule />
+										<Schedule data={this.state.data} />
 
-											<hr className="my-4" />
-											{/* Teachers */}
-											<h6 className="heading-small text-muted mb-4">
-												Teachers
-											</h6>
-											<div className="pl-lg-4">
-												{/*
-												{
-													this.state.teachers.map((teacher, key) => {
-														return(
-															<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
-																<Link to={teacher.name}>
-																	<span className="avatar avatar-sm" >
-																		<img
-																			alt="..."
-																			className="rounded-circle"
-																			src={teacher.img.src}
-																		/>
-																	</span>
-																	<span>{teacher.name}</span>
-																</Link>
-															</div>
-														)
-													})
-												}
-												*/}
-											</div>
+										<hr className="my-4" />
+										<h6 className="heading-small text-muted mb-4">
+                      Registration
+                    </h6>
+                    <div className="pl-lg-4">
+											<Row>
+												<Col lg="4">
+													<FormGroup>
+														<label
+                              className="form-control-label"
+                              htmlFor="input-reg-limit"
+                            >
+                              Registration limit
+                            </label>
+                            <Input
+                              className="form-control-alternative"
+                              id="input-reg-limit"
+                              placeholder="# of students"
+                              type="number"
+                            />
+													</FormGroup>
+												</Col>
+												<Col lg="4">
+													<div className="pl-lg-4">
+														<small className="form-control-label">Currently registered</small>
+														<h2>*# of registered students*</h2>
+				                  </div>
+												</Col>
+												<Col lg="4">
+													<FormGroup>
+														<label
+                              className="form-control-label"
+                              htmlFor="input-cost"
+                            >
+                              Cost
+                            </label>
+                            <Input
+                              className="form-control-alternative"
+                              id="input-cost"
+                              placeholder="$"
+                              type="number"
+                            />
+													</FormGroup>
+												</Col>
+											</Row>
+                    </div>
+										<hr className="my-4" />
+										{/* Teachers */}
+										<h6 className="heading-small text-muted mb-4">
+											Teachers
+										</h6>
+										<div className="pl-lg-4">
+											{
+												this.state.data.teachers.map((teacher, key) => {
+													return(
+														<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
+															<Link to={teacher.first_name}>
+																<span className="avatar avatar-sm" >
+																	<img
+																		alt="..."
+																		className="rounded-circle"
+																		src={teacher.avatar}
+																	/>
+																</span>
+																<span>{teacher.first_name}</span>
+															</Link>
+														</div>
+													)
+												})
+											}
+										</div>
 										<hr className="my-4" />
                     {/* Students */}
                     <h6 className="heading-small text-muted mb-4">
@@ -263,7 +225,7 @@ class ClassInfo extends React.Component {
                     </h6>
                     <div className="pl-lg-4">
 											{
-												this.state.students.map((student, key) => {
+												this.state.data.students.map((student, key) => {
 													return(
 														<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
 															<Link to={student.name}>
