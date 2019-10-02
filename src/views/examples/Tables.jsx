@@ -47,7 +47,7 @@ class Tables extends React.Component {
 					src: require("../../assets/img/theme/bootstrap.jpg")
 				},
 				name: "English 1",
-				subject: "English/ESL",
+				subject: "English",
 				shortDescription: "First level of English.  Prepares students for English 2.",
 				fullDescription: "",
 				teachers: [
@@ -103,7 +103,7 @@ class Tables extends React.Component {
 					src: require("../../assets/img/theme/vue.jpg")
 				},
 				name: "English 3",
-				subject: "English/ESL",
+				subject: "English",
 				shortDescription: "Third level of English.  Prepares student for intermediate level English.",
 				fullDescription: "",
 				teachers: [
