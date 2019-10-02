@@ -195,10 +195,18 @@ var routes = [
 		invisible: true
 	},
 	{
-		path: "/student/:student",
+		path: "/profile",
 		name: "Student Info",
 		icon: "ni ni-single-02 text-yellow",
 		component: StudentInfo,
+		layout: "/student",
+		invisible: true
+	},
+	{
+		path: "/profile-edit",
+		name: "Student Edit",
+		icon: "ni ni-single-02 text-yellow",
+		component: StudentEdit,
 		layout: "/student",
 		invisible: true
 	},

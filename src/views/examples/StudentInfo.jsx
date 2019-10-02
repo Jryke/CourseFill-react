@@ -57,6 +57,14 @@ class Profile extends React.Component {
 	// 		)
 	// 	}
 	// }
+	renderLink = () => {
+		let studentName = this.props.match.params.student
+		if (this.props.location.pathname === `/admin/student/${studentName}`) {
+			return `/admin/student-edit/${studentName}`
+		} else if (this.props.location.pathname === '/student/profile') {
+			return '/student/profile-edit'
+		}
+	}
   render() {
     return (
       <>
@@ -78,7 +86,7 @@ class Profile extends React.Component {
 												onClick={e => {
 													e.preventDefault()
 													this.props.history.push({
-														pathname: `/admin/student-edit/${this.props.match.params.student}`,
+														pathname: this.renderLink()
 													})
 												}}
 												size="sm"
