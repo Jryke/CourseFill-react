@@ -23,9 +23,6 @@ import {
   Card,
   CardHeader,
   CardBody,
-  FormGroup,
-  Form,
-  Input,
   Container,
   Row,
   Col
@@ -35,7 +32,6 @@ import axios from 'axios'
 // core components
 import DetailsHeader from "../../components/Headers/DetailsHeader.jsx";
 import TeacherCard from "./TeacherCard.jsx"
-import Schedule from "./Schedule.jsx";
 
 class ClassInfo extends React.Component {
 	state = {
@@ -145,6 +141,58 @@ class ClassInfo extends React.Component {
 		                  </div>
 										</Col>
 									</Row>
+									<hr className="my-4" />
+									{/* Teachers */}
+									<h6 className="heading-small text-muted mb-4">
+										Teachers
+									</h6>
+									<div className="pl-lg-4">
+										{/*
+										{
+											this.state.teachers.map((teacher, key) => {
+												return(
+													<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
+														<Link to={teacher.name}>
+															<span className="avatar avatar-sm" >
+																<img
+																	alt="..."
+																	className="rounded-circle"
+																	src={teacher.img.src}
+																/>
+															</span>
+															<span>{teacher.name}</span>
+														</Link>
+													</div>
+												)
+											})
+										}
+										*/}
+									</div>
+									<hr className="my-4" />
+									{/* Students */}
+									<h6 className="heading-small text-muted mb-4">
+										Students
+									</h6>
+									<div className="pl-lg-4">
+										{
+											this.state.students.map((student, key) => {
+												return(
+													<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
+														<Link to={student.name}>
+															<span className="avatar avatar-sm" >
+																<img
+																	alt="..."
+																	className="rounded-circle"
+																	src={student.img.src}
+																/>
+															</span>
+															<span>{student.name}</span>
+														</Link>
+													</div>
+												)
+											})
+										}
+									</div>
                 </CardBody>
               </Card>
             </Col>

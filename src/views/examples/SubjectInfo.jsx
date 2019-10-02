@@ -23,9 +23,7 @@ import {
   Card,
   CardHeader,
   CardBody,
-  FormGroup,
   Form,
-  Input,
   Container,
   Row,
   Col
@@ -38,7 +36,6 @@ import TeacherCard from "./TeacherCard.jsx"
 class Profile extends React.Component {
 	renderEditButton = () => {
 		let subjectName = this.props.match.params.subject
-		console.log(subjectName)
 		if (this.props.location.pathname === `/admin/subject/${subjectName}`) {
 			return(
 				<Col className="text-right" xs="4">
@@ -60,7 +57,6 @@ class Profile extends React.Component {
 		}
 	}
   render() {
-		console.log(this.props)
     return (
       <>
         <DetailsHeader title={"Subject Name"} info={"Subject Information"} />

@@ -60,7 +60,6 @@ class Student extends React.Component {
     return "Brand";
   };
   render() {
-		console.log(this.props)
     return (
       <>
         <Sidebar
