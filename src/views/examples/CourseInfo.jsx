@@ -35,7 +35,13 @@ import TeacherCard from "./TeacherCard.jsx"
 
 class ClassInfo extends React.Component {
 	state = {
-		data: ''
+		data: {
+			schedule: {
+				days: []
+			},
+			students: [],
+			teachers: []
+		}
 	}
 
 	renderEditButton = () => {
@@ -75,8 +81,7 @@ class ClassInfo extends React.Component {
   render() {
     return (
       <>
-
-        <DetailsHeader title={"Course Name"} subtitle={"Course Subject"} info={"Course Description"} />
+        <DetailsHeader title={this.state.data.name} subtitle={this.state.data.subject} info={this.state.data.description} />
         {/* Page content */}
         <Container className="mt--7" fluid>
           <Row>
@@ -85,38 +90,34 @@ class ClassInfo extends React.Component {
                 <CardHeader className="bg-white border-0">
                   <Row className="align-items-center">
                     <Col xs="8">
-                      <h3 className="mb-0">{this.state.data.name}</h3>
+                      <h3 className="mb-0">COURSE INFORMATION</h3>
                     </Col>
 										{this.renderEditButton()}
 
                   </Row>
                 </CardHeader>
                 <CardBody>
-                  <h6 className="heading-small text-muted mb-4">
-                    Course information
-                  </h6>
                   <div className="pl-lg-4">
                     <Row>
                       <Col lg="6">
                         <div>
 													<small className="form-control-label">Course name</small>
-													<h1>*English 101*</h1>
+													<h1>{this.state.data.name}</h1>
                         </div>
                       </Col>
                       <Col lg="6">
 												<div>
 													<small className="form-control-label">Subject</small>
-													<h1>*English/ESL*</h1>
+													<h1>{this.state.data.subject}</h1>
                         </div>
                       </Col>
                     </Row>
                   </div>
                   <hr className="my-4" />
                   {/* Description */}
-                  <h6 className="heading-small text-muted mb-4">Class Description</h6>
                   <div className="pl-lg-4">
 										<small className="form-control-label">Description</small>
-										<h2>*Course descriptions goes here.  Course will prepare students for the next level of English 102.  Students will learn basic vocabulary, phrases and grammar*</h2>
+										<h2>{this.state.data.description}</h2>
                   </div>
 									<hr className="my-4" />
                   {/* Schedule */}
@@ -125,19 +126,21 @@ class ClassInfo extends React.Component {
 										<Col>
 											<div className="pl-lg-4">
 												<small className="form-control-label">Hours</small>
-												<h2>*9:00am - 9:50am*</h2>
+												<h2>{this.state.data.schedule.startTime} - {this.state.data.schedule.endTime}</h2>
 		                  </div>
 										</Col>
 										<Col>
 											<div className="pl-lg-4">
 												<small className="form-control-label">Days of week</small>
-												<h2>*M/W/F*</h2>
+													{
+														this.state.data.schedule.days.map((day, key) => <h2 key={key}>{day}</h2>)
+													}
 		                  </div>
 										</Col>
 										<Col>
 											<div className="pl-lg-4">
 												<small className="form-control-label">Dates</small>
-												<h2>*January 5, 2020 - May 18, 2020*</h2>
+												<h2>{this.state.data.schedule.startDate} - {this.state.data.schedule.endDate}</h2>
 		                  </div>
 										</Col>
 									</Row>
