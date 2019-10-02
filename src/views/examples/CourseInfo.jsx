@@ -174,6 +174,7 @@ class ClassInfo extends React.Component {
 										Students
 									</h6>
 									<div className="pl-lg-4">
+										{/*
 										{
 											this.state.students.map((student, key) => {
 												return(
@@ -192,6 +193,7 @@ class ClassInfo extends React.Component {
 												)
 											})
 										}
+										*/}
 									</div>
                 </CardBody>
               </Card>
