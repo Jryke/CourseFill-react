@@ -54,11 +54,10 @@ class Login extends React.Component {
 		})
 	  .then(res => {
 	    if (res.status === 200) {
-				console.log(localStorage.setItem('token', res.data.token ))
-	      console.log(this.props.history.push('/admin/index'))
+			localStorage.setItem('token', res.data.token)
+	    this.props.history.push('/admin/classes')
 	    } else {
-	      const error = new Error(res.error);
-	      throw error;
+			  alert('Error logging in please try again');
 	    }
 	  })
 	  .catch(err => {
@@ -82,8 +81,8 @@ class Login extends React.Component {
               <div className="text-center text-muted mb-4">
                 <small>Login Information</small>
               </div>
-              <Form role="form">
-                <FormGroup onSubmit={this.submitForm} className="mb-3">
+              <Form onSubmit={this.submitForm} role="form">
+                <FormGroup className="mb-3">
                   <InputGroup className="input-group-alternative">
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>

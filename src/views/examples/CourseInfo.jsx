@@ -159,6 +159,18 @@ class ClassInfo extends React.Component {
 			)
 		}
 	}
+
+	componentDidMount() {
+		axios.get(`${process.env.REACT_APP_API_PORT}/courses/5d9327187f0e99bef3e00aef`)
+				.then(res => {
+						const data = res.data
+						this.setState({data: data})
+						console.log(data)
+				}).catch(err => {
+					console.log("Error")
+				})
+	}
+
   render() {
     return (
       <>
