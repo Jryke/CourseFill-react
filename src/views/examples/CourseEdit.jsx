@@ -230,6 +230,33 @@ class ClassInfo extends React.Component {
 
 										<Schedule />
 
+											<hr className="my-4" />
+											{/* Teachers */}
+											<h6 className="heading-small text-muted mb-4">
+												Teachers
+											</h6>
+											<div className="pl-lg-4">
+												{/*
+												{
+													this.state.teachers.map((teacher, key) => {
+														return(
+															<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
+																<Link to={teacher.name}>
+																	<span className="avatar avatar-sm" >
+																		<img
+																			alt="..."
+																			className="rounded-circle"
+																			src={teacher.img.src}
+																		/>
+																	</span>
+																	<span>{teacher.name}</span>
+																</Link>
+															</div>
+														)
+													})
+												}
+												*/}
+											</div>
 										<hr className="my-4" />
                     {/* Students */}
                     <h6 className="heading-small text-muted mb-4">
