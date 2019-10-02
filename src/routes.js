@@ -28,6 +28,8 @@ import SubjectEdit from "./views/examples/SubjectEdit.jsx";
 import TeacherInfo from "./views/examples/TeacherInfo.jsx";
 import TeacherEdit from "./views/examples/TeacherEdit.jsx";
 import StudentInfo from "./views/examples/StudentInfo.jsx";
+import StudentEdit from "./views/examples/StudentEdit.jsx";
+
 
 var routes = [
 	// Teacher Links
@@ -124,6 +126,14 @@ var routes = [
 		name: "Student Info",
 		icon: "ni ni-single-02 text-yellow",
 		component: StudentInfo,
+		layout: "/admin",
+		invisible: true
+	},
+	{
+		path: "/student-edit/:student",
+		name: "Student Edit",
+		icon: "ni ni-single-02 text-yellow",
+		component: StudentEdit,
 		layout: "/admin",
 		invisible: true
 	},
