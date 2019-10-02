@@ -34,8 +34,8 @@ import StudentEdit from "./views/examples/StudentEdit.jsx";
 var routes = [
 	// Teacher Links
   {
-    path: "/classes",
-    name: "Classes",
+    path: "/courses",
+    name: "Courses",
     icon: "ni ni-bullet-list-67 text-red",
     component: Tables,
     layout: "/admin",
@@ -139,8 +139,8 @@ var routes = [
 	},
 	// Student Links
 	{
-    path: "/classes",
-    name: "Classes",
+    path: "/courses",
+    name: "Courses",
     icon: "ni ni-bullet-list-67 text-red",
     component: Tables,
     layout: "/student",

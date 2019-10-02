@@ -131,7 +131,7 @@ class Profile extends React.Component {
 										<hr className="my-4" />
                     {/* Students */}
                     <h6 className="heading-small text-muted mb-4">
-                      Classes in this subject
+                      Courses in this subject
                     </h6>
 										{/*
                     <div className="pl-lg-4">

@@ -316,24 +316,24 @@ class Tables extends React.Component {
 		return headerText
 	}
 	makeTableHeadProps = () => {
-		if (this.props.location.pathname === "/admin/classes") {
-			return ["Class", "Subject", "Description", "Teachers", "Registration", "Schedule", "Price", "Action"]
+		if (this.props.location.pathname === "/admin/courses") {
+			return ["Course", "Subject", "Description", "Teachers", "Registration", "Schedule", "Price", "Action"]
 		} else if (this.props.location.pathname === "/admin/subjects") {
-			return ["Subject", "Class", "Description", "Teachers", "Registration", "Schedule", "Price", "Action"]
+			return ["Subject", "Course", "Description", "Teachers", "Registration", "Schedule", "Price", "Action"]
 		} else if (this.props.location.pathname === "/admin/teachers") {
-			return ["Teacher", "Classes", "Subject", "Students", "Schedule", "Action"]
+			return ["Teacher", "Courses", "Subject", "Students", "Schedule", "Action"]
 		} else if (this.props.location.pathname === "/admin/students") {
-			return ["Student", "Classes", "Teachers", "Schedule", "Action"]
-		} else if (this.props.location.pathname === "/student/classes") {
-			return ["Class", "Subject", "Description", "Teachers", "Registration", "Schedule", "Price", "Action"]
+			return ["Student", "Courses", "Teachers", "Schedule", "Action"]
+		} else if (this.props.location.pathname === "/student/courses") {
+			return ["Course", "Subject", "Description", "Teachers", "Registration", "Schedule", "Price", "Action"]
 		} else if (this.props.location.pathname === "/student/subjects") {
-			return ["Subject", "Class", "Description", "Teachers", "Registration", "Schedule", "Price", "Action"]
+			return ["Subject", "Course", "Description", "Teachers", "Registration", "Schedule", "Price", "Action"]
 		} else if (this.props.location.pathname === "/student/teachers") {
-			return ["Teacher", "Class", "Subject", "Schedule", "Action"]
+			return ["Teacher", "Course", "Subject", "Schedule", "Action"]
 		}
 	}
 	renderTableData = () => {
-		if (this.props.location.pathname === "/admin/classes" || this.props.location.pathname === "/student/classes") {
+		if (this.props.location.pathname === "/admin/courses" || this.props.location.pathname === "/student/courses") {
 			return <CoursesTable courses={this.state.courses} {...this.props} />
 		} else if (this.props.location.pathname === "/admin/subjects" || this.props.location.pathname === "/student/subjects") {
 			return <SubjectsTable courses={this.state.courses} {...this.props} />
