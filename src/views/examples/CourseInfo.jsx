@@ -32,7 +32,7 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom"
 // core components
-import ClassHeader from "../../components/Headers/ClassHeader.jsx";
+import DetailsHeader from "../../components/Headers/DetailsHeader.jsx";
 import TeacherCard from "./TeacherCard.jsx"
 import Schedule from "./Schedule.jsx";
 
@@ -156,7 +156,7 @@ class ClassInfo extends React.Component {
 						}}
 						size="sm"
 					>
-						Edit
+						Edit course info
 					</Button>
 				</Col>
 			)
@@ -169,7 +169,7 @@ class ClassInfo extends React.Component {
 		console.log(this.props)
     return (
       <>
-        <ClassHeader {...this.props}/>
+        <DetailsHeader title={"Course Name"} subtitle={"Course Subject"} info={"Course Description"} />
         {/* Page content */}
         <Container className="mt--7" fluid>
           <Row>
