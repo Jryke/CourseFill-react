@@ -54,8 +54,8 @@ class Login extends React.Component {
 		})
 	  .then(res => {
 	    if (res.status === 200) {
-				localStorage.setItem('token', res.data.token )
-	      this.props.history.push('/admin/index');
+				console.log(localStorage.setItem('token', res.data.token ))
+	      console.log(this.props.history.push('/admin/index'))
 	    } else {
 	      const error = new Error(res.error);
 	      throw error;
@@ -63,7 +63,7 @@ class Login extends React.Component {
 	  })
 	  .catch(err => {
 	    console.error(err);
-	    alert('Error signing up please try again');
+	    alert('Error logging in please try again');
 	  });
 	}
 

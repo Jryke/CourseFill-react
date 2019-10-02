@@ -53,7 +53,7 @@ class Register extends React.Component {
 
 		submitForm = (e) => {
 		e.preventDefault();
-		axios.post(`${process.env.REACT_APP_API_PORT}/student/signup`, {
+		axios.post(`${process.env.REACT_APP_API_PORT}/signup`, {
 			first_name: this.state.first_name,
 			middle_name: this.state.middle_name,
 			last_name: this.state.last_name,
