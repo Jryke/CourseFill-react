@@ -206,14 +206,8 @@ class ClassInfo extends React.Component {
                   {/* Description */}
                   <h6 className="heading-small text-muted mb-4">Class Description</h6>
                   <div className="pl-lg-4">
-										<Row>
-											<Col>
-												<div>
-													<small className="form-control-label">Description</small>
-													<h2>*Course descriptions goes here.  Course will prepare students for the next level of English 102.  Students will learn basic vocabulary, phrases and grammar*</h2>
-                        </div>
-											</Col>
-										</Row>
+										<small className="form-control-label">Description</small>
+										<h2>*Course descriptions goes here.  Course will prepare students for the next level of English 102.  Students will learn basic vocabulary, phrases and grammar*</h2>
                   </div>
 									<hr className="my-4" />
                   {/* Schedule */}
