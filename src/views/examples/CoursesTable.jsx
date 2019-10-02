@@ -33,8 +33,19 @@ import axios from 'axios'
 // core components
 
 class CoursesTable extends React.Component {
+	state = {
+			data: [
+				{
+					schedule: {
+						days: []
+					},
+					students: [],
+					teachers: []
+				}
+			]
+	}
 	orderList = () => {
-		let orderedList = this.props.courses.sort((a,b) => {
+		let orderedList = this.state.data.sort((a,b) => {
 			var nameA = a.name.toUpperCase()
 			var nameB = b.name.toUpperCase()
 			return nameA < nameB ? -1 : nameA > nameB ? 1 : 0
@@ -48,10 +59,9 @@ class CoursesTable extends React.Component {
 	}
 
 	componentDidMount() {
-	axios.get(`${process.env.REACT_APP_API_PORT}/admin/courses`)
+	axios.get(`${process.env.REACT_APP_API_PORT}/courses`)
 			.then(res => {
 					const data = res.data;
-					console.log(data)
 					this.setState({data: data})
 			}).catch(err => {
 				console.log("Error")
@@ -66,7 +76,7 @@ class CoursesTable extends React.Component {
 						return(
 							<tr key={key}>
 									<td>
-										<Link to={`course/${course.name}`}>
+										<Link to={`course/${course._id}`}>
 											{course.name}
 										</Link>
 									</td>
@@ -77,22 +87,22 @@ class CoursesTable extends React.Component {
 									</td>
 									<td>
 										<Link to={`course/${course.name}`}>
-											{course.shortDescription}
+											{course.description}
 										</Link></td>
 									<td>
 										{
 											course.teachers.map((teacher, key) => {
 												return(
 													<div className="avatar-group" key={key}>
-														<Link to={`teacher/${teacher.name}`}>
+														<Link to={`teacher/${teacher.first_name}`}>
 															<span className="avatar avatar-sm" >
 																<img
 																	alt="..."
 																	className="rounded-circle"
-																	src={teacher.img.src}
+																	src='{teacher.avatar}'
 																/>
 															</span>
-															<span>{teacher.name}</span>
+															<span>{teacher.first_name}</span>
 														</Link>
 													</div>
 												)
@@ -103,7 +113,10 @@ class CoursesTable extends React.Component {
 									<td>
 										<Link to={`course/${course.name}`}>
 											<div className="d-flex align-items-center">
+												registration
+												{/*
 												<span className="mr-2">{`${course.registration.registered / course.registration.limit * 100}%`}</span>
+
 												<div>
 													<Progress
 														max={course.registration.limit}
@@ -111,6 +124,7 @@ class CoursesTable extends React.Component {
 														barClassName="bg-danger"
 													/>
 												</div>
+												*/}
 											</div>
 										</Link>
 									</td>
@@ -126,7 +140,10 @@ class CoursesTable extends React.Component {
 
 									<td>
 										<Link to={`course/${course.name}`}>
+											price
+											{/*
 											${course.price}
+											*/}
 										</Link>
 									</td>
 									<td className="text-right">
