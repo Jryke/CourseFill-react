@@ -24,6 +24,7 @@ import StudentRegister from "./views/examples/StudentRegister.jsx";
 import CourseEdit from "./views/examples/CourseEdit.jsx";
 import CourseInfo from "./views/examples/CourseInfo.jsx";
 import SubjectInfo from "./views/examples/SubjectInfo.jsx";
+import SubjectEdit from "./views/examples/SubjectEdit.jsx";
 import TeacherInfo from "./views/examples/TeacherInfo.jsx";
 import StudentInfo from "./views/examples/StudentInfo.jsx";
 
@@ -90,6 +91,14 @@ var routes = [
 		name: "Subject Info",
 		icon: "ni ni-single-02 text-yellow",
 		component: SubjectInfo,
+		layout: "/admin",
+		invisible: true
+	},
+	{
+		path: "/subject-edit/:subject",
+		name: "Subject Edit",
+		icon: "ni ni-single-02 text-yellow",
+		component: SubjectEdit,
 		layout: "/admin",
 		invisible: true
 	},

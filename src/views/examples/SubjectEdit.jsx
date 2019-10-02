@@ -36,31 +36,7 @@ import DetailsHeader from "../../components/Headers/DetailsHeader.jsx";
 import TeacherCard from "./TeacherCard.jsx"
 
 class Profile extends React.Component {
-	renderEditButton = () => {
-		let subjectName = this.props.match.params.subject
-		console.log(subjectName)
-		if (this.props.location.pathname === `/admin/subject/${subjectName}`) {
-			return(
-				<Col className="text-right" xs="4">
-					<Button
-						color="primary"
-						href="#pablo"
-						onClick={e => {
-							e.preventDefault()
-							this.props.history.push({
-								pathname: `/admin/subject-edit/${subjectName}`,
-							})
-						}}
-						size="sm"
-					>
-						Edit subject info
-					</Button>
-				</Col>
-			)
-		}
-	}
   render() {
-		console.log(this.props)
     return (
       <>
         <DetailsHeader title={"Subject Name"} info={"Subject Information"} />
@@ -74,9 +50,16 @@ class Profile extends React.Component {
                     <Col xs="8">
                       <h3 className="mb-0">Subject</h3>
                     </Col>
-                    {
-											this.renderEditButton()
-										}
+                    <Col className="text-right" xs="4">
+                      <Button
+                        color="primary"
+                        href="#pablo"
+                        onClick={e => e.preventDefault()}
+                        size="sm"
+                      >
+                        Save changes
+                      </Button>
+                    </Col>
                   </Row>
                 </CardHeader>
                 <CardBody>
@@ -87,20 +70,39 @@ class Profile extends React.Component {
                     <div className="pl-lg-4">
                       <Row>
                         <Col lg="6">
-													<div>
-														<small className="form-control-label">Subject name</small>
-														<h1>*English*</h1>
-	                        </div>
+                          <FormGroup>
+                            <label
+                              className="form-control-label"
+                              htmlFor="input-subject-name"
+                            >
+                              Subject name
+                            </label>
+                            <Input
+                              className="form-control-alternative"
+                              defaultValue="Subject name"
+                              id="input-subject-name"
+                              placeholder="Subject name"
+                              type="text"
+                            />
+                          </FormGroup>
                         </Col>
                       </Row>
                     </div>
                     <hr className="my-4" />
                     {/* Description */}
                     <h6 className="heading-small text-muted mb-4">Additional information</h6>
-											<div className="pl-lg-4">
-												<small className="form-control-label">Information</small>
-												<h2>*Subject information goes here.  Anything that the teachers and students need to know about the subject can be added.  This is just to fill space until data is received.*</h2>
-		                  </div>
+                    <div className="pl-lg-4">
+                      <FormGroup>
+                        <label>Information</label>
+                        <Input
+                          className="form-control-alternative"
+                          placeholder="Use this space to write any information about this subject"
+                          rows="4"
+                          defaultValue="Use this space to write any information about this subject"
+                          type="textarea"
+                        />
+                      </FormGroup>
+                    </div>
 										<hr className="my-4" />
                     {/* Students */}
                     <h6 className="heading-small text-muted mb-4">
