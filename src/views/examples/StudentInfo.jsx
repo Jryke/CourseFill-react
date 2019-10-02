@@ -30,6 +30,7 @@ import {
   Col
 } from "reactstrap";
 // core components
+import axios from 'axios'
 import DetailsHeader from "../../components/Headers/DetailsHeader.jsx";
 import TeacherCard from "./TeacherCard.jsx";
 
@@ -64,6 +65,17 @@ class Profile extends React.Component {
 		} else if (this.props.location.pathname === '/student/profile') {
 			return '/student/profile-edit'
 		}
+	}
+
+	componentDidMount() {
+		axios.get(`${process.env.REACT_APP_API_PORT}/user/5d94a9d1b6799bfc5fb85012`)
+				.then(res => {
+						const data = res.data
+						this.setState({data: data})
+						console.log(data)
+				}).catch(err => {
+					console.log("Error")
+				})
 	}
   render() {
     return (
