@@ -29,6 +29,7 @@ import {
   // UncontrolledTooltip
 } from "reactstrap";
 import { Link } from "react-router-dom"
+import axios from 'axios'
 // core components
 
 class CoursesTable extends React.Component {
@@ -45,6 +46,18 @@ class CoursesTable extends React.Component {
 			pathname: `/admin/${course.name}`,
 		})
 	}
+
+	componentDidMount() {
+	axios.get(`${process.env.REACT_APP_API_PORT}/admin/courses`)
+			.then(res => {
+					const data = res.data;
+					console.log(data)
+					this.setState({data: data})
+			}).catch(err => {
+				console.log("Error")
+			})
+}
+
   render() {
     return (
 			<>
