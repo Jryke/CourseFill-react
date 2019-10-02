@@ -162,9 +162,6 @@ class ClassInfo extends React.Component {
 			)
 		}
 	}
-	renderEditView = () => {
-
-	}
   render() {
 		console.log(this.props)
     return (
