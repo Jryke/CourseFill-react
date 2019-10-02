@@ -39,108 +39,9 @@ import Schedule from "./Schedule.jsx";
 
 class ClassInfo extends React.Component {
 	state = {
-		students: [
-			{
-				name: "John",
-				href: "#pablo",
-				id: "tooltip804044742",
-				img: {
-					alt: "...",
-					src: require("../../assets/img/theme/team-3-800x800.jpg")
-				},
-				teachers: [
-					{
-						name: "The Jesus",
-						href: "#pablo",
-						id: "tooltip804044742",
-						img: {
-							alt: "...",
-							src: require("../../assets/img/theme/team-3-800x800.jpg")
-						},
-						courses: ["Bowling", "Throwing Strikes", "Fashion Style"],
-						students: ["The Dude", "Walter", "Donnie"]
-					},
-					{
-						name: "Splinter",
-						href: "#pablo",
-						id: "tooltip742438047",
-						img: {
-							alt: "...",
-							src: require("../../assets/img/theme/team-2-800x800.jpg")
-						},
-						courses: ["Ninjitsu", "Skateboarding", "Meditation"],
-						students: ["Leonardo","Donatello", "Michaelangelo", "Raphael"]
-					}
-				],
-				courses: [
-					"Spanish 1",
-					"Spanish 2"
-				]
-			},
-			{
-				name: "Chris",
-				href: "#pablo",
-				id: "tooltip941738690",
-				img: {
-					alt: "...",
-					src: require("../../assets/img/theme/team-1-800x800.jpg")
-				},
-				teachers: [
-					{
-						name: "Ali",
-						href: "#pablo",
-						id: "tooltip941738690",
-						img: {
-							alt: "...",
-							src: require("../../assets/img/theme/team-1-800x800.jpg")
-						},
-						courses: ["One Round Knockouts", "12 Punch combination", "Being The Greatest"],
-						students: ["Tyson","Mayweather", "Butterbean", "Holyfield"]
-					}
-				],
-				courses: [
-					"English 1",
-					"English 2"
-				]
-			},
-			{
-				name: "Sarah",
-				href: "#pablo",
-				id: "tooltip742438047",
-				img: {
-					alt: "...",
-					src: require("../../assets/img/theme/team-2-800x800.jpg")
-				},
-				teachers: [
-					{
-						name: "Splinter",
-						href: "#pablo",
-						id: "tooltip742438047",
-						img: {
-							alt: "...",
-							src: require("../../assets/img/theme/team-2-800x800.jpg")
-						},
-						courses: ["Ninjitsu", "Skateboarding", "Meditation"],
-						students: ["Leonardo","Donatello", "Michaelangelo", "Raphael"]
-					},
-					{
-						name: "Ali",
-						href: "#pablo",
-						id: "tooltip941738690",
-						img: {
-							alt: "...",
-							src: require("../../assets/img/theme/team-1-800x800.jpg")
-						},
-						courses: ["One Round Knockouts", "12 Punch combination", "Being The Greatest"],
-						students: ["Tyson","Mayweather", "Butterbean", "Holyfield"]
-					}
-				],
-				courses: [
-					"Mandarin 3"
-				]
-			}
-		]
+		data: ''
 	}
+
 	renderEditButton = () => {
 		let courseName = this.props.match.params.course
 		if (this.props.location.pathname === `/admin/course/${courseName}`) {
@@ -176,9 +77,9 @@ class ClassInfo extends React.Component {
 	}
 
   render() {
-		console.log(this.props)
     return (
       <>
+
         <DetailsHeader title={"Course Name"} subtitle={"Course Subject"} info={"Course Description"} />
         {/* Page content */}
         <Container className="mt--7" fluid>
@@ -188,9 +89,8 @@ class ClassInfo extends React.Component {
                 <CardHeader className="bg-white border-0">
                   <Row className="align-items-center">
                     <Col xs="8">
-                      <h3 className="mb-0">Course Name</h3>
+                      <h3 className="mb-0">{this.state.data.name}</h3>
                     </Col>
-
 										{this.renderEditButton()}
 
                   </Row>
