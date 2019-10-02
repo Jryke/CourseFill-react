@@ -34,29 +34,29 @@ import DetailsHeader from "../../components/Headers/DetailsHeader.jsx";
 import TeacherCard from "./TeacherCard.jsx";
 
 class Profile extends React.Component {
-	renderEditButton = () => {
-		let studentName = this.props.match.params.student
-		// set this if statement to include if student logged in matches student being viewed
-		if (this.props.location.pathname === `/admin/student/${studentName}`) {
-			return(
-				<Col className="text-right" xs="4">
-					<Button
-						color="primary"
-						href="#pablo"
-						onClick={e => {
-							e.preventDefault()
-							this.props.history.push({
-								pathname: `/admin/student-edit/${studentName}`,
-							})
-						}}
-						size="sm"
-					>
-						Edit student info
-					</Button>
-				</Col>
-			)
-		}
-	}
+	// renderEditButton = () => {
+	// 	let studentName = this.props.match.params.student
+	// 	// set this if statement to include if student logged in matches student being viewed
+	// 	if (this.props.location.pathname === `/admin/student/${studentName}`) {
+	// 		return(
+	// 			<Col className="text-right" xs="4">
+	// 				<Button
+	// 					color="primary"
+	// 					href="#pablo"
+	// 					onClick={e => {
+	// 						e.preventDefault()
+	// 						this.props.history.push({
+	// 							pathname: `/admin/student-edit/${studentName}`,
+	// 						})
+	// 					}}
+	// 					size="sm"
+	// 				>
+	// 					Edit student info
+	// 				</Button>
+	// 			</Col>
+	// 		)
+	// 	}
+	// }
   render() {
     return (
       <>
@@ -71,9 +71,21 @@ class Profile extends React.Component {
 										<Col xs="8">
 											<h3 className="mb-0">Student</h3>
 										</Col>
-										{
-											this.renderEditButton()
-										}
+										<Col className="text-right" xs="4">
+											<Button
+												color="primary"
+												href="#pablo"
+												onClick={e => {
+													e.preventDefault()
+													this.props.history.push({
+														pathname: `/admin/student-edit/${this.props.match.params.student}`,
+													})
+												}}
+												size="sm"
+											>
+												Edit student info
+											</Button>
+										</Col>
 									</Row>
 								</CardHeader>
 								<CardBody>

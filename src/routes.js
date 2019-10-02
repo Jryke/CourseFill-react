@@ -166,7 +166,7 @@ var routes = [
     path: "/profile",
     name: "Profile",
     icon: "ni ni-single-02 text-yellow",
-    component: Profile,
+    component: StudentInfo,
     layout: "/student",
 		invisible: false
   },
