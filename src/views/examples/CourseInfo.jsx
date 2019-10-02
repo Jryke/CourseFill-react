@@ -31,6 +31,7 @@ import {
   Col
 } from "reactstrap";
 import { Link } from "react-router-dom"
+import axios from 'axios'
 // core components
 import ClassHeader from "../../components/Headers/ClassHeader.jsx";
 import Schedule from "./Schedule.jsx";
