@@ -41,6 +41,7 @@ import Schedule from "./Schedule.jsx";
 class ClassInfo extends React.Component {
 	state = {
 		editable: false,
+		days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
 		data: {
 			schedule: {
 				days: []
@@ -86,6 +87,24 @@ class ClassInfo extends React.Component {
 		let state = this.state
 		state[stateRef] = e.target.value
 		this.setState({state}, console.log(this.state))
+	}
+	updateDays = (e, i, day) => {
+		if (e.target.checked) {
+			let state = this.state
+			state.data.schedule.days.push(day)
+			const sortDays = (a, b) => {
+			  a = this.state.days.indexOf(a);
+			  b = this.state.days.indexOf(b);
+			  return a < b ? 0 : 1;
+			}
+			state.data.schedule.days.sort(sortDays)
+			this.setState({state})
+		} else if (!e.target.checked) {
+			let index = this.state.data.schedule.days.indexOf(day)
+			let state = this.state
+			state.data.schedule.days.splice(index, 1)
+			this.setState({state})
+		}
 	}
 	submitForm = (e) => {
 		e.preventDefault()
@@ -374,7 +393,7 @@ class ClassInfo extends React.Component {
 													</Row>
 		                    </div>
 
-												<Schedule data={this.state.data} />
+												<Schedule data={this.state.data} sendInputToState={this.sendInputToState} updateDays={this.updateDays} days={this.state.days} />
 
 												<hr className="my-4" />
 												<h6 className="heading-small text-muted mb-4">

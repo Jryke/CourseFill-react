@@ -9,9 +9,6 @@ import {
 // core components
 
 class Schedule extends React.Component {
-	state = {
-		days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-	}
 	changeDate = (date, field) => {
 		let dates = this.state.dates
 		dates[field] = date
@@ -47,6 +44,7 @@ class Schedule extends React.Component {
 									className="form-control-alternative"
 									id="input-start-date"
 									type="date"
+									onChange={(e, stateRef) => this.props.sendInputToState(e, 'schedule.startDate')}
 								/>
 							</FormGroup>
 							<FormGroup>
@@ -60,6 +58,7 @@ class Schedule extends React.Component {
 									className="form-control-alternative"
 									id="input-end-date"
 									type="date"
+									onChange={(e, stateRef) => this.props.sendInputToState(e, 'schedule.endDate')}
 								/>
 							</FormGroup>
 							<FormGroup>
@@ -75,6 +74,7 @@ class Schedule extends React.Component {
 									id="input-start-time"
 									placeholder={this.props.data.schedule.startTime}
 									type="datetime-local"
+									onChange={(e, stateRef) => this.props.sendInputToState(e, 'schedule.startTime')}
 								/>
 							</FormGroup>
 							<FormGroup>
@@ -90,6 +90,7 @@ class Schedule extends React.Component {
 									id="input-end-time"
 									placeholder={this.props.data.schedule.endTime}
 									type="datetime-local"
+									onChange={(e, stateRef) => this.props.sendInputToState(e, 'schedule.endTime')}
 								/>
 							</FormGroup>
 						</Col>
@@ -101,11 +102,11 @@ class Schedule extends React.Component {
 									Days of the week
 								</label>
 								{
-									this.state.days.map((day, key) => {
+									this.props.days.map((day, i) => {
 										return (
-											<div className="custom-checkbox" key={key}>
+											<div className="custom-checkbox" key={i}>
 												<label>
-													<input type="checkbox" checked={this.renderDaysDefault(day)} onChange={e => e.preventDefault()} />
+													<input type="checkbox" defaultChecked={this.renderDaysDefault(day)} onChange={e => this.props.updateDays(e, i, day)} />
 													{day}
 												</label>
 											</div>
