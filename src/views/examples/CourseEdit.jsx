@@ -60,7 +60,7 @@ class ClassInfo extends React.Component {
 		console.log(this.state.data.description)
     return (
       <>
-        <DetailsHeader title={"Course Name"} subtitle={"Course Subject"} info={"Course Description"} />
+        <DetailsHeader title={this.state.data.name} subtitle={this.state.data.subject} info={this.state.data.description} />
         {/* Page content */}
         <Container className="mt--7" fluid>
           <Row>
