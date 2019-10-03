@@ -93,6 +93,7 @@ class ClassInfo extends React.Component {
 		console.log('form submitted')
 	}
   render() {
+		console.log(this.state);
     return (
       <>
         <DetailsHeader title={this.state.data.name} subtitle={this.state.data.subject} info={this.state.data.description} />
@@ -352,6 +353,7 @@ class ClassInfo extends React.Component {
 		                              id="input-subject"
 		                              placeholder={this.state.data.subject}
 		                              type="text"
+																	onChange={(e, stateRef) => this.sendInputToState(e, 'subject')}
 		                            />
 		                          </FormGroup>
 		                        </Col>
@@ -365,6 +367,7 @@ class ClassInfo extends React.Component {
 																	defaultValue={this.state.data.description}
 				                          rows="4"
 				                          type="textarea"
+																	onChange={(e, stateRef) => this.sendInputToState(e, 'description')}
 				                        />
 				                      </FormGroup>
 														</Col>
@@ -393,6 +396,7 @@ class ClassInfo extends React.Component {
 		                              id="input-reg-limit"
 		                              placeholder="# of students"
 		                              type="number"
+																	onChange={(e, stateRef) => this.sendInputToState(e, 'registration.limit')}
 		                            />
 															</FormGroup>
 														</Col>
@@ -436,6 +440,7 @@ class ClassInfo extends React.Component {
 																	id="input-price"
 																	placeholder={this.state.data.price}
 																	type="number"
+																	onChange={(e, stateRef) => this.sendInputToState(e, 'price')}
 																/>
 															</FormGroup>
 														</Col>
