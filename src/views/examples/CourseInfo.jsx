@@ -143,10 +143,11 @@ class ClassInfo extends React.Component {
 										</Col>
 									</Row>
 
-
+									<hr className="my-4" />
+                  {/* Registration */}
 									<Row>
 										<Col lg="4">
-											<div>
+											<div className="pl-lg-4">
 												<small className="form-control-label">Registration limit</small>
 												<h2>*# of seats*</h2>
 											</div>
@@ -158,7 +159,7 @@ class ClassInfo extends React.Component {
 											</div>
 										</Col>
 										<Col lg="4">
-											<div>
+											<div className="pl-lg-4">
 												<small className="form-control-label">Cost</small>
 												<h2>*$COST*</h2>
 											</div>
