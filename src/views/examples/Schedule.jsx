@@ -26,7 +26,6 @@ class Schedule extends React.Component {
 		}
 	}
  	render() {
-		console.log(this.props)
 		return (
 			<>
 				<hr className="my-4" />
