@@ -82,6 +82,16 @@ class ClassInfo extends React.Component {
 			)
 		}
 	}
+	sendInputToState = (e, stateRef) => {
+		let state = this.state
+		state[stateRef] = e.target.value
+		this.setState({state}, console.log(this.state))
+	}
+	submitForm = (e) => {
+		e.preventDefault()
+		// PATCH REQUEST THEN
+		console.log('form submitted')
+	}
   render() {
     return (
       <>
@@ -294,8 +304,8 @@ class ClassInfo extends React.Component {
 		                      </Button>
 		                      <Button
 		                        color="primary"
-		                        href="#pablo"
-		                        onClick={e => e.preventDefault()}
+		                        form="course-edit"
+		                        type="submit"
 		                        size="sm"
 		                      >
 		                        Save changes
@@ -304,7 +314,7 @@ class ClassInfo extends React.Component {
 		                  </Row>
 		                </CardHeader>
 		                <CardBody>
-		                  <Form>
+		                  <Form id="course-edit" onSubmit={this.submitForm}>
 		                    <h6 className="heading-small text-muted mb-4">
 		                      General information
 		                    </h6>
@@ -324,6 +334,7 @@ class ClassInfo extends React.Component {
 		                              id="input-course-name"
 		                              placeholder={this.state.data.name}
 		                              type="text"
+																	onChange={(e, stateRef) => this.sendInputToState(e, 'name')}
 		                            />
 		                          </FormGroup>
 		                        </Col>
