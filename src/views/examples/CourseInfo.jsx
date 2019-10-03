@@ -53,12 +53,12 @@ class ClassInfo extends React.Component {
 	}
 	componentDidMount() {
 		axios.get(`${process.env.REACT_APP_API_PORT}/courses/${this.props.match.params.id}`)
-				.then(res => {
-						const data = res.data
-						this.setState({data: data})
-				}).catch(err => {
-					console.log("Error")
-				})
+			.then(res => {
+				const data = res.data
+				this.setState({data: data})
+			}).catch(err => {
+				console.log("Error")
+			})
 	}
 	renderEditButton = () => {
 		let courseId = this.state.data._id
@@ -85,8 +85,8 @@ class ClassInfo extends React.Component {
 	}
 	sendInputToState = (e, stateRef) => {
 		let state = this.state
-		state[stateRef] = e.target.value
-		this.setState({state}, console.log(this.state))
+		state.data[stateRef] = e.target.value
+		this.setState({state})
 	}
 	updateDays = (e, i, day) => {
 		if (e.target.checked) {
@@ -106,13 +106,25 @@ class ClassInfo extends React.Component {
 			this.setState({state})
 		}
 	}
-	submitForm = (e) => {
+	submitUpdates = (e) => {
 		e.preventDefault()
 		// PATCH REQUEST THEN
 		console.log('form submitted')
 	}
+	cancelUpdates = (e) => {
+		e.preventDefault()
+		axios.get(`${process.env.REACT_APP_API_PORT}/courses/${this.props.match.params.id}`)
+			.then(res => {
+				const data = res.data
+				this.setState({
+					data: data,
+					editable: !this.state.editable
+				})
+			}).catch(err => {
+				console.log("Error")
+			})
+	}
   render() {
-		console.log(this.state);
     return (
       <>
         <DetailsHeader title={this.state.data.name} subtitle={this.state.data.subject} info={this.state.data.description} />
@@ -311,13 +323,7 @@ class ClassInfo extends React.Component {
 		                      <Button
 		                        color="default"
 		                        href="#pablo"
-		                        onClick={e => {
-															e.preventDefault()
-															this.setState({
-																editable: !this.state.editable
-															})
-															}
-														}
+		                        onClick={this.cancelUpdates}
 		                        size="sm"
 		                      >
 		                        Cancel changes
@@ -327,6 +333,7 @@ class ClassInfo extends React.Component {
 		                        form="course-edit"
 		                        type="submit"
 		                        size="sm"
+														onClick={this.submitUpdates}
 		                      >
 		                        Save changes
 		                      </Button>
