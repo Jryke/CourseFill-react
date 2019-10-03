@@ -57,7 +57,6 @@ class ClassInfo extends React.Component {
 				})
 	}
   render() {
-		console.log(this.state.data.description)
     return (
       <>
         <DetailsHeader title={this.state.data.name} subtitle={this.state.data.subject} info={this.state.data.description} />

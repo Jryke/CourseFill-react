@@ -82,14 +82,6 @@ var routes = [
 		invisible: true
 	},
 	{
-		path: "/course-edit/:id",
-		name: "Class Edit",
-		icon: "ni ni-single-02 text-yellow",
-		component: CourseEdit,
-		layout: "/admin",
-		invisible: true
-	},
-	{
 		path: "/subject/:id",
 		name: "Subject Info",
 		icon: "ni ni-single-02 text-yellow",
