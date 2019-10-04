@@ -37,7 +37,7 @@ import DetailsHeader from "../../components/Headers/DetailsHeader.jsx";
 import TeacherCard from "./TeacherCard.jsx"
 import Schedule from "./Schedule.jsx";
 
-class ClassInfo extends React.Component {
+class CourseEdit extends React.Component {
 	state = {
 		data: {
 			schedule: {
@@ -256,4 +256,4 @@ class ClassInfo extends React.Component {
   }
 }
 
-export default ClassInfo;
+export default CourseEdit;
