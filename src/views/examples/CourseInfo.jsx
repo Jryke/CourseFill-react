@@ -168,28 +168,31 @@ class CourseInfo extends React.Component {
 		                <CardBody>
 		                  <div className="pl-lg-4">
 												<h6 className="heading-small text-muted mb-4">General information</h6>
-
-		                    <Row>
+		                    <Row className="mb-3">
 		                      <Col lg="6">
 														{/* Name */}
-		                        <div>
+		                        <div className="pl-lg-4">
 															<small className="form-control-label">Course name</small>
 															<h1>{this.state.data.name}</h1>
 		                        </div>
 		                      </Col>
 		                      <Col lg="6">
 														{/* Subject */}
-														<div>
+														<div className="pl-lg-4">
 															<small className="form-control-label">Subject</small>
 															<h1>{this.state.data.subject}</h1>
 		                        </div>
 		                      </Col>
 		                    </Row>
-		                  </div>
-		                  {/* Description */}
-		                  <div className="pl-lg-4">
-												<small className="form-control-label">Description</small>
-												<h2>{this.state.data.description}</h2>
+												{/* Description */}
+												<Row>
+													<Col lg="6">
+														<div className="pl-lg-4">
+															<small className="form-control-label">Description</small>
+															<h2>{this.state.data.description}</h2>
+					                  </div>
+													</Col>
+												</Row>
 		                  </div>
 											<hr className="my-4" />
 		                  {/* Schedule */}
@@ -415,10 +418,16 @@ class CourseInfo extends React.Component {
 													<Row>
 														<Col>
 															<FormGroup>
-				                        <label>Description</label>
+																<label
+		                              className="form-control-label"
+		                              htmlFor="input-description"
+		                            >
+																	Description
+																</label>
 				                        <Input
 				                          className="form-control-alternative"
 																	defaultValue={this.state.data.description}
+																	id="input-description"
 				                          rows="4"
 				                          type="textarea"
 																	onChange={(e) => this.sendInputToState(e, 'description')}
