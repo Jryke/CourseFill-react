@@ -29,7 +29,8 @@ import {
   Container,
   Row,
   Col,
-	Progress
+	Progress,
+	CardFooter
 } from "reactstrap";
 import { Link } from "react-router-dom"
 import axios from 'axios'
@@ -321,6 +322,14 @@ class CourseInfo extends React.Component {
 												</div>
 											</div>
 		                </CardBody>
+										<CardFooter>
+											<Row className="align-items-center">
+												<Col xs="8"></Col>
+												{
+													this.renderEditButton()
+												}
+											</Row>
+										</CardFooter>
 		              </Card>
 		            </Col>
 								<Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
@@ -544,6 +553,30 @@ class CourseInfo extends React.Component {
 		                    </div>
 		                  </Form>
 		                </CardBody>
+										<CardFooter>
+											<Row className="align-items-center">
+												<Col xs="8"></Col>
+												<Col className="text-right" xs="4">
+		                      <Button
+		                        color="default"
+		                        href="#pablo"
+		                        onClick={this.cancelUpdates}
+		                        size="sm"
+		                      >
+		                        Cancel changes
+		                      </Button>
+		                      <Button
+		                        color="primary"
+		                        form="course-edit"
+		                        type="submit"
+		                        size="sm"
+														onClick={this.submitUpdates}
+		                      >
+		                        Save changes
+		                      </Button>
+		                    </Col>
+											</Row>
+										</CardFooter>
 		              </Card>
 		            </Col>
 								<Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
