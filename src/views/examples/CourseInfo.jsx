@@ -84,9 +84,21 @@ class CourseInfo extends React.Component {
 		}
 	}
 	sendInputToState = (e, stateRef) => {
-		let state = this.state
-		state.data[stateRef] = e.target.value
-		this.setState({state})
+		let data = this.state.data
+		if (stateRef === 'limit') {
+			data.registration.limit = e.target.value
+		} else if (stateRef === 'startDate') {
+			data.schedule.startDate = e.target.value
+		} else if (stateRef === 'endDate') {
+			data.schedule.endDate = e.target.value
+		} else if (stateRef === 'startTime') {
+			data.schedule.startTime = e.target.value
+		} else if (stateRef === 'endTime') {
+			data.schedule.endTime = e.target.value
+		} else {
+			data[stateRef] = e.target.value
+		}
+		this.setState({data})
 	}
 	updateDays = (e, i, day) => {
 		if (e.target.checked) {
@@ -108,17 +120,16 @@ class CourseInfo extends React.Component {
 	}
 	submitUpdates = (e) => {
 		e.preventDefault()
-		// PATCH REQUEST THEN
-		axios.patch(`${process.env.REACT_APP_API_PORT}/courses/${this.props.match.params.id}`)
-			.then(res => {
-					const data = res.data;
-					this.setState({data: data})
+		axios.patch(`${process.env.REACT_APP_API_PORT}/courses/${this.props.match.params.id}`, this.state.data)
+			.then(data => {
+					this.setState({
+						editable: !this.state.editable
+					})
 			}).catch(err => {
 				console.log("Error")
 			})
-		console.log('form submitted')
 	}
-	
+
 	cancelUpdates = (e) => {
 		e.preventDefault()
 		axios.get(`${process.env.REACT_APP_API_PORT}/courses/${this.props.match.params.id}`)
@@ -227,7 +238,7 @@ class CourseInfo extends React.Component {
 													<Col lg="4">
 														<div className="pl-lg-4">
 															<small className="form-control-label">Availability</small>
-															<h2>{100 - (this.state.data.registration.registered / this.state.data.registration.limit * 100)}%</h2>
+															<h2>{Math.round(100 - (this.state.data.registration.registered / this.state.data.registration.limit * 100))}%</h2>
 															<Progress
 																max={this.state.data.registration.limit}
 																value={this.state.data.registration.registered}
@@ -369,7 +380,7 @@ class CourseInfo extends React.Component {
 		                              id="input-course-name"
 		                              placeholder={this.state.data.name}
 		                              type="text"
-																	onChange={(e, stateRef) => this.sendInputToState(e, 'name')}
+																	onChange={e => this.sendInputToState(e, 'name')}
 		                            />
 		                          </FormGroup>
 		                        </Col>
@@ -387,7 +398,7 @@ class CourseInfo extends React.Component {
 		                              id="input-subject"
 		                              placeholder={this.state.data.subject}
 		                              type="text"
-																	onChange={(e, stateRef) => this.sendInputToState(e, 'subject')}
+																	onChange={(e) => this.sendInputToState(e, 'subject')}
 		                            />
 		                          </FormGroup>
 		                        </Col>
@@ -401,7 +412,7 @@ class CourseInfo extends React.Component {
 																	defaultValue={this.state.data.description}
 				                          rows="4"
 				                          type="textarea"
-																	onChange={(e, stateRef) => this.sendInputToState(e, 'description')}
+																	onChange={(e) => this.sendInputToState(e, 'description')}
 				                        />
 				                      </FormGroup>
 														</Col>
@@ -430,7 +441,7 @@ class CourseInfo extends React.Component {
 		                              id="input-reg-limit"
 		                              placeholder="# of students"
 		                              type="number"
-																	onChange={(e, stateRef) => this.sendInputToState(e, 'registration.limit')}
+																	onChange={(e) => this.sendInputToState(e, 'limit')}
 		                            />
 															</FormGroup>
 														</Col>
@@ -443,7 +454,7 @@ class CourseInfo extends React.Component {
 														<Col lg="4">
 															<div className="pl-lg-4">
 																<small className="form-control-label">Availability</small>
-																<h2>{100 - (this.state.data.registration.registered / this.state.data.registration.limit * 100)}%</h2>
+																<h2>{Math.round(100 - (this.state.data.registration.registered / this.state.data.registration.limit * 100))}%</h2>
 																<Progress
 																	max={this.state.data.registration.limit}
 																	value={this.state.data.registration.registered}

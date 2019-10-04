@@ -45,7 +45,7 @@ class Schedule extends React.Component {
 									id="input-start-date"
 									type="date"
 									defaultValue={this.props.data.schedule.startDate}
-									onChange={(e, stateRef) => this.props.sendInputToState(e, 'schedule.startDate')}
+									onChange={(e, stateRef) => this.props.sendInputToState(e, 'startDate')}
 								/>
 							</FormGroup>
 							<FormGroup>
@@ -60,7 +60,7 @@ class Schedule extends React.Component {
 									id="input-end-date"
 									type="date"
 									defaultValue={this.props.data.schedule.endDate}
-									onChange={(e, stateRef) => this.props.sendInputToState(e, 'schedule.endDate')}
+									onChange={(e, stateRef) => this.props.sendInputToState(e, 'endDate')}
 								/>
 							</FormGroup>
 							<FormGroup>
@@ -76,7 +76,7 @@ class Schedule extends React.Component {
 									id="input-start-time"
 									placeholder={this.props.data.schedule.startTime}
 									type="datetime-local"
-									onChange={(e, stateRef) => this.props.sendInputToState(e, 'schedule.startTime')}
+									onChange={(e, stateRef) => this.props.sendInputToState(e, 'startTime')}
 								/>
 							</FormGroup>
 							<FormGroup>
@@ -92,7 +92,7 @@ class Schedule extends React.Component {
 									id="input-end-time"
 									placeholder={this.props.data.schedule.endTime}
 									type="datetime-local"
-									onChange={(e, stateRef) => this.props.sendInputToState(e, 'schedule.endTime')}
+									onChange={(e, stateRef) => this.props.sendInputToState(e, 'endTime')}
 								/>
 							</FormGroup>
 						</Col>
