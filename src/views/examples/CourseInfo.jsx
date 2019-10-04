@@ -84,18 +84,10 @@ class CourseInfo extends React.Component {
 			)
 		}
 	}
-	sendInputToState = (e, stateRef) => {
+	sendInputToState = (e, stateRef, stateObj) => {
 		let data = this.state.data
-		if (stateRef === 'limit') {
-			data.registration.limit = e.target.value
-		} else if (stateRef === 'startDate') {
-			data.schedule.startDate = e.target.value
-		} else if (stateRef === 'endDate') {
-			data.schedule.endDate = e.target.value
-		} else if (stateRef === 'startTime') {
-			data.schedule.startTime = e.target.value
-		} else if (stateRef === 'endTime') {
-			data.schedule.endTime = e.target.value
+		if (stateObj) {
+			data[stateObj][stateRef] = e.target.value
 		} else {
 			data[stateRef] = e.target.value
 		}
@@ -459,7 +451,7 @@ class CourseInfo extends React.Component {
 		                              id="input-reg-limit"
 		                              placeholder="# of students"
 		                              type="number"
-																	onChange={(e) => this.sendInputToState(e, 'limit')}
+																	onChange={(e) => this.sendInputToState(e, 'limit', 'registration')}
 		                            />
 															</FormGroup>
 														</Col>
