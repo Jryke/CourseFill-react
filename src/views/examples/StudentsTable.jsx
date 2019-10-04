@@ -39,6 +39,16 @@ class StudentsTable extends React.Component {
 		})
 		return orderedList
 	}
+
+	componentDidMount() {
+		axios.get(`${process.env.REACT_APP_API_PORT}/students`)
+			.then(res => {
+				const data = res.data
+				this.setState({data: data})
+			}).catch(err => {
+				console.log("Error")
+			})
+	}
   render() {
     return (
 			<>
