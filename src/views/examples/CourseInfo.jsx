@@ -109,8 +109,16 @@ class CourseInfo extends React.Component {
 	submitUpdates = (e) => {
 		e.preventDefault()
 		// PATCH REQUEST THEN
+		axios.patch(`${process.env.REACT_APP_API_PORT}/courses/${this.props.match.params.id}`)
+			.then(res => {
+					const data = res.data;
+					this.setState({data: data})
+			}).catch(err => {
+				console.log("Error")
+			})
 		console.log('form submitted')
 	}
+	
 	cancelUpdates = (e) => {
 		e.preventDefault()
 		axios.get(`${process.env.REACT_APP_API_PORT}/courses/${this.props.match.params.id}`)
