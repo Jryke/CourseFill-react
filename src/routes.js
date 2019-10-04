@@ -194,14 +194,6 @@ var routes = [
 		layout: "/student",
 		invisible: true
 	},
-	{
-		path: "/profile-edit",
-		name: "Student Edit",
-		icon: "ni ni-single-02 text-yellow",
-		component: StudentEdit,
-		layout: "/student",
-		invisible: true
-	},
 	// Auth Links
   {
     path: "/login",
