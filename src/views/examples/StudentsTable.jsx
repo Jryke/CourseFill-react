@@ -32,10 +32,13 @@ import axios from 'axios'
 // core components
 
 class StudentsTable extends React.Component {
+	state = {
+		data: []
+	}
 	orderList = () => {
-		let orderedList = this.props.students.sort((a,b) => {
-			var studentA = a.name.toUpperCase()
-			var studentB = b.name.toUpperCase()
+		let orderedList = this.state.data.sort((a,b) => {
+			var studentA = a.last_name.toUpperCase()
+			var studentB = b.last_name.toUpperCase()
 			return studentA < studentB ? -1 : studentA > studentB ? 1 : 0
 		})
 		return orderedList
@@ -51,6 +54,7 @@ class StudentsTable extends React.Component {
 			})
 	}
   render() {
+		console.log(this.state)
     return (
 			<>
 				{
@@ -60,18 +64,17 @@ class StudentsTable extends React.Component {
 								<td>
 									<Media className="align-items-center">
 										<Link
-											to={`student/${student.name}`}
+											to={`student/${student._id}`}
 											className="avatar rounded-circle mr-3"
 										>
 											<img
-												alt={student.img.alt}
-												src={student.img.src}
+												src={student.avatar}
 											/>
 										</Link>
 										<Media>
 											<span className="mb-0 text-sm">
-												<Link to={`student/${student.name}`}>
-													{student.name}
+												<Link to={`student/${student._id}`}>
+													{student.first_name} {student.last_name}
 												</Link>
 											</span>
 										</Media>
@@ -90,7 +93,9 @@ class StudentsTable extends React.Component {
 										)
 									})
 								}</td>
-								<td>{
+								<td>
+									{/*
+									{
 									student.teachers.map((teacher, key) => {
 										return(
 											<div className="avatar-group" key={key}>
@@ -107,7 +112,9 @@ class StudentsTable extends React.Component {
 											</div>
 										)
 									})
-								}</td>
+								}
+								*/}
+							</td>
 								<td>
 									<Badge color="" className="badge-dot mr-4">
 										<i className="bg-warning" />
