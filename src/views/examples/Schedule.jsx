@@ -44,6 +44,7 @@ class Schedule extends React.Component {
 									className="form-control-alternative"
 									id="input-start-date"
 									type="date"
+									defaultValue={this.props.data.schedule.startDate}
 									onChange={(e, stateRef) => this.props.sendInputToState(e, 'schedule.startDate')}
 								/>
 							</FormGroup>
@@ -58,6 +59,7 @@ class Schedule extends React.Component {
 									className="form-control-alternative"
 									id="input-end-date"
 									type="date"
+									defaultValue={this.props.data.schedule.endDate}
 									onChange={(e, stateRef) => this.props.sendInputToState(e, 'schedule.endDate')}
 								/>
 							</FormGroup>
