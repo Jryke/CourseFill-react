@@ -38,7 +38,7 @@ import DetailsHeader from "../../components/Headers/DetailsHeader.jsx";
 import TeacherCard from "./TeacherCard.jsx"
 import Schedule from "./Schedule.jsx";
 
-class ClassInfo extends React.Component {
+class CourseInfo extends React.Component {
 	state = {
 		editable: false,
 		days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
@@ -541,4 +541,4 @@ class ClassInfo extends React.Component {
   }
 }
 
-export default ClassInfo;
+export default CourseInfo;
