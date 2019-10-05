@@ -40,7 +40,8 @@ class StudentInfo extends React.Component {
 	state = {
 		editable: false,
 		data: {
-			courses: []
+			courses: [],
+			address: {}
 		}
 	}
 	componentDidMount() {
@@ -85,16 +86,10 @@ class StudentInfo extends React.Component {
 		}
 		this.setState({data})
 	}
-	// sendInputToState = (e, stateRef) => {
-	// 	let data = this.state.data
-	// 	data[stateRef] = e.target.value
-	// 	this.setState({data})
-	// }
   render() {
-		console.log(this.state)
     return (
       <>
-				<DetailsHeader title={"Student Name"} info={"About Student"} />
+				<DetailsHeader title={`${this.state.data.first_name} ${this.state.data.last_name}`} info={this.state.data.about} />
 				{/* Page content */}
 				{
 					!this.state.editable ? (
@@ -151,14 +146,6 @@ class StudentInfo extends React.Component {
 														</Col>
 													</Row>
 													<Row>
-														<Col lg="6">
-															<div>
-																<small className="form-control-label">Email address</small>
-																<h1>{this.state.data.email}</h1>
-			                        </div>
-														</Col>
-													</Row>
-													<Row>
 														<Col md="12">
 															<div>
 																<small className="form-control-label">About</small>
@@ -168,41 +155,70 @@ class StudentInfo extends React.Component {
 													</Row>
 												</div>
 												<hr className="my-4" />
-												{/* Address */}
+												{/* Contact information */}
 												<h6 className="heading-small text-muted mb-4">
 													Contact information
+												</h6>
+												<div className="pl-lg-4">
+													<Row>
+														<Col lg="6">
+															<div>
+																<small className="form-control-label">Email address</small>
+																<h1>{this.state.data.email}</h1>
+			                        </div>
+		                        </Col>
+														<Col lg="6">
+															<div>
+																<small className="form-control-label">Phone number</small>
+																<h2>{this.state.data.phone}</h2>
+															</div>
+		                        </Col>
+													</Row>
+		                    </div>
+												<hr className="my-4" />
+												{/* Address */}
+												<h6 className="heading-small text-muted mb-4">
+													Address information
 												</h6>
 												<div className="pl-lg-4">
 		                      <Row>
 		                        <Col md="12">
 															<div>
-																<small className="form-control-label">Address</small>
-																<h3>{this.state.data.address}*add address*</h3>
+																<small className="form-control-label">Street address</small>
+																<h2>{this.state.data.address.streetAddress}</h2>
 			                        </div>
 		                        </Col>
 		                      </Row>
 		                      <Row>
-		                        <Col lg="4">
+		                        <Col lg="6">
 		                          <FormGroup>
 																<div>
 																	<small className="form-control-label">City</small>
-																	<h3>{this.state.data.address}*add city*</h3>
+																	<h2>{this.state.data.address.city}</h2>
 				                        </div>
 		                          </FormGroup>
 		                        </Col>
-		                        <Col lg="4">
+		                        <Col lg="6">
+															<div>
+																<small className="form-control-label">State</small>
+																<h2>{this.state.data.address.state}</h2>
+															</div>
+		                        </Col>
+													</Row>
+													<Row>
+														<Col lg="6">
 															<div>
 																<small className="form-control-label">Country</small>
-																<h3>{this.state.data.address}*add country*</h3>
+																<h2>{this.state.data.address.country}</h2>
 															</div>
 		                        </Col>
-		                        <Col lg="4">
+														<Col lg="6">
 															<div>
 																<small className="form-control-label">Postal code</small>
-																<h3>{this.state.data.address}*add postal code*</h3>
+																<h2>{this.state.data.address.zipCode}</h2>
 															</div>
 		                        </Col>
-		                      </Row>
+													</Row>
 		                    </div>
 												<hr className="my-4" />
 												{/* Courses */}
@@ -340,9 +356,9 @@ class StudentInfo extends React.Component {
 																</label>
 																<Input
 																	className="form-control-alternative"
+																	placeholder="First name"
 																	defaultValue={this.state.data.first_name}
 																	id="input-first-name"
-																	placeholder={this.state.data.first_name}
 																	type="text"
 																	onChange={e => this.sendInputToState(e, 'first_name')}
 																/>
@@ -358,9 +374,9 @@ class StudentInfo extends React.Component {
 																</label>
 																<Input
 																	className="form-control-alternative"
+																	placeholder="Middle name"
 																	defaultValue={this.state.data.middle_name}
 																	id="input-middle-name"
-																	placeholder={this.state.data.middle_name}
 																	type="text"
 																	onChange={e => this.sendInputToState(e, 'middle_name')}
 																/>
@@ -376,30 +392,11 @@ class StudentInfo extends React.Component {
 																</label>
 																<Input
 																	className="form-control-alternative"
+																	placeholder="Last name"
 																	defaultValue={this.state.data.last_name}
 																	id="input-last-name"
-																	placeholder={this.state.data.last_name}
 																	type="text"
 																	onChange={e => this.sendInputToState(e, 'last_name')}
-																/>
-															</FormGroup>
-														</Col>
-													</Row>
-													<Row>
-														<Col lg="6">
-															<FormGroup>
-																<label
-																	className="form-control-label"
-																	htmlFor="input-email"
-																>
-																	Email address
-																</label>
-																<Input
-																	className="form-control-alternative"
-																	id="input-email"
-																	placeholder={this.state.data.email}
-																	type="email"
-																	onChange={e => this.sendInputToState(e, 'email')}
 																/>
 															</FormGroup>
 														</Col>
@@ -415,9 +412,9 @@ class StudentInfo extends React.Component {
 																</label>
 																<Input
 																	className="form-control-alternative"
-																	placeholder={this.state.data.about}
-																	rows="4"
+																	placeholder="About me..."
 																	defaultValue={this.state.data.about}
+																	rows="4"
 																	type="textarea"
 																	onChange={e => this.sendInputToState(e, 'about')}
 																/>
@@ -426,9 +423,54 @@ class StudentInfo extends React.Component {
 													</Row>
 												</div>
 												<hr className="my-4" />
-												{/* Address */}
+												{/* Contact information */}
 												<h6 className="heading-small text-muted mb-4">
 													Contact information
+												</h6>
+												<div className="pl-lg-4">
+													<Row>
+														<Col lg="6">
+															<FormGroup>
+																<label
+																	className="form-control-label"
+																	htmlFor="input-email"
+																>
+																	Email address
+																</label>
+																<Input
+																	className="form-control-alternative"
+																	placeholder="Email address"
+																	defaultValue={this.state.data.email}
+																	id="input-email"
+																	type="email"
+																	onChange={e => this.sendInputToState(e, 'email')}
+																/>
+															</FormGroup>
+														</Col>
+														<Col lg="6">
+															<FormGroup>
+																<label
+																	className="form-control-label"
+																	htmlFor="input-phone"
+																>
+																	Phone number
+																</label>
+																<Input
+																	className="form-control-alternative"
+																	placeholder="xxx-xxx-xxxx"
+																	defaultValue={this.state.data.phone}
+																	id="input-phone"
+																	type="tel"
+																	onChange={e => this.sendInputToState(e, 'email')}
+																/>
+															</FormGroup>
+														</Col>
+													</Row>
+												</div>
+												<hr className="my-4" />
+												{/* Address */}
+												<h6 className="heading-small text-muted mb-4">
+													Address information
 												</h6>
 												<div className="pl-lg-4">
 													<Row>
@@ -438,13 +480,13 @@ class StudentInfo extends React.Component {
 																	className="form-control-label"
 																	htmlFor="input-address"
 																>
-																	Address
+																	Street address
 																</label>
 																<Input
 																	className="form-control-alternative"
-																	defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
+																	placeholder="Street address"
+																	defaultValue={this.state.data.address.streetAddress}
 																	id="input-address"
-																	placeholder="Home Address"
 																	type="text"
 																	onChange={e => this.sendInputToState(e, 'streetAddress', 'address')}
 																/>
@@ -452,7 +494,7 @@ class StudentInfo extends React.Component {
 														</Col>
 													</Row>
 													<Row>
-														<Col lg="4">
+														<Col lg="6">
 															<FormGroup>
 																<label
 																	className="form-control-label"
@@ -462,15 +504,35 @@ class StudentInfo extends React.Component {
 																</label>
 																<Input
 																	className="form-control-alternative"
-																	defaultValue="New York"
-																	id="input-city"
 																	placeholder="City"
+																	defaultValue={this.state.data.address.city}
+																	id="input-city"
 																	type="text"
 																	onChange={e => this.sendInputToState(e, 'city', 'address')}
 																/>
 															</FormGroup>
 														</Col>
-														<Col lg="4">
+														<Col lg="6">
+															<FormGroup>
+																<label
+																	className="form-control-label"
+																	htmlFor="input-state"
+																>
+																	State
+																</label>
+																<Input
+																	className="form-control-alternative"
+																	placeholder="State"
+																	defaultValue={this.state.data.address.state}
+																	id="input-state"
+																	type="text"
+																	onChange={e => this.sendInputToState(e, 'country', 'address')}
+																/>
+															</FormGroup>
+														</Col>
+													</Row>
+													<Row>
+														<Col lg="6">
 															<FormGroup>
 																<label
 																	className="form-control-label"
@@ -480,15 +542,15 @@ class StudentInfo extends React.Component {
 																</label>
 																<Input
 																	className="form-control-alternative"
-																	defaultValue="United States"
-																	id="input-country"
 																	placeholder="Country"
+																	defaultValue={this.state.data.address.country}
+																	id="input-country"
 																	type="text"
 																	onChange={e => this.sendInputToState(e, 'country', 'address')}
 																/>
 															</FormGroup>
 														</Col>
-														<Col lg="4">
+														<Col lg="6">
 															<FormGroup>
 																<label
 																	className="form-control-label"
