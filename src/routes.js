@@ -21,15 +21,10 @@ import Tables from "./views/examples/Tables.jsx";
 import Signup from "./views/examples/Signup.jsx";
 import AdminRegister from "./views/examples/AdminRegister.jsx";
 import StudentRegister from "./views/examples/StudentRegister.jsx";
-import CourseEdit from "./views/examples/CourseEdit.jsx";
 import CourseInfo from "./views/examples/CourseInfo.jsx";
 import SubjectInfo from "./views/examples/SubjectInfo.jsx";
-import SubjectEdit from "./views/examples/SubjectEdit.jsx";
 import TeacherInfo from "./views/examples/TeacherInfo.jsx";
-import TeacherEdit from "./views/examples/TeacherEdit.jsx";
 import StudentInfo from "./views/examples/StudentInfo.jsx";
-import StudentEdit from "./views/examples/StudentEdit.jsx";
-
 
 var routes = [
 	// Teacher Links
@@ -76,7 +71,7 @@ var routes = [
 	{
 		path: "/course/:id",
 		name: "Class Info",
-		icon: "ni ni-single-02 text-yellow",
+		icon: "ni ni-bullet-list-67 text-red",
 		component: CourseInfo,
 		layout: "/admin",
 		invisible: true
@@ -84,48 +79,24 @@ var routes = [
 	{
 		path: "/subject/:id",
 		name: "Subject Info",
-		icon: "ni ni-single-02 text-yellow",
+		icon: "ni ni-bullet-list-67 text-red",
 		component: SubjectInfo,
-		layout: "/admin",
-		invisible: true
-	},
-	{
-		path: "/subject-edit/:id",
-		name: "Subject Edit",
-		icon: "ni ni-single-02 text-yellow",
-		component: SubjectEdit,
 		layout: "/admin",
 		invisible: true
 	},
 	{
 		path: "/teacher/:id",
 		name: "Teacher Info",
-		icon: "ni ni-single-02 text-yellow",
+		icon: "ni ni-bullet-list-67 text-red",
 		component: TeacherInfo,
-		layout: "/admin",
-		invisible: true
-	},
-	{
-		path: "/teacher-edit/:id",
-		name: "Teacher Edit",
-		icon: "ni ni-single-02 text-yellow",
-		component: TeacherEdit,
 		layout: "/admin",
 		invisible: true
 	},
 	{
 		path: "/student/:id",
 		name: "Student Info",
-		icon: "ni ni-single-02 text-yellow",
+		icon: "ni ni-bullet-list-67 text-red",
 		component: StudentInfo,
-		layout: "/admin",
-		invisible: true
-	},
-	{
-		path: "/student-edit/:id",
-		name: "Student Edit",
-		icon: "ni ni-single-02 text-yellow",
-		component: StudentEdit,
 		layout: "/admin",
 		invisible: true
 	},
@@ -154,14 +125,14 @@ var routes = [
     layout: "/student",
 		invisible: false
   },
-  {
-    path: "/profile",
-    name: "Profile",
-    icon: "ni ni-single-02 text-yellow",
-    component: StudentInfo,
-    layout: "/student",
-		invisible: false
-  },
+	{
+		path: "/profile",
+		name: "Student Info",
+		icon: "ni ni-single-02 text-yellow",
+		component: StudentInfo,
+		layout: "/student",
+		invisible: true
+	},
 	{
 		path: "/course/:id",
 		name: "Class Info",
@@ -173,7 +144,7 @@ var routes = [
 	{
 		path: "/subject/:id",
 		name: "Subject Info",
-		icon: "ni ni-single-02 text-yellow",
+		icon: "ni ni-bullet-list-67 text-red",
 		component: SubjectInfo,
 		layout: "/student",
 		invisible: true
@@ -181,16 +152,8 @@ var routes = [
 	{
 		path: "/teacher/:id",
 		name: "Teacher Info",
-		icon: "ni ni-single-02 text-yellow",
+		icon: "ni ni-bullet-list-67 text-red",
 		component: TeacherInfo,
-		layout: "/student",
-		invisible: true
-	},
-	{
-		path: "/profile",
-		name: "Student Info",
-		icon: "ni ni-single-02 text-yellow",
-		component: StudentInfo,
 		layout: "/student",
 		invisible: true
 	},
