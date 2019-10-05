@@ -23,6 +23,7 @@ import {
   Card,
   CardHeader,
   CardBody,
+	CardFooter,
   FormGroup,
   Form,
 	Input,
@@ -40,14 +41,6 @@ class StudentInfo extends React.Component {
 		editable: false,
 		data: {
 			courses: []
-		}
-	}
-	renderLink = () => {
-		let studentName = this.props.match.params.student
-		if (this.props.location.pathname === `/admin/student/${studentName}`) {
-			return `/admin/student-edit/${studentName}`
-		} else if (this.props.location.pathname === '/student/profile') {
-			return '/student/profile-edit'
 		}
 	}
 	componentDidMount() {
@@ -83,11 +76,20 @@ class StudentInfo extends React.Component {
 			editable: !this.state.editable
 		})
 	}
-	sendInputToState = (e, stateRef) => {
+	sendInputToState = (e, stateRef, stateObj) => {
 		let data = this.state.data
-		data[stateRef] = e.target.value
+		if (stateObj) {
+			data[stateObj][stateRef] = e.target.value
+		} else {
+			data[stateRef] = e.target.value
+		}
 		this.setState({data})
 	}
+	// sendInputToState = (e, stateRef) => {
+	// 	let data = this.state.data
+	// 	data[stateRef] = e.target.value
+	// 	this.setState({data})
+	// }
   render() {
 		console.log(this.state)
     return (
@@ -138,7 +140,7 @@ class StudentInfo extends React.Component {
 														<Col lg="4">
 															<div>
 																<small className="form-control-label">Middle name</small>
-																<h1>{this.state.data.middle_name}*add middle name*</h1>
+																<h1>{this.state.data.middle_name}</h1>
 			                        </div>
 														</Col>
 														<Col lg="4">
@@ -160,7 +162,7 @@ class StudentInfo extends React.Component {
 														<Col md="12">
 															<div>
 																<small className="form-control-label">About</small>
-																<h3>{this.state.data.about}*add about*</h3>
+																<h3>{this.state.data.about}</h3>
 			                        </div>
 														</Col>
 													</Row>
@@ -263,6 +265,26 @@ class StudentInfo extends React.Component {
 												*/}
 											</Form>
 										</CardBody>
+										<CardFooter>
+											<Row className="align-items-center">
+												<Col xs="8"></Col>
+												<Col className="text-right" xs="4">
+													<Button
+														color="primary"
+														href="#pablo"
+														onClick={e => {
+															e.preventDefault()
+															this.setState({
+																editable: !this.state.editable
+															})
+														}}
+														size="sm"
+													>
+														Edit student info
+													</Button>
+												</Col>
+											</Row>
+										</CardFooter>
 									</Card>
 								</Col>
 								<Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
@@ -424,6 +446,7 @@ class StudentInfo extends React.Component {
 																	id="input-address"
 																	placeholder="Home Address"
 																	type="text"
+																	onChange={e => this.sendInputToState(e, 'streetAddress', 'address')}
 																/>
 															</FormGroup>
 														</Col>
@@ -443,6 +466,7 @@ class StudentInfo extends React.Component {
 																	id="input-city"
 																	placeholder="City"
 																	type="text"
+																	onChange={e => this.sendInputToState(e, 'city', 'address')}
 																/>
 															</FormGroup>
 														</Col>
@@ -460,6 +484,7 @@ class StudentInfo extends React.Component {
 																	id="input-country"
 																	placeholder="Country"
 																	type="text"
+																	onChange={e => this.sendInputToState(e, 'country', 'address')}
 																/>
 															</FormGroup>
 														</Col>
@@ -476,6 +501,7 @@ class StudentInfo extends React.Component {
 																	id="input-postal-code"
 																	placeholder="Postal code"
 																	type="number"
+																	onChange={e => this.sendInputToState(e, 'zipCode', 'address')}
 																/>
 															</FormGroup>
 														</Col>
@@ -542,6 +568,30 @@ class StudentInfo extends React.Component {
 												*/}
 											</Form>
 										</CardBody>
+										<CardFooter>
+											<Row className="align-items-center">
+												<Col xs="8"></Col>
+												<Col className="text-right" xs="4">
+		                      <Button
+		                        color="default"
+		                        href="#pablo"
+		                        onClick={this.cancelUpdates}
+		                        size="sm"
+		                      >
+		                        Cancel changes
+		                      </Button>
+		                      <Button
+		                        color="primary"
+		                        form="course-edit"
+		                        type="submit"
+		                        size="sm"
+														onClick={this.submitUpdates}
+		                      >
+		                        Save changes
+		                      </Button>
+		                    </Col>
+											</Row>
+										</CardFooter>
 									</Card>
 								</Col>
 								<Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
