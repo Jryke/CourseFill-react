@@ -33,7 +33,46 @@ import axios from 'axios'
 
 class StudentsTable extends React.Component {
 	state = {
-		data: []
+		data: [
+			{
+				first_name: '',
+				middle_name: '',
+				last_name: '',
+				email: '',
+				avatar: '',
+				role: '',
+				school: '',
+				created_at: '',
+				courses: [
+					{
+						schedule: [
+							{
+								days: [],
+								startDate: '',
+								endDate: '',
+								startTime: '',
+								endTime: ''
+							}
+						],
+						teachers: [
+							{
+								first_name: '',
+								last_name: '',
+								avatar: '',
+								_id: ''
+							}
+						],
+						registration: {
+							registered: 0,
+							limit: 0
+						},
+						_id: '',
+						name: '',
+						subject: ''
+					}
+				]
+			}
+		]
 	}
 	orderList = () => {
 		let orderedList = this.state.data.sort((a,b) => {
@@ -54,7 +93,6 @@ class StudentsTable extends React.Component {
 			})
 	}
   render() {
-		console.log(this.state)
     return (
 			<>
 				{
@@ -80,41 +118,46 @@ class StudentsTable extends React.Component {
 										</Media>
 									</Media>
 								</td>
-
-
 								<td>{
 									student.courses.map((course, key) => {
 										return(
 											<div key={key}>
-												<Link to={`course/${course}`}>
-													{course}
-												</Link>
-											</div>
-										)
-									})
-								}</td>
-								<td>
-									{/*
-									{
-									student.teachers.map((teacher, key) => {
-										return(
-											<div className="avatar-group" key={key}>
-												<Link to={`teacher/${teacher.name}`}>
-													<span className="avatar avatar-sm" >
-														<img
-															alt="..."
-															className="rounded-circle"
-															src={teacher.img.src}
-														/>
-													</span>
-													<span>{teacher.name}</span>
+												<Link to={`course/${course._id}`}>
+													{course.name}
 												</Link>
 											</div>
 										)
 									})
 								}
-								*/}
 							</td>
+							<td>
+								{
+									student.courses.map((course, key) => {
+										return (
+											course.teachers.map((teacher, key) => {
+												return(
+													<div className="avatar-group" key={key}>
+														<Link to={`teacher/${teacher._id}`}>
+															<span className="avatar avatar-sm" >
+																<img
+																	alt="..."
+																	className="rounded-circle"
+																	src={teacher.avatar}
+																/>
+															</span>
+															<span>
+																{teacher.first_name} {teacher.last_name}
+															</span>
+														</Link>
+													</div>
+												)
+											})
+										)
+									})
+
+								}
+							</td>
+
 								<td>
 									<Badge color="" className="badge-dot mr-4">
 										<i className="bg-warning" />
