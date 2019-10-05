@@ -130,16 +130,19 @@ class Login extends React.Component {
                 href="#pablo"
                 onClick={e => e.preventDefault()}
               >
-                <small>Forgot password?</small>
+                <span>Forgot password?</span>
               </a>
             </Col>
             <Col className="text-right" xs="6">
               <a
                 className="text-light"
                 href="#pablo"
-                onClick={e => e.preventDefault()}
-              >
-                <small>Create new account</small>
+                onClick={e => {
+									e.preventDefault()
+									this.props.history.push('/auth/student-register')
+									}}
+	              >
+                <span>Create new account</span>
               </a>
             </Col>
           </Row>
