@@ -31,6 +31,7 @@ import {
   Row,
   Col
 } from "reactstrap";
+import { Link } from 'react-router-dom'
 // core components
 import axios from 'axios'
 import DetailsHeader from "../../components/Headers/DetailsHeader.jsx";
@@ -86,7 +87,21 @@ class StudentInfo extends React.Component {
 		}
 		this.setState({data})
 	}
+	getTeachersFromCourses = () => {
+		let teachersArray = []
+		this.state.data.courses.forEach(course => {
+			course.teachers.forEach(teacher => {
+				let checkArr = teachersArray.map(teacher => teacher._id)
+				if (!checkArr.includes(teacher._id)) {
+					teachersArray.push(teacher)
+				}
+			})
+		})
+		return teachersArray
+	}
   render() {
+		console.log(this.state)
+		console.log(this.getTeachersFromCourses())
     return (
       <>
 				<DetailsHeader title={`${this.state.data.first_name} ${this.state.data.last_name}`} info={this.state.data.about} />
@@ -225,20 +240,12 @@ class StudentInfo extends React.Component {
 												<h6 className="heading-small text-muted mb-4">
 													Registered courses
 												</h6>
-												{/*
 												<div className="pl-lg-4">
 													{
-														this.state.courses.map((course, key) => {
+														this.state.data.courses.map((course, key) => {
 															return(
 																<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
-																	<Link to={course.name}>
-																		<span className="avatar avatar-sm" >
-																			<img
-																				alt="..."
-																				className="rounded-circle"
-																				src={course.img.src}
-																			/>
-																		</span>
+																	<Link to={`../course/${course._id}`}>
 																		<span>{course.name}</span>
 																	</Link>
 																</div>
@@ -246,7 +253,6 @@ class StudentInfo extends React.Component {
 														})
 													}
 												</div>
-												*/}
 
 												{/* THIS SECTION MUST ONLY BE AVAILABLE TO TEACHERS/ADMINS */}
 
@@ -255,30 +261,26 @@ class StudentInfo extends React.Component {
 												<h6 className="heading-small text-muted mb-4">
 													Teachers
 												</h6>
-												{/*
-
 												<div className="pl-lg-4">
-
 													{
-														this.state.teachers.map((teacher, key) => {
+														this.getTeachersFromCourses().map((teacher, key) => {
 															return(
 																<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
-																	<Link to={teacher.name}>
+																	<Link to={`../teacher/${teacher._id}`}>
 																		<span className="avatar avatar-sm" >
 																			<img
 																				alt="..."
 																				className="rounded-circle"
-																				src={teacher.img.src}
+																				src={teacher.avatar}
 																			/>
 																		</span>
-																		<span>{teacher.name}</span>
+																		<span>{teacher.first_name} {teacher.last_name}</span>
 																	</Link>
 																</div>
 															)
 														})
 													}
 												</div>
-												*/}
 											</Form>
 										</CardBody>
 										<CardFooter>
@@ -574,20 +576,12 @@ class StudentInfo extends React.Component {
 												<h6 className="heading-small text-muted mb-4">
 													Registered courses
 												</h6>
-												{/*
 												<div className="pl-lg-4">
 													{
-														this.state.courses.map((course, key) => {
+														this.state.data.courses.map((course, key) => {
 															return(
 																<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
-																	<Link to={course.name}>
-																		<span className="avatar avatar-sm" >
-																			<img
-																				alt="..."
-																				className="rounded-circle"
-																				src={course.img.src}
-																			/>
-																		</span>
+																	<Link to={`../course/${course._id}`}>
 																		<span>{course.name}</span>
 																	</Link>
 																</div>
@@ -595,7 +589,6 @@ class StudentInfo extends React.Component {
 														})
 													}
 												</div>
-												*/}
 
 												{/* THIS SECTION MUST ONLY BE AVAILABLE TO TEACHERS/ADMINS */}
 
@@ -604,30 +597,26 @@ class StudentInfo extends React.Component {
 												<h6 className="heading-small text-muted mb-4">
 													Teachers
 												</h6>
-												{/*
-
 												<div className="pl-lg-4">
-
 													{
-														this.state.teachers.map((teacher, key) => {
+														this.getTeachersFromCourses().map((teacher, key) => {
 															return(
 																<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
-																	<Link to={teacher.name}>
+																	<Link to={`../teacher/${teacher._id}`}>
 																		<span className="avatar avatar-sm" >
 																			<img
 																				alt="..."
 																				className="rounded-circle"
-																				src={teacher.img.src}
+																				src={teacher.avatar}
 																			/>
 																		</span>
-																		<span>{teacher.name}</span>
+																		<span>{teacher.first_name} {teacher.last_name}</span>
 																	</Link>
 																</div>
 															)
 														})
 													}
 												</div>
-												*/}
 											</Form>
 										</CardBody>
 										<CardFooter>
