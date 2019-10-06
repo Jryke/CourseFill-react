@@ -271,7 +271,7 @@ class CourseInfo extends React.Component {
 														this.state.data.teachers.map((teacher, key) => {
 															return(
 																<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
-																	<Link to={teacher.first_name}>
+																	<Link to={`../teacher/${teacher._id}`}>
 																		<span className="avatar avatar-sm" >
 																			<img
 																				alt="..."
@@ -294,12 +294,11 @@ class CourseInfo extends React.Component {
 													Students
 												</h6>
 												<div className="pl-lg-4">
-													{/*
 													{
-														this.state.students.map((student, key) => {
+														this.state.data.students.map((student, key) => {
 															return(
 																<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
-																	<Link to={student.name}>
+																	<Link to={`../student/${student._id}`}>
 																		<span className="avatar avatar-sm" >
 																			<img
 																				alt="..."
@@ -313,7 +312,6 @@ class CourseInfo extends React.Component {
 															)
 														})
 													}
-													*/}
 												</div>
 											</div>
 		                </CardBody>
@@ -512,7 +510,7 @@ class CourseInfo extends React.Component {
 														this.state.data.teachers.map((teacher, key) => {
 															return(
 																<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
-																	<Link to={teacher.first_name}>
+																	<Link to={`../teacher/${teacher._id}`}>
 																		<span className="avatar avatar-sm" >
 																			<img
 																				alt="..."
@@ -537,7 +535,7 @@ class CourseInfo extends React.Component {
 														this.state.data.students.map((student, key) => {
 															return(
 																<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
-																	<Link to={student.name}>
+																	<Link to={`../student/${student._id}`}>
 																		<span className="avatar avatar-sm" >
 																			<img
 																				alt="..."
