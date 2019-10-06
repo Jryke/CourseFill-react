@@ -39,6 +39,10 @@ class CoursesTable extends React.Component {
 					schedule: {
 						days: []
 					},
+					registration: {
+						registered: 0,
+						limit: 0
+					},
 					students: [],
 					teachers: []
 				}
@@ -69,6 +73,7 @@ class CoursesTable extends React.Component {
 }
 
   render() {
+		console.log(this.state)
     return (
 			<>
 				{
@@ -86,7 +91,7 @@ class CoursesTable extends React.Component {
 										</Link>
 									</td>
 									<td>
-										<Link to={`course/${course.name}`}>
+										<Link to={`course/${course._id}`}>
 											{course.description}
 										</Link></td>
 									<td>
@@ -94,7 +99,7 @@ class CoursesTable extends React.Component {
 											course.teachers.map((teacher, key) => {
 												return(
 													<div className="avatar-group" key={key}>
-														<Link to={`teacher/${teacher.first_name}`}>
+														<Link to={`teacher/${teacher._id}`}>
 															<span className="avatar avatar-sm" >
 																<img
 																	alt="..."
@@ -102,7 +107,7 @@ class CoursesTable extends React.Component {
 																	src='{teacher.avatar}'
 																/>
 															</span>
-															<span>{teacher.first_name}</span>
+															<span>{teacher.first_name} {teacher.last_name}</span>
 														</Link>
 													</div>
 												)
@@ -111,12 +116,9 @@ class CoursesTable extends React.Component {
 									</td>
 
 									<td>
-										<Link to={`course/${course.name}`}>
+										<Link to={`course/${course._id}`}>
 											<div className="d-flex align-items-center">
-												registration
-												{/*
-												<span className="mr-2">{`${course.registration.registered / course.registration.limit * 100}%`}</span>
-
+												<span className="mr-2">{`${Math.round(course.registration.registered / course.registration.limit * 100)}%`}</span>
 												<div>
 													<Progress
 														max={course.registration.limit}
@@ -124,13 +126,12 @@ class CoursesTable extends React.Component {
 														barClassName="bg-danger"
 													/>
 												</div>
-												*/}
 											</div>
 										</Link>
 									</td>
 
 									<td>
-										<Link to={`course/${course.name}`}>
+										<Link to={`course/${course._id}`}>
 											<Badge color="" className="badge-dot mr-4">
 												<i className="bg-warning" />
 												pending
@@ -139,11 +140,8 @@ class CoursesTable extends React.Component {
 									</td>
 
 									<td>
-										<Link to={`course/${course.name}`}>
-											price
-											{/*
+										<Link to={`course/${course._id}`}>
 											${course.price}
-											*/}
 										</Link>
 									</td>
 									<td className="text-right">
