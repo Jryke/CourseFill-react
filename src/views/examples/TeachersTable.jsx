@@ -27,13 +27,40 @@ import {
   Media
 } from "reactstrap";
 import {Link} from "react-router-dom"
+import axios from 'axios'
 // core components
 
 class TeachersTable extends React.Component {
+	state = {
+		teachers: [
+			{
+				students: [{}],
+				courses: [
+					{
+						schedule: [
+							{
+								days: [],
+							}
+						],
+						registration: {},
+					}
+				]
+			}
+		]
+	}
+	componentDidMount() {
+		axios.get(`${process.env.REACT_APP_API_PORT}/teachers`)
+			.then(res => {
+				const teachers = res.data
+				this.setState({teachers})
+			}).catch(err => {
+				console.log("Error")
+			})
+	}
 	orderList = () => {
-		let orderedList = this.props.teachers.sort((a,b) => {
-			var teacherA = a.name.toUpperCase()
-			var teacherB = b.name.toUpperCase()
+		let orderedList = this.state.teachers.sort((a,b) => {
+			var teacherA = a.last_name.toUpperCase()
+			var teacherB = b.last_name.toUpperCase()
 			return teacherA < teacherB ? -1 : teacherA > teacherB ? 1 : 0
 		})
 		return orderedList
@@ -43,7 +70,7 @@ class TeachersTable extends React.Component {
 			return(
 				<td>
 					<div>
-						<Link to={`teacher/${teacher.name}`}>
+						<Link to={`teacher/${teacher._id}`}>
 							{teacher.students.length} students
 						</Link>
 					</div>
@@ -67,18 +94,18 @@ class TeachersTable extends React.Component {
 								<td>
 									<Media className="align-items-center">
 										<Link
-											to={`teacher/${teacher.name}`}
+											to={`teacher/${teacher._id}`}
 											className="avatar rounded-circle mr-3"
 										>
 											<img
-												alt={teacher.img.alt}
-												src={teacher.img.src}
+												alt="..."
+												src={teacher.avatar}
 											/>
 										</Link>
 										<Media>
 											<span className="mb-0 text-sm">
-												<Link to={`teacher/${teacher.name}`}>
-													{teacher.name}
+												<Link to={`teacher/${teacher._id}`}>
+													{teacher.first_name} {teacher.last_name}
 												</Link>
 											</span>
 										</Media>
@@ -89,7 +116,7 @@ class TeachersTable extends React.Component {
 										teacher.courses.map((course, key) => {
 											return(
 												<div key={key}>
-													<Link to={`course/${course.name}`}>
+													<Link to={`course/${course._id}`}>
 														{course.name}
 													</Link>
 												</div>
@@ -97,19 +124,19 @@ class TeachersTable extends React.Component {
 										})
 									}
 								</td>
-								<td>{
-									teacher.courses.map((course, key) => {
-										return(
-											<div key={key}>
-												<Link to={`subject/${course.subject}`} onClick={e => {
-														e.stopPropagation()
-													}}>
-													{course.subject}
-												</Link>
-											</div>
-										)
-									})
-								}</td>
+								<td>
+									{
+										teacher.courses.map((course, key) => {
+											return(
+												<div key={key}>
+													<Link to={`subject/${course.subject}`} onClick={e => {e.stopPropagation()}}>
+														{course.subject}
+													</Link>
+												</div>
+											)
+										})
+									}
+								</td>
 								{
 									this.renderStudents(teacher)
 								}
