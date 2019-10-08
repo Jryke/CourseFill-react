@@ -160,7 +160,7 @@ class TeacherInfo extends React.Component {
 					!this.state.editable ? (
 						<Container className="mt--7" fluid>
 		          <Row>
-		            <Col className="order-xl-1 mb-6" xl="8">
+		            <Col className="order-xl-1 mb-6" xl="10">
 		              <Card className="bg-secondary shadow">
 		                <CardHeader className="bg-white border-0">
 		                  <Row className="align-items-center">
@@ -226,7 +226,7 @@ class TeacherInfo extends React.Component {
 		                        <Col md="12">
 															<div>
 																<small className="form-control-label">Address</small>
-																<h3>{this.renderAddressInfo('streetAddress')}</h3>
+																<h3>{this.renderAddressInfo("streetAddress")}</h3>
 			                        </div>
 		                        </Col>
 		                      </Row>
@@ -235,20 +235,20 @@ class TeacherInfo extends React.Component {
 		                          <FormGroup>
 																<div>
 																	<small className="form-control-label">City</small>
-																	<h3>{this.renderAddressInfo('city')}</h3>
+																	<h3>{this.renderAddressInfo("city")}</h3>
 				                        </div>
 		                          </FormGroup>
 		                        </Col>
 		                        <Col lg="4">
 															<div>
 																<small className="form-control-label">Country</small>
-																<h3>{this.renderAddressInfo('country')}</h3>
+																<h3>{this.renderAddressInfo("country")}</h3>
 															</div>
 		                        </Col>
 		                        <Col lg="4">
 															<div>
 																<small className="form-control-label">Postal code</small>
-																<h3>{this.renderAddressInfo('zipCode')}</h3>
+																<h3>{this.renderAddressInfo("zipCode")}</h3>
 															</div>
 		                        </Col>
 		                      </Row>
@@ -288,15 +288,12 @@ class TeacherInfo extends React.Component {
 										</CardFooter>
 		              </Card>
 		            </Col>
-								<Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
-		              <TeacherCard />
-		            </Col>
 		          </Row>
 		        </Container>
 					) : (
 						<Container className="mt--7" fluid>
 		          <Row>
-		            <Col className="order-xl-1 mb-6" xl="8">
+		            <Col className="order-xl-1 mb-6" xl="10">
 		              <Card className="bg-secondary shadow">
 		                <CardHeader className="bg-white border-0">
 		                  <Row className="align-items-center">
@@ -567,9 +564,6 @@ class TeacherInfo extends React.Component {
 											</Row>
 										</CardFooter>
 		              </Card>
-		            </Col>
-								<Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
-		              <TeacherCard />
 		            </Col>
 		          </Row>
 		        </Container>
