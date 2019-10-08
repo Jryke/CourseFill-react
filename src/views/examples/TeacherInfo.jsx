@@ -35,9 +35,19 @@ import TeacherCard from "./TeacherCard.jsx";
 class TeacherInfo extends React.Component {
 	state = {
 		editable: false,
-		data: {
-			address: {}
+		teacher: {
+			courses: [],
+			address: {},
+			students: []
 		}
+	}
+	componentDidMount() {
+		axios.get(`${process.env.REACT_APP_API_PORT}/user/${this.props.match.params.id}`)
+			.then(res => {
+					this.setState({teacher: res.data})
+			}).catch(err => {
+				console.log("Error")
+			})
 	}
 	renderEditButton = () => {
 		let teacherId = this.props.match.params.id
@@ -62,39 +72,63 @@ class TeacherInfo extends React.Component {
 		}
 	}
 	sendInputToState = (e, stateRef, stateObj) => {
-		let data = this.state.data
+		let teacher = this.state.teacher
 		if (stateObj) {
-			data[stateObj][stateRef] = e.target.value
+			teacher[stateObj][stateRef] = e.target.value
 		} else {
-			data[stateRef] = e.target.value
+			teacher[stateRef] = e.target.value
 		}
-		this.setState({data})
+		this.setState({teacher})
 	}
 	submitUpdates = (e) => {
 		e.preventDefault()
-		// axios.patch(`${process.env.REACT_APP_API_PORT}/teachers/${this.props.match.params.id}`, this.state.data)
-		// 	.then(data => {
+		axios.patch(`${process.env.REACT_APP_API_PORT}/teachers/${this.props.match.params.id}`, this.state.teacher)
+			.then(data => {
 					this.setState({
 						editable: !this.state.editable
 					})
-			// }).catch(err => {
-			// 	console.log("Error")
-			// })
+			}).catch(err => {
+				console.log("Error")
+			})
 	}
 	cancelUpdates = (e) => {
 		e.preventDefault()
-		// axios.get(`${process.env.REACT_APP_API_PORT}/teacher/${this.props.match.params.id}`)
-		// 	.then(res => {
-		// 		const data = res.data
-				this.setState({
-					// data: data,
-					editable: !this.state.editable
+		axios.get(`${process.env.REACT_APP_API_PORT}/user/${this.props.match.params.id}`)
+			.then(res => {
+					this.setState({
+						teacher: res.data,
+						editable: !this.state.editable
+					})
+			}).catch(err => {
+				console.log("Error")
+			})
+	}
+	renderStudents = () => {
+		if (this.state.teacher.students) {
+			return(
+				this.state.teacher.students.map((student, key) => {
+					return(
+						<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
+							<Link to={`../student/${student._id}`}>
+								<span className="avatar avatar-sm" >
+									<img
+										alt="..."
+										className="rounded-circle"
+										src={student.avatar}
+									/>
+								</span>
+								<span>{student.first_name} {student.last_name}</span>
+							</Link>
+						</div>
+					)
 				})
-			// }).catch(err => {
-			// 	console.log("Error")
-			// })
+			)
+		} else {
+			return null
+		}
 	}
   render() {
+		console.log(this.state)
     return (
       <>
         <DetailsHeader title={"Teacher Name"} info={"About Teacher"} />
@@ -125,19 +159,19 @@ class TeacherInfo extends React.Component {
 		                        <Col lg="4">
 															<div>
 																<small className="form-control-label">First name</small>
-																<h1>*FirstName*</h1>
+																<h1>{this.state.teacher.first_name}</h1>
 			                        </div>
 		                        </Col>
 		                        <Col lg="4">
 															<div>
 																<small className="form-control-label">Middle name</small>
-																<h1>*MiddleName*</h1>
+																<h1>{this.state.teacher.middle_name}</h1>
 			                        </div>
 		                        </Col>
 		                        <Col lg="4">
 															<div>
 																<small className="form-control-label">Last name</small>
-																<h1>*LastName*</h1>
+																<h1>{this.state.teacher.last_name}</h1>
 			                        </div>
 		                        </Col>
 		                      </Row>
@@ -145,7 +179,7 @@ class TeacherInfo extends React.Component {
 		                        <Col lg="12">
 															<div>
 																<small className="form-control-label">Email address</small>
-																<h1>*teacher@teachermail.com*</h1>
+																<h1>{this.state.teacher.email}</h1>
 			                        </div>
 		                        </Col>
 		                      </Row>
@@ -153,7 +187,7 @@ class TeacherInfo extends React.Component {
 														<Col md="12">
 															<div>
 																<small className="form-control-label">About</small>
-																<h3>*Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.*</h3>
+																<h3>{this.state.teacher.about}</h3>
 			                        </div>
 														</Col>
 													</Row>
@@ -164,12 +198,13 @@ class TeacherInfo extends React.Component {
 		                    <h6 className="heading-small text-muted mb-4">
 		                      Contact information
 		                    </h6>
-		                    <div className="pl-lg-4">
+
+												<div className="pl-lg-4">
 		                      <Row>
 		                        <Col md="12">
 															<div>
 																<small className="form-control-label">Address</small>
-																<h3>*Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09*</h3>
+																<h3>{this.state.teacher.address.streetAddress}</h3>
 			                        </div>
 		                        </Col>
 		                      </Row>
@@ -178,51 +213,43 @@ class TeacherInfo extends React.Component {
 		                          <FormGroup>
 																<div>
 																	<small className="form-control-label">City</small>
-																	<h3>*New York*</h3>
+																	<h3>{this.state.teacher.address.city}</h3>
 				                        </div>
 		                          </FormGroup>
 		                        </Col>
 		                        <Col lg="4">
 															<div>
 																<small className="form-control-label">Country</small>
-																<h3>*United States*</h3>
+																<h3>{this.state.teacher.address.country}</h3>
 															</div>
 		                        </Col>
 		                        <Col lg="4">
 															<div>
 																<small className="form-control-label">Postal code</small>
-																<h3>*11345*</h3>
+																<h3>{this.state.teacher.address.zipCode}</h3>
 															</div>
 		                        </Col>
 		                      </Row>
 		                    </div>
+
 												<hr className="my-4" />
 		                    {/* Students */}
 		                    <h6 className="heading-small text-muted mb-4">
 		                      Courses taught by this teacher
 		                    </h6>
-												{/*
 		                    <div className="pl-lg-4">
 													{
-														this.state.teachers.map((teacher, key) => {
+														this.state.teacher.courses.map((course, key) => {
 															return(
 																<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
-																	<Link to={teacher.name}>
-																		<span className="avatar avatar-sm" >
-																			<img
-																				alt="..."
-																				className="rounded-circle"
-																				src={teacher.img.src}
-																			/>
-																		</span>
-																		<span>{teacher.name}</span>
+																	<Link to={`../course/${course._id}`}>
+																		<p>{course.name}</p>
 																	</Link>
 																</div>
 															)
 														})
 													}
 		                    </div>
-												*/}
 
 												{/* THIS SECTION MUST ONLY BE AVAILABLE TO TEACHERS/ADMINS */}
 
@@ -231,28 +258,11 @@ class TeacherInfo extends React.Component {
 		                    <h6 className="heading-small text-muted mb-4">
 		                      Students
 		                    </h6>
-												{/*
 		                    <div className="pl-lg-4">
 													{
-														this.state.students.map((student, key) => {
-															return(
-																<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
-																	<Link to={student.name}>
-																		<span className="avatar avatar-sm" >
-																			<img
-																				alt="..."
-																				className="rounded-circle"
-																				src={student.img.src}
-																			/>
-																		</span>
-																		<span>{student.name}</span>
-																	</Link>
-																</div>
-															)
-														})
+														this.renderStudents()
 													}
 		                    </div>
-												*/}
 		                  </Form>
 		                </CardBody>
 										<CardFooter>
@@ -318,7 +328,7 @@ class TeacherInfo extends React.Component {
 		                            </label>
 		                            <Input
 		                              className="form-control-alternative"
-		                              defaultValue="First name"
+		                              defaultValue={this.state.teacher.first_name}
 		                              id="input-first-name"
 		                              placeholder="First name"
 		                              type="text"
@@ -336,7 +346,7 @@ class TeacherInfo extends React.Component {
 		                            </label>
 		                            <Input
 		                              className="form-control-alternative"
-		                              defaultValue="Middle name"
+		                              defaultValue={this.state.teacher.middle_name}
 		                              id="input-middle-name"
 		                              placeholder="Middle name"
 		                              type="text"
@@ -354,7 +364,7 @@ class TeacherInfo extends React.Component {
 		                            </label>
 		                            <Input
 		                              className="form-control-alternative"
-		                              defaultValue="Last name"
+		                              defaultValue={this.state.teacher.last_name}
 		                              id="input-last-name"
 		                              placeholder="Last name"
 		                              type="text"
@@ -374,6 +384,7 @@ class TeacherInfo extends React.Component {
 		                            </label>
 		                            <Input
 		                              className="form-control-alternative"
+																	defaultValue={this.state.teacher.email}
 		                              id="input-email"
 		                              placeholder="name@example.com"
 		                              type="email"
@@ -395,7 +406,7 @@ class TeacherInfo extends React.Component {
 				                          className="form-control-alternative"
 				                          placeholder="Tell a little bit about yourself..."
 				                          rows="4"
-				                          defaultValue="Tell a little bit about yourself..."
+				                          defaultValue={this.state.teacher.about}
 				                          type="textarea"
 																	onChange={e => this.sendInputToState(e, "about")}
 				                        />
@@ -420,8 +431,7 @@ class TeacherInfo extends React.Component {
 		                            </label>
 		                            <Input
 		                              className="form-control-alternative"
-		                              defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-		                              id="input-address"
+																	defaultValue={this.state.teacher.address.streetAddress}		                              id="input-address"
 		                              placeholder="Home Address"
 		                              type="text"
 																	onChange={e => this.sendInputToState(e, "streetAddress", "address")}
@@ -440,7 +450,7 @@ class TeacherInfo extends React.Component {
 		                            </label>
 		                            <Input
 		                              className="form-control-alternative"
-		                              defaultValue="New York"
+		                              defaultValue={this.state.teacher.address.city}
 		                              id="input-city"
 		                              placeholder="City"
 		                              type="text"
@@ -458,7 +468,7 @@ class TeacherInfo extends React.Component {
 		                            </label>
 		                            <Input
 		                              className="form-control-alternative"
-		                              defaultValue="United States"
+		                              defaultValue={this.state.teacher.address.country}
 		                              id="input-country"
 		                              placeholder="Country"
 		                              type="text"
@@ -476,6 +486,7 @@ class TeacherInfo extends React.Component {
 		                            </label>
 		                            <Input
 		                              className="form-control-alternative"
+																	defaultValue={this.state.teacher.address.zipCode}
 		                              id="input-postal-code"
 		                              placeholder="Postal code"
 		                              type="number"
@@ -490,28 +501,19 @@ class TeacherInfo extends React.Component {
 		                    <h6 className="heading-small text-muted mb-4">
 		                      Courses taught by this teacher
 		                    </h6>
-												{/*
-		                    <div className="pl-lg-4">
+												<div className="pl-lg-4">
 													{
-														this.state.teachers.map((teacher, key) => {
+														this.state.teacher.courses.map((course, key) => {
 															return(
 																<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
-																	<Link to={teacher.name}>
-																		<span className="avatar avatar-sm" >
-																			<img
-																				alt="..."
-																				className="rounded-circle"
-																				src={teacher.img.src}
-																			/>
-																		</span>
-																		<span>{teacher.name}</span>
+																	<Link to={`../course/${course._id}`}>
+																		<p>{course.name}</p>
 																	</Link>
 																</div>
 															)
 														})
 													}
 		                    </div>
-												*/}
 
 												{/* THIS SECTION MUST ONLY BE AVAILABLE TO TEACHERS/ADMINS */}
 
@@ -520,28 +522,11 @@ class TeacherInfo extends React.Component {
 		                    <h6 className="heading-small text-muted mb-4">
 		                      Students
 		                    </h6>
-												{/*
-		                    <div className="pl-lg-4">
+												<div className="pl-lg-4">
 													{
-														this.state.students.map((student, key) => {
-															return(
-																<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
-																	<Link to={student.name}>
-																		<span className="avatar avatar-sm" >
-																			<img
-																				alt="..."
-																				className="rounded-circle"
-																				src={student.img.src}
-																			/>
-																		</span>
-																		<span>{student.name}</span>
-																	</Link>
-																</div>
-															)
-														})
+														this.renderStudents()
 													}
 		                    </div>
-												*/}
 		                  </Form>
 		                </CardBody>
 										<CardFooter>
