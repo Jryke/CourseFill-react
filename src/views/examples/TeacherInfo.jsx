@@ -128,10 +128,9 @@ class TeacherInfo extends React.Component {
 		}
 	}
   render() {
-		console.log(this.state)
     return (
       <>
-        <DetailsHeader title={"Teacher Name"} info={"About Teacher"} />
+        <DetailsHeader title={`${this.state.teacher.first_name} ${this.state.teacher.last_name}`} info={this.state.teacher.about} />
         {/* Page content */}
 				{
 					!this.state.editable ? (
@@ -198,7 +197,6 @@ class TeacherInfo extends React.Component {
 		                    <h6 className="heading-small text-muted mb-4">
 		                      Contact information
 		                    </h6>
-
 												<div className="pl-lg-4">
 		                      <Row>
 		                        <Col md="12">
@@ -231,7 +229,6 @@ class TeacherInfo extends React.Component {
 		                        </Col>
 		                      </Row>
 		                    </div>
-
 												<hr className="my-4" />
 		                    {/* Students */}
 		                    <h6 className="heading-small text-muted mb-4">
