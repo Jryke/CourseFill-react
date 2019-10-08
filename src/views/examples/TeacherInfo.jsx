@@ -127,6 +127,30 @@ class TeacherInfo extends React.Component {
 			return null
 		}
 	}
+	renderAddressInfo = (info) => {
+		if (this.state.teacher.address) {
+			return this.state.teacher.address[info]
+		} else {
+			return null
+		}
+	}
+	renderCourses = () => {
+		if (this.state.teacher.courses) {
+			return (
+				this.state.teacher.courses.map((course, key) => {
+					return(
+						<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
+							<Link to={`../course/${course._id}`}>
+								<p>{course.name}</p>
+							</Link>
+						</div>
+					)
+				})
+			)
+		} else {
+			return null
+		}
+	}
   render() {
     return (
       <>
@@ -202,7 +226,7 @@ class TeacherInfo extends React.Component {
 		                        <Col md="12">
 															<div>
 																<small className="form-control-label">Address</small>
-																<h3>{this.state.teacher.address.streetAddress}</h3>
+																<h3>{this.renderAddressInfo('streetAddress')}</h3>
 			                        </div>
 		                        </Col>
 		                      </Row>
@@ -211,40 +235,32 @@ class TeacherInfo extends React.Component {
 		                          <FormGroup>
 																<div>
 																	<small className="form-control-label">City</small>
-																	<h3>{this.state.teacher.address.city}</h3>
+																	<h3>{this.renderAddressInfo('city')}</h3>
 				                        </div>
 		                          </FormGroup>
 		                        </Col>
 		                        <Col lg="4">
 															<div>
 																<small className="form-control-label">Country</small>
-																<h3>{this.state.teacher.address.country}</h3>
+																<h3>{this.renderAddressInfo('country')}</h3>
 															</div>
 		                        </Col>
 		                        <Col lg="4">
 															<div>
 																<small className="form-control-label">Postal code</small>
-																<h3>{this.state.teacher.address.zipCode}</h3>
+																<h3>{this.renderAddressInfo('zipCode')}</h3>
 															</div>
 		                        </Col>
 		                      </Row>
 		                    </div>
 												<hr className="my-4" />
-		                    {/* Students */}
+		                    {/* Courses */}
 		                    <h6 className="heading-small text-muted mb-4">
 		                      Courses taught by this teacher
 		                    </h6>
 		                    <div className="pl-lg-4">
 													{
-														this.state.teacher.courses.map((course, key) => {
-															return(
-																<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
-																	<Link to={`../course/${course._id}`}>
-																		<p>{course.name}</p>
-																	</Link>
-																</div>
-															)
-														})
+														this.renderCourses()
 													}
 		                    </div>
 
