@@ -56,7 +56,7 @@ class StudentInfo extends React.Component {
 	}
 	submitUpdates = (e) => {
 		e.preventDefault()
-		axios.patch(`${process.env.REACT_APP_API_PORT}/user/${this.props.match.params.id}`, this.state.data)
+		axios.patch(`${process.env.REACT_APP_API_PORT}/students/${this.props.match.params.id}`, this.state.data)
 			.then(data => {
 					this.setState({
 						editable: !this.state.editable
@@ -100,6 +100,7 @@ class StudentInfo extends React.Component {
 		return teachersArray
 	}
   render() {
+		console.log(this.state)
     return (
       <>
 				<DetailsHeader title={`${this.state.data.first_name} ${this.state.data.last_name}`} info={this.state.data.about} />
