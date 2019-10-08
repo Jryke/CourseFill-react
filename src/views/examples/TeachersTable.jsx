@@ -66,12 +66,22 @@ class TeachersTable extends React.Component {
 		return orderedList
 	}
 	renderStudents = (teacher) => {
-		if (this.props.location.pathname === '/admin/teachers') {
+		if (this.props.location.pathname === '/admin/teachers' && teacher.students) {
 			return(
 				<td>
 					<div>
 						<Link to={`teacher/${teacher._id}`}>
 							{teacher.students.length} students
+						</Link>
+					</div>
+				</td>
+			)
+		} else if (this.props.location.pathname === '/admin/teachers') {
+			return(
+				<td>
+					<div>
+						<Link to={`teacher/${teacher._id}`}>
+							0 students
 						</Link>
 					</div>
 				</td>
@@ -85,6 +95,7 @@ class TeachersTable extends React.Component {
 		})
 	}
   render() {
+		console.log(this.state)
     return (
 			<>
 				{
