@@ -326,7 +326,11 @@ class CourseInfo extends React.Component {
 		              </Card>
 		            </Col>
 								<Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
-									<TeacherCard />
+									{
+										this.state.data.teachers.map((teacher, key) => {
+											return <TeacherCard teacher={teacher} key={key} />
+										})
+									}
 		            </Col>
 		          </Row>
 		        </Container>
