@@ -700,6 +700,9 @@ class CourseInfo extends React.Component {
 		                      </Button>
 		                    </Col>
 											</Row>
+											{
+												this.renderDeleteButton()
+											}
 										</CardFooter>
 		              </Card>
 		            </Col>
