@@ -39,6 +39,23 @@ class SubjectsTable extends React.Component {
 		})
 		return orderedList
 	}
+	addToCart = (courseName, price) => {
+		let cart = localStorage.getItem('cart')
+			? JSON.parse(localStorage.getItem('cart')) : []
+		let data = {name: courseName, price: price}
+		cart.push(data)
+		localStorage.setItem('cart', JSON.stringify(cart))
+	}
+	addToCartAndCheckout = (courseName, price) => {
+		let cart = localStorage.getItem('cart')
+			? JSON.parse(localStorage.getItem('cart')) : []
+		let data = {name: courseName, price: price}
+		cart.push(data)
+		localStorage.setItem('cart', JSON.stringify(cart))
+		this.props.history.push({
+			pathname: "/auth/cart",
+		})
+	}
   render() {
     return (
 			<>
@@ -123,22 +140,14 @@ class SubjectsTable extends React.Component {
 										</DropdownToggle>
 										<DropdownMenu className="dropdown-menu-arrow" right>
 											<DropdownItem
-												href="#pablo"
-												onClick={e => e.preventDefault()}
+												onClick={() => this.addToCart(course.name, course.price)}
 											>
 												Add to cart
 											</DropdownItem>
 											<DropdownItem
-												href="#pablo"
-												onClick={e => e.preventDefault()}
+												onClick={() => this.addToCartAndCheckout(course.name, course.price)}
 											>
 												Add to cart and register
-											</DropdownItem>
-											<DropdownItem
-												href="#pablo"
-												onClick={e => e.preventDefault()}
-											>
-												Something else here
 											</DropdownItem>
 										</DropdownMenu>
 									</UncontrolledDropdown>
