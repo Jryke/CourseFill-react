@@ -21,7 +21,8 @@ class Cart extends React.Component {
 	state = {
 		name: [],
 		price: 0,
-		cart: []
+		cart: [],
+		total: ''
 	}
 //
 //
@@ -81,7 +82,7 @@ removeItem = (e, course) => {
 
             </CardBody>
 
-							<StripeProvider  className="text-center text-heavy mb-4" apiKey="pk_test_P55aXLui6UUIKIktSJYLq56p00uE4eoJif">
+							<StripeProvider apiKey="pk_test_P55aXLui6UUIKIktSJYLq56p00uE4eoJif">
 								<Elements>
 									<Checkout />
 								</Elements>
