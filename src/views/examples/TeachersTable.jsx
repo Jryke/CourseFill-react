@@ -88,12 +88,6 @@ class TeachersTable extends React.Component {
 			)
 		}
 	}
-	redirect = (e, item) => {
-		e.preventDefault()
-		this.props.history.push({
-			pathname: `/admin/${item.name}`,
-		})
-	}
   render() {
 		console.log(this.state)
     return (
@@ -156,40 +150,6 @@ class TeachersTable extends React.Component {
 										<i className="bg-warning" />
 										pending
 									</Badge>
-								</td>
-								<td className="text-right">
-									<UncontrolledDropdown>
-										<DropdownToggle
-											className="btn-icon-only text-light"
-											href="#pablo"
-											role="button"
-											size="sm"
-											color=""
-											onClick={e => e.preventDefault()}
-										>
-											<i className="fas fa-ellipsis-v" />
-										</DropdownToggle>
-										<DropdownMenu className="dropdown-menu-arrow" right>
-											<DropdownItem
-												href="#pablo"
-												onClick={e => e.preventDefault()}
-											>
-												Add to cart
-											</DropdownItem>
-											<DropdownItem
-												href="#pablo"
-												onClick={e => e.preventDefault()}
-											>
-												Add to cart and register
-											</DropdownItem>
-											<DropdownItem
-												href="#pablo"
-												onClick={e => e.preventDefault()}
-											>
-												Something else here
-											</DropdownItem>
-										</DropdownMenu>
-									</UncontrolledDropdown>
 								</td>
 							</tr>
 						)

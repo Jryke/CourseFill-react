@@ -82,8 +82,40 @@ class CoursesTable extends React.Component {
 			pathname: "/auth/cart",
 		})
 	}
+	renderDropdown = (course) => {
+		if (this.props.location.pathname === "/student/courses") {
+			return(
+				<td className="text-left">
+					<UncontrolledDropdown>
+						<DropdownToggle
+							className="btn-icon-only text-light"
+							href="#pablo"
+							role="button"
+							size="sm"
+							color=""
+							onClick={e => e.preventDefault()}
+						>
+							<i className="fas fa-ellipsis-v" />
+						</DropdownToggle>
+						<DropdownMenu className="dropdown-menu-arrow" right>
+							<DropdownItem
+								onClick={() => this.addToCart(course.name, course.price)}
+							>
+								Add to cart
+							</DropdownItem>
+							<DropdownItem
+								onClick={() => this.addToCartAndCheckout(course.name, course.price)}
+							>
+								Add to cart and register
+							</DropdownItem>
+						</DropdownMenu>
+					</UncontrolledDropdown>
+				</td>
+			)
+		}
+	}
   render() {
-		console.log(this.state)
+		console.log(this.props)
     return (
 			<>
 				{
@@ -150,32 +182,9 @@ class CoursesTable extends React.Component {
 											${course.price}
 										</Link>
 									</td>
-									<td className="text-right">
-										<UncontrolledDropdown>
-											<DropdownToggle
-												className="btn-icon-only text-light"
-												href="#pablo"
-												role="button"
-												size="sm"
-												color=""
-												onClick={e => e.preventDefault()}
-											>
-												<i className="fas fa-ellipsis-v" />
-											</DropdownToggle>
-											<DropdownMenu className="dropdown-menu-arrow" right>
-												<DropdownItem
-													onClick={() => this.addToCart(course.name, course.price)}
-												>
-													Add to cart
-												</DropdownItem>
-												<DropdownItem
-													onClick={() => this.addToCartAndCheckout(course.name, course.price)}
-												>
-													Add to cart and register
-												</DropdownItem>
-											</DropdownMenu>
-										</UncontrolledDropdown>
-									</td>
+									{
+										this.renderDropdown(course)
+									}
 							</tr>
 						)
 					})
