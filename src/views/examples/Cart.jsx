@@ -21,8 +21,7 @@ class Cart extends React.Component {
 	state = {
 		name: [],
 		price: 0,
-		cart: [],
-		total: ''
+		cart: []
 	}
 //
 //
@@ -32,8 +31,6 @@ componentDidMount() {
 	this.setState({cart: JSON.parse(localStorage.getItem('cart'))})
 	console.log(this.state.cart)
 }
-
-
 
 removeItem = (e, course) => {
 	e.preventDefault()
@@ -84,12 +81,12 @@ removeItem = (e, course) => {
 
             </CardBody>
 
-							<StripeProvider apiKey="pk_test_P55aXLui6UUIKIktSJYLq56p00uE4eoJif">
+							<StripeProvider  className="text-center text-heavy mb-4" apiKey="pk_test_P55aXLui6UUIKIktSJYLq56p00uE4eoJif">
 								<Elements>
 									<Checkout />
 								</Elements>
 							</StripeProvider>
-
+							<Button className="btn btn-success" size="sm">Checkout</Button>
           </Card>
         </Col>
       </>
