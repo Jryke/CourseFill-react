@@ -129,9 +129,9 @@ var routes = [
 		path: "/profile",
 		name: "Student Info",
 		icon: "ni ni-single-02 text-yellow",
-		component: StudentInfo,
+		component: Profile,
 		layout: "/student",
-		invisible: true
+		invisible: false
 	},
 	{
 		path: "/course/:id",

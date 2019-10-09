@@ -43,7 +43,7 @@ class CoursesTable extends React.Component {
 						registered: 0,
 						limit: 0
 					},
-					students: [],
+					students: [{}],
 					teachers: []
 				}
 			]
@@ -70,10 +70,8 @@ class CoursesTable extends React.Component {
 			}).catch(err => {
 				console.log("Error")
 			})
-}
-
+	}
   render() {
-		console.log(this.state)
     return (
 			<>
 				{
@@ -118,11 +116,11 @@ class CoursesTable extends React.Component {
 									<td>
 										<Link to={`course/${course._id}`}>
 											<div className="d-flex align-items-center">
-												<span className="mr-2">{`${Math.round(course.registration.registered / course.registration.limit * 100)}%`}</span>
+												<span className="mr-2">{`${Math.round(course.students.length / course.registration.limit * 100)}%`}</span>
 												<div>
 													<Progress
 														max={course.registration.limit}
-														value={course.registration.registered}
+														value={course.students.length}
 														barClassName="bg-danger"
 													/>
 												</div>

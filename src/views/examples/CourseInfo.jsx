@@ -29,7 +29,12 @@ import {
   Container,
   Row,
   Col,
-	Progress
+	Progress,
+	CardFooter,
+	Dropdown,
+	DropdownToggle,
+	DropdownMenu,
+	DropdownItem
 } from "reactstrap";
 import { Link } from "react-router-dom"
 import axios from 'axios'
@@ -41,13 +46,15 @@ import Schedule from "./Schedule.jsx";
 class CourseInfo extends React.Component {
 	state = {
 		editable: false,
+		dropdownOpen: false,
+		allTeachers: [{}],
 		days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
 		data: {
 			schedule: {
 				days: []
 			},
-			students: [],
-			teachers: [],
+			students: [{}],
+			teachers: [{}],
 			registration: {}
 		}
 	}
@@ -153,7 +160,38 @@ class CourseInfo extends React.Component {
 				console.log("Error")
 			})
 	}
+	removeTeacher = (e, teacherId) => {
+		e.preventDefault()
+		let index = this.state.data.teachers.findIndex(el => el._id === teacherId)
+		let teachersArr = this.state.data.teachers
+		teachersArr.splice(index, 1)
+		let data = this.state.data
+		data.teachers = teachersArr
+		this.setState({data})
+	}
+	toggleTeacherDropdown = (e) => {
+		e.preventDefault()
+		axios.get(`${process.env.REACT_APP_API_PORT}/teachers`)
+			.then(res => {
+				const allTeachers = res.data
+				this.setState({
+					dropdownOpen: !this.state.dropdownOpen,
+					allTeachers: allTeachers
+				})
+			}).catch(err => {
+				console.log("Error")
+			})
+	}
+	selectTeacher = (e, teacher) => {
+		e.preventDefault()
+		console.log('teacher info', teacher)
+		let data = this.state.data
+		data.teachers.push(teacher)
+		this.setState(data)
+		console.log('teacher id', teacher._id)
+	}
   render() {
+		// console.log(this.state)
     return (
       <>
         <DetailsHeader title={this.state.data.name} subtitle={this.state.data.subject} info={this.state.data.description} />
@@ -243,16 +281,16 @@ class CourseInfo extends React.Component {
 													<Col lg="4">
 														<div className="pl-lg-4">
 															<small className="form-control-label">Currently registered</small>
-															<h2>{this.state.data.registration.registered}</h2>
+															<h2>{this.state.data.students.length}</h2>
 														</div>
 													</Col>
 													<Col lg="4">
 														<div className="pl-lg-4">
 															<small className="form-control-label">Availability</small>
-															<h2>{100 - (this.state.data.registration.registered / this.state.data.registration.limit * 100)}%</h2>
+															<h2>{Math.round(100 - (this.state.data.students.length / this.state.data.registration.limit * 100))}%</h2>
 															<Progress
 																max={this.state.data.registration.limit}
-																value={this.state.data.registration.registered}
+																value={this.state.data.students.length}
 																barClassName="bg-danger"
 															/>
 														</div>
@@ -273,8 +311,6 @@ class CourseInfo extends React.Component {
 													</Col>
 												</Row>
 											</div>
-
-
 											<hr className="my-4" />
 											{/* Teachers */}
 											<div className="pl-lg-4">
@@ -319,10 +355,10 @@ class CourseInfo extends React.Component {
 																			<img
 																				alt="..."
 																				className="rounded-circle"
-																				src={student.img.src}
+																				src={student.avatar}
 																			/>
 																		</span>
-																		<span>{student.name}</span>
+																		<span>{student.first_name} {student.last_name}</span>
 																	</Link>
 																</div>
 															)
@@ -335,7 +371,11 @@ class CourseInfo extends React.Component {
 		              </Card>
 		            </Col>
 								<Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
-									<TeacherCard />
+									{
+										this.state.data.teachers.map(teacher => {
+											return <TeacherCard teacher={teacher} key={teacher._id} />
+										})
+									}
 		            </Col>
 		          </Row>
 		        </Container>
@@ -459,16 +499,16 @@ class CourseInfo extends React.Component {
 														<Col lg="4">
 															<div className="pl-lg-4">
 																<small className="form-control-label">Currently registered</small>
-																<h2>{this.state.data.registration.registered}</h2>
+																<h2>{this.state.data.students.length}</h2>
 															</div>
 														</Col>
 														<Col lg="4">
 															<div className="pl-lg-4">
 																<small className="form-control-label">Availability</small>
-																<h2>{100 - (this.state.data.registration.registered / this.state.data.registration.limit * 100)}%</h2>
+																<h2>{Math.round(100 - (this.state.data.students.length / this.state.data.registration.limit * 100))}%</h2>
 																<Progress
 																	max={this.state.data.registration.limit}
-																	value={this.state.data.registration.registered}
+																	value={this.state.data.students.length}
 																	barClassName="bg-danger"
 																/>
 															</div>
@@ -509,12 +549,45 @@ class CourseInfo extends React.Component {
 												<h6 className="heading-small text-muted mb-4">
 													Teachers
 												</h6>
+
+
+
+												<Dropdown isOpen={this.state.dropdownOpen} toggle={e => this.toggleTeacherDropdown(e)}>
+													<DropdownToggle caret>
+														Add teacher
+													</DropdownToggle>
+													<DropdownMenu>
+														{
+															this.state.allTeachers.map(teacher => {
+																return(
+																	<DropdownItem
+																		onClick={(e) => this.selectTeacher(e, teacher)}
+																		key={teacher._id}
+																	>
+																		{teacher.first_name} {teacher.last_name}
+																	</DropdownItem>
+																)
+															})
+														}
+													</DropdownMenu>
+												</Dropdown>
+
+
+
 												<div className="pl-lg-4">
 													{
-														this.state.data.teachers.map((teacher, key) => {
+														this.state.data.teachers.map(teacher => {
 															return(
-																<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
-																	<Link to={teacher.first_name}>
+																<div className="avatar-group" key={teacher._id} style={{display: "inline-block", padding: '40px'}}>
+																<Button
+																	color="danger"
+																	href="#pablo"
+																	onClick={e => this.removeTeacher(e, teacher._id)}
+																	size="sm"
+																>
+																	remove
+																</Button>
+																	<Link to={`../teacher/${teacher._id}`}>
 																		<span className="avatar avatar-sm" >
 																			<img
 																				alt="..."
@@ -535,7 +608,7 @@ class CourseInfo extends React.Component {
 		                      Students
 		                    </h6>
 		                    <div className="pl-lg-4">
-													{
+												{
 														this.state.data.students.map((student, key) => {
 															return(
 																<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
@@ -544,10 +617,10 @@ class CourseInfo extends React.Component {
 																			<img
 																				alt="..."
 																				className="rounded-circle"
-																				src={student.img.src}
+																				src={student.avatar}
 																			/>
 																		</span>
-																		<span>{student.name}</span>
+																		<span>{student.first_name} {student.last_name}</span>
 																	</Link>
 																</div>
 															)
@@ -560,7 +633,11 @@ class CourseInfo extends React.Component {
 		            </Col>
 
 								<Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
-									<TeacherCard />
+									{
+										this.state.data.teachers.map((teacher, key) => {
+											return <TeacherCard teacher={teacher} key={key} />
+										})
+									}
 		            </Col>
 		          </Row>
 		        </Container>

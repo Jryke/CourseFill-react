@@ -56,7 +56,7 @@ class StudentInfo extends React.Component {
 	}
 	submitUpdates = (e) => {
 		e.preventDefault()
-		axios.patch(`${process.env.REACT_APP_API_PORT}/user/${this.props.match.params.id}`, this.state.data)
+		axios.patch(`${process.env.REACT_APP_API_PORT}/students/${this.props.match.params.id}`, this.state.data)
 			.then(data => {
 					this.setState({
 						editable: !this.state.editable
@@ -99,6 +99,13 @@ class StudentInfo extends React.Component {
 		})
 		return teachersArray
 	}
+	renderAddressInfo = (info) => {
+		if (this.state.data.address) {
+			return this.state.data.address[info]
+		} else {
+			return null
+		}
+	}
   render() {
     return (
       <>
@@ -108,7 +115,7 @@ class StudentInfo extends React.Component {
 					!this.state.editable ? (
 						<Container className="mt--7" fluid>
 							<Row>
-								<Col className="order-xl-1 mb-6" xl="8">
+								<Col className="order-xl-1 mb-6" xl="10">
 									<Card className="bg-secondary shadow">
 										<CardHeader className="bg-white border-0">
 											<Row className="align-items-center">
@@ -198,7 +205,7 @@ class StudentInfo extends React.Component {
 		                        <Col md="12">
 															<div>
 																<small className="form-control-label">Street address</small>
-																<h2>{this.state.data.address.streetAddress}</h2>
+																<h2>{this.renderAddressInfo("streetAddress")}</h2>
 			                        </div>
 		                        </Col>
 		                      </Row>
@@ -207,14 +214,14 @@ class StudentInfo extends React.Component {
 		                          <FormGroup>
 																<div>
 																	<small className="form-control-label">City</small>
-																	<h2>{this.state.data.address.city}</h2>
+																	<h2>{this.renderAddressInfo("city")}</h2>
 				                        </div>
 		                          </FormGroup>
 		                        </Col>
 		                        <Col lg="6">
 															<div>
 																<small className="form-control-label">State</small>
-																<h2>{this.state.data.address.state}</h2>
+																<h2>{this.renderAddressInfo("state")}</h2>
 															</div>
 		                        </Col>
 													</Row>
@@ -222,13 +229,13 @@ class StudentInfo extends React.Component {
 														<Col lg="6">
 															<div>
 																<small className="form-control-label">Country</small>
-																<h2>{this.state.data.address.country}</h2>
+																<h2>{this.renderAddressInfo("country")}</h2>
 															</div>
 		                        </Col>
 														<Col lg="6">
 															<div>
 																<small className="form-control-label">Postal code</small>
-																<h2>{this.state.data.address.zipCode}</h2>
+																<h2>{this.renderAddressInfo("zipCode")}</h2>
 															</div>
 		                        </Col>
 													</Row>
@@ -303,15 +310,12 @@ class StudentInfo extends React.Component {
 										</CardFooter>
 									</Card>
 								</Col>
-								<Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
-									<TeacherCard />
-								</Col>
 							</Row>
 						</Container>
 					) : (
 						<Container className="mt--7" fluid>
 							<Row>
-								<Col className="order-xl-1 mb-6" xl="8">
+								<Col className="order-xl-1 mb-6" xl="10">
 									<Card className="bg-secondary shadow">
 										<CardHeader className="bg-white border-0">
 											<Row className="align-items-center">
@@ -485,7 +489,7 @@ class StudentInfo extends React.Component {
 																<Input
 																	className="form-control-alternative"
 																	placeholder="Street address"
-																	defaultValue={this.state.data.address.streetAddress}
+																	defaultValue={this.renderAddressInfo("streetAddress")}
 																	id="input-address"
 																	type="text"
 																	onChange={e => this.sendInputToState(e, 'streetAddress', 'address')}
@@ -505,7 +509,7 @@ class StudentInfo extends React.Component {
 																<Input
 																	className="form-control-alternative"
 																	placeholder="City"
-																	defaultValue={this.state.data.address.city}
+																	defaultValue={this.renderAddressInfo("city")}
 																	id="input-city"
 																	type="text"
 																	onChange={e => this.sendInputToState(e, 'city', 'address')}
@@ -523,7 +527,7 @@ class StudentInfo extends React.Component {
 																<Input
 																	className="form-control-alternative"
 																	placeholder="State"
-																	defaultValue={this.state.data.address.state}
+																	defaultValue={this.renderAddressInfo("state")}
 																	id="input-state"
 																	type="text"
 																	onChange={e => this.sendInputToState(e, 'country', 'address')}
@@ -543,7 +547,7 @@ class StudentInfo extends React.Component {
 																<Input
 																	className="form-control-alternative"
 																	placeholder="Country"
-																	defaultValue={this.state.data.address.country}
+																	defaultValue={this.renderAddressInfo("country")}
 																	id="input-country"
 																	type="text"
 																	onChange={e => this.sendInputToState(e, 'country', 'address')}
@@ -562,6 +566,7 @@ class StudentInfo extends React.Component {
 																	className="form-control-alternative"
 																	id="input-postal-code"
 																	placeholder="Postal code"
+																	defaultValue={this.renderAddressInfo("zipCode")}
 																	type="number"
 																	onChange={e => this.sendInputToState(e, 'zipCode', 'address')}
 																/>
@@ -642,9 +647,6 @@ class StudentInfo extends React.Component {
 											</Row>
 										</CardFooter>
 									</Card>
-								</Col>
-								<Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
-									<TeacherCard />
 								</Col>
 							</Row>
 						</Container>
