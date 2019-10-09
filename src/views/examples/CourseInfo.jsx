@@ -19,6 +19,7 @@ import React from "react";
 
 // reactstrap components
 import {
+	Alert,
 	Button,
   Card,
   CardHeader,
@@ -74,6 +75,8 @@ class CourseInfo extends React.Component {
 	let data = {name: this.state.data.name, price: this.state.data.price}
 	cart.push(data)
 	localStorage.setItem('cart', JSON.stringify(cart))
+	alert("Course added succesfully")
+
 }
 
 	renderEditButton = () => {
@@ -102,6 +105,8 @@ class CourseInfo extends React.Component {
 					<Col className="text-right" xs="4">
 						<Button
 							color="primary"
+							data-toggle="modal"
+							data-target="#exampleModal"
 							size="sm"
 							onClick={this.addToCart}>Add to cart
 						</Button>

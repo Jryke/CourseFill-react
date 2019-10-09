@@ -1,4 +1,7 @@
 import React from 'react'
+import {StripeProvider, Elements} from 'react-stripe-elements'
+import Checkout from './Checkout'
+
 
 
 import {
@@ -24,9 +27,9 @@ class Cart extends React.Component {
 //
 //
 //
-  componentDidMount() {
-		this.setState({cart: JSON.parse(localStorage.getItem('cart'))})
-		console.log(this.state.cart)
+componentDidMount() {
+	this.setState({cart: JSON.parse(localStorage.getItem('cart'))})
+	console.log(this.state.cart)
 }
 
 removeItem = (e, course) => {
@@ -43,46 +46,55 @@ removeItem = (e, course) => {
 		 localStorage.removeItem('cart');
 		 this.setState({cart: []});
 	 }
+
+
 //
 	render () {
 		return (
-			<div>
-				{console.log(this.state.cart)}
+			<>
+        <Col lg="6" md="8">
+          <Card className="bg-secondary shadow border-0">
+            <CardHeader className="bg-transparent pb-5">
+              <div className="text-muted text-center mt-2 mb-4">
+              </div>
+            </CardHeader>
+            <CardBody className="px-lg-5 py-lg-5">
+              <div className="text-center text-muted mb-4">
 
-				{(this.state.cart.map((course, key) => {
-					return (<div key={key}>{course.name} ${course.price}
-					<span>
-						{console.log(course)}
-						<Button size="sm" color="primary" onClick={e => this.removeItem(e, course.name )
-							}
-					style={{ marginRight: "10px" }}>Remove Course</Button></span></div>
-				)}))}
+									{(this.state.cart.map((course, key) => {
+										return (<div className="text-center text-muted mb-4" key={key}>{course.name} <span style={{ marginLeft: "1rem" }}> ${course.price}</span>
+										<span>
+											<Button size="sm" color="primary" onClick={e => this.removeItem(e, course.name )
+												}
+										style={{ marginLeft: "1rem" }}>Remove Course</Button></span></div>
+									)}))}
 
-				<div>Total:	${(this.state.cart.reduce((a, c) =>
-					a + c.price, 0))}</div>
+									<div className="text-center text-heavy mb-4">Total:	${(this.state.cart.reduce((a, c) =>
+										a + c.price, 0))}</div>
 
-				<Button size="sm" color="danger" onClick={this.clearCart}
-				style={{ marginRight: "10px" }}>Clear Cart</Button>
-			{console.log(localStorage)}
-			</div>
+
+									<Button size="sm" color="danger" onClick={this.clearCart}
+									style={{ marginRight: "10px" }}>Clear Cart</Button>
+
+
+              </div>
+
+            </CardBody>
+
+							<StripeProvider  className="text-center text-heavy mb-4" apiKey="pk_test_P55aXLui6UUIKIktSJYLq56p00uE4eoJif">
+								<Elements>
+									<Checkout />
+								</Elements>
+							</StripeProvider>
+							<Button className="btn btn-success" size="sm">Checkout</Button>
+          </Card>
+        </Col>
+      </>
+
 				)
-			// // // 		<div>
-			// // // 				 <h3 className="card-title">Cart</h3><hr />
-			// // // 				 {
-			// // // 					 courses.map((course, index) =>
-			// // // 						 <CartItem course={course} remove={this.removeFromCart} key={index}/>)
-			// // // 				 } <hr/>
-			// // // 			 { courses.length ?
-			// // // 					 <div><h4>
-			// // // 						 <small>Total Amount: </small>
-			// // // 						 <span className="float-right text-primary">${total}</span>
-			// // // 					 </h4><hr/></div>: ''}
-			// // // 				 { !courses.length ?<h3 className="text-warning">No item on the cart</h3>: ''}
-			// // // 				 <Link to="/checkout">
-			// // // 						 <Button className="btn btn-success float-right">Checkout</Button></Link>
-			// // //
-			// // // 			 </div>
-			// // 	}
+
+
+
 
 
 
