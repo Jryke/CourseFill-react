@@ -115,6 +115,24 @@ class CourseInfo extends React.Component {
 				)
 		}
 	}
+	renderDeleteButton = () => {
+		let courseId = this.state.data._id
+		if (this.props.location.pathname === `/admin/course/${courseId}`) {
+			return(
+				<Row className="align-items-center">
+					<Col className="text-center" xs="1">
+						<Button
+							color="danger"
+							onClick={this.deleteClass}
+							size="sm"
+						>
+							Delete class
+						</Button>
+					</Col>
+				</Row>
+			)
+		}
+	}
 	sendInputToState = (e, stateRef, stateObj) => {
 		let data = this.state.data
 		if (stateObj) {
@@ -153,7 +171,6 @@ class CourseInfo extends React.Component {
 				console.log("Error")
 			})
 	}
-
 	cancelUpdates = (e) => {
 		e.preventDefault()
 		axios.get(`${process.env.REACT_APP_API_PORT}/courses/${this.props.match.params.id}`)
@@ -162,6 +179,18 @@ class CourseInfo extends React.Component {
 				this.setState({
 					data: data,
 					editable: !this.state.editable
+				})
+			}).catch(err => {
+				console.log("Error")
+			})
+	}
+	deleteClass = (e) => {
+		e.preventDefault()
+		axios.delete(`${process.env.REACT_APP_API_PORT}/course/${this.props.match.params.id}`)
+			.then(data => {
+				console.log('classDeleted', data)
+				this.props.history.push({
+					pathname: "/admin/courses"
 				})
 			}).catch(err => {
 				console.log("Error")
@@ -197,10 +226,8 @@ class CourseInfo extends React.Component {
 		this.setState(data)
 		console.log('teacher id', teacher._id)
 	}
-
-
   render() {
-		// console.log(this.state)
+		console.log(this.props)
     return (
       <>
         <DetailsHeader title={this.state.data.name} subtitle={this.state.data.subject} info={this.state.data.description} />
@@ -384,6 +411,9 @@ class CourseInfo extends React.Component {
 													this.renderEditButton()
 												}
 											</Row>
+											{
+												this.renderDeleteButton()
+											}
 										</CardFooter>
 		              </Card>
 		            </Col>
@@ -572,8 +602,6 @@ class CourseInfo extends React.Component {
 													Teachers
 												</h6>
 
-
-
 												<Dropdown isOpen={this.state.dropdownOpen} toggle={e => this.toggleTeacherDropdown(e)}>
 													<DropdownToggle caret>
 														Add teacher
@@ -593,8 +621,6 @@ class CourseInfo extends React.Component {
 														}
 													</DropdownMenu>
 												</Dropdown>
-
-
 
 												<div className="pl-lg-4">
 													{
