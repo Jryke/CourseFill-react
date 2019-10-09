@@ -34,7 +34,6 @@ import {
 import { Link } from 'react-router-dom'
 // core components
 import DetailsHeader from "../../components/Headers/DetailsHeader.jsx";
-import TeacherCard from "./TeacherCard.jsx"
 
 class SubjectInfo extends React.Component {
 	state = {
@@ -109,7 +108,7 @@ class SubjectInfo extends React.Component {
 					!this.state.editable ? (
 						<Container className="mt--7" fluid>
 		          <Row>
-		            <Col className="order-xl-1 mb-6" xl="8">
+		            <Col className="order-xl-1 mb-6" xl="10">
 		              <Card className="bg-secondary shadow">
 		                <CardHeader className="bg-white border-0">
 		                  <Row className="align-items-center">
@@ -210,9 +209,6 @@ class SubjectInfo extends React.Component {
 											</Row>
 										</CardFooter>
 		              </Card>
-		            </Col>
-								<Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
-		              <TeacherCard />
 		            </Col>
 		          </Row>
 		        </Container>
@@ -371,9 +367,6 @@ class SubjectInfo extends React.Component {
 											</Row>
 										</CardFooter>
 		              </Card>
-		            </Col>
-								<Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
-		              <TeacherCard />
 		            </Col>
 		          </Row>
 		        </Container>

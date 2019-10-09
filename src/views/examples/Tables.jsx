@@ -317,17 +317,17 @@ class Tables extends React.Component {
 	}
 	makeTableHeadProps = () => {
 		if (this.props.location.pathname === "/admin/courses") {
-			return ["Course", "Subject", "Description", "Teachers", "Registration", "Schedule", "Price", "Action"]
+			return ["Course", "Subject", "Teachers", "Registration", "Schedule", "Price", "Action"]
 		} else if (this.props.location.pathname === "/admin/subjects") {
-			return ["Subject", "Course", "Description", "Teachers", "Registration", "Schedule", "Price", "Action"]
+			return ["Subject", "Course", "Teachers", "Registration", "Schedule", "Price", "Action"]
 		} else if (this.props.location.pathname === "/admin/teachers") {
 			return ["Teacher", "Courses", "Subject", "Students", "Schedule", "Action"]
 		} else if (this.props.location.pathname === "/admin/students") {
 			return ["Student", "Courses", "Teachers", "Schedule", "Action"]
 		} else if (this.props.location.pathname === "/student/courses") {
-			return ["Course", "Subject", "Description", "Teachers", "Registration", "Schedule", "Price", "Action"]
+			return ["Course", "Subject", "Teachers", "Registration", "Schedule", "Price", "Action"]
 		} else if (this.props.location.pathname === "/student/subjects") {
-			return ["Subject", "Course", "Description", "Teachers", "Registration", "Schedule", "Price", "Action"]
+			return ["Subject", "Course", "Teachers", "Registration", "Schedule", "Price", "Action"]
 		} else if (this.props.location.pathname === "/student/teachers") {
 			return ["Teacher", "Course", "Subject", "Schedule", "Action"]
 		}

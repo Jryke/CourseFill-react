@@ -59,12 +59,6 @@ class SubjectsTable extends React.Component {
 								</td>
 
 								<td>
-									<Link to={`subject/${course.subject}`}>
-										{course.shortDescription}
-									</Link>
-								</td>
-
-								<td>
 									{
 										course.teachers.map((teacher, key) => {
 											return(

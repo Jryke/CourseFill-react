@@ -36,7 +36,17 @@ import {
 } from "reactstrap";
 
 class AdminNavbar extends React.Component {
+  renderCart = () => {
+    if (this.props.match.path === "/student") {
+      return(
+        <Link to="../../auth/cart">
+          <i class="fas fa-shopping-cart fa-5x" style={{color: "white"}}></i>
+        </Link>
+      )
+    }
+  }
   render() {
+    console.log(this.props)
     return (
       <>
         <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
@@ -106,9 +116,9 @@ class AdminNavbar extends React.Component {
               </UncontrolledDropdown>
             </Nav>
             */}
-            <Link to="../../auth/cart">
-              <i class="fas fa-shopping-cart fa-5x" style={{color: "white"}}></i>
-            </Link>
+            {
+              this.renderCart()
+            }
           </Container>
         </Navbar>
       </>

@@ -140,7 +140,7 @@ class TeachersTable extends React.Component {
 										teacher.courses.map((course, key) => {
 											return(
 												<div key={key}>
-													<Link to={`subject/${course.subject}`} onClick={e => {e.stopPropagation()}}>
+													<Link to={`course/${course._id}`} onClick={e => {e.stopPropagation()}}>
 														{course.subject}
 													</Link>
 												</div>
