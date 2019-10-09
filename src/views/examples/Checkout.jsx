@@ -9,7 +9,7 @@ class Checkout extends React.Component {
 		this.props.stripe.createToken({})
 		.then(res => {
 			axios.post(`${process.env.REACT_APP_API_PORT}/pay`, {
-				amount: 325,
+				amount: this.props.total * 100,
 				currency: 'usd',
 				description: '',
 				source: res.token.id

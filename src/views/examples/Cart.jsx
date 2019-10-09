@@ -84,10 +84,10 @@ removeItem = (e, course) => {
 
 							<StripeProvider apiKey="pk_test_P55aXLui6UUIKIktSJYLq56p00uE4eoJif">
 								<Elements>
-									<Checkout />
+									<Checkout total={(this.state.cart.reduce((a, c) =>
+										a + c.price, 0))}/>
 								</Elements>
 							</StripeProvider>
-							<Button className="btn btn-success" size="sm">Checkout</Button>
           </Card>
         </Col>
       </>
