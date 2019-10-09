@@ -67,6 +67,15 @@ class CourseInfo extends React.Component {
 				console.log("Error")
 			})
 	}
+
+	addToCart = () => {
+	let cart = localStorage.getItem('cart')
+		? JSON.parse(localStorage.getItem('cart')) : []
+	let data = {name: this.state.data.name, price: this.state.data.price}
+	cart.push(data)
+	localStorage.setItem('cart', JSON.stringify(cart))
+}
+
 	renderEditButton = () => {
 		let courseId = this.state.data._id
 		// MAKE THIS IF STATEMENT CHECK THAT USER IS ADMIN (NOT TEACHER OR STUDENT)
@@ -88,6 +97,17 @@ class CourseInfo extends React.Component {
 					</Button>
 				</Col>
 			)
+		} else {
+				return (
+					<Col className="text-right" xs="4">
+						<Button
+							color="primary"
+							size="sm"
+							onClick={this.addToCart}>Add to cart
+						</Button>
+					</Col>
+
+				)
 		}
 	}
 	sendInputToState = (e, stateRef, stateObj) => {
@@ -172,6 +192,8 @@ class CourseInfo extends React.Component {
 		this.setState(data)
 		console.log('teacher id', teacher._id)
 	}
+
+
   render() {
 		// console.log(this.state)
     return (
@@ -555,7 +577,7 @@ class CourseInfo extends React.Component {
 														{
 															this.state.allTeachers.map(teacher => {
 																return(
-																	<DropdownItem 
+																	<DropdownItem
 																		onClick={(e) => this.selectTeacher(e, teacher)}
 																		key={teacher._id}
 																	>
