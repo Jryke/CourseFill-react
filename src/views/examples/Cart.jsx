@@ -31,14 +31,15 @@ class Cart extends React.Component {
 		console.log(this.state.cart)
 }
 
-//
-removeItem(e) {
-    this.setState({cart: this.state.cart.filter((item) => {
-        return item !== e.target.value
-    })})
+removeItem = (e, course) => {
+	e.preventDefault()
+	let index = this.state.cart.findIndex(el => el.name === course.name)
+	let cartArr = this.state.cart
+	cartArr.splice(index, 1)
+	let cart = this.state.cart
+	localStorage.setItem('cart', JSON.stringify(cart))
+	this.setState({cart})
 }
-
-// 	//
 
 	clearCart = () => {
 		 localStorage.removeItem('cart');
@@ -48,11 +49,13 @@ removeItem(e) {
 	render () {
 		return (
 			<div>
+				{console.log(this.state.cart)}
+
 				{(this.state.cart.map((course, key) => {
 					return (<div key={key}>{course.name} ${course.price}
 					<span>
-
-						<Button size="sm" color="primary" onClick={this.removeItem
+						{console.log(course)}
+						<Button size="sm" color="primary" onClick={e => this.removeItem(e, course.name )
 							}
 					style={{ marginRight: "10px" }}>Remove Course</Button></span></div>
 				)}))}
