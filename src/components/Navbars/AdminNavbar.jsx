@@ -106,7 +106,7 @@ class AdminNavbar extends React.Component {
               </UncontrolledDropdown>
             </Nav>
             */}
-            <Link to="">
+            <Link to="../auth/cart">
               <i class="fas fa-shopping-cart fa-5x" style={{color: "white"}}></i>
             </Link>
           </Container>

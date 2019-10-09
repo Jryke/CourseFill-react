@@ -25,6 +25,7 @@ import CourseInfo from "./views/examples/CourseInfo.jsx";
 import SubjectInfo from "./views/examples/SubjectInfo.jsx";
 import TeacherInfo from "./views/examples/TeacherInfo.jsx";
 import StudentInfo from "./views/examples/StudentInfo.jsx";
+import Cart from "./views/examples/Cart.jsx"
 
 var routes = [
 	// Teacher Links
@@ -189,6 +190,14 @@ var routes = [
     component: StudentRegister,
     layout: "/auth",
 		invisible: true
-  }
+	},
+	{
+		path: "/cart",
+		name: "Shopping Cart",
+		icon: "ni ni-circle-08 text-pink",
+		component: Cart,
+		layout: "/auth",
+		invisible: true
+	}
 ];
 export default routes;
