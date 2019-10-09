@@ -89,10 +89,6 @@ class CoursesTable extends React.Component {
 										</Link>
 									</td>
 									<td>
-										<Link to={`course/${course._id}`}>
-											{course.description}
-										</Link></td>
-									<td>
 										{
 											course.teachers.map((teacher, key) => {
 												return(
