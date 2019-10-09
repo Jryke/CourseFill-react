@@ -44,7 +44,7 @@ var routes = [
     icon: "ni ni-bullet-list-67 text-red",
     component: Tables,
     layout: "/admin",
-		invisible: false
+		invisible: true
   },
 	{
     path: "/teachers",
@@ -125,7 +125,7 @@ var routes = [
     icon: "ni ni-bullet-list-67 text-red",
     component: Tables,
     layout: "/student",
-		invisible: false
+		invisible: true
   },
 	{
     path: "/teachers",
