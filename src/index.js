@@ -26,6 +26,7 @@ import "./assets/scss/argon-dashboard-react.scss";
 import AdminLayout from "./layouts/Admin.jsx";
 import StudentLayout from "./layouts/Student.jsx"
 import AuthLayout from "./layouts/Auth.jsx";
+import Cart from "./views/examples/Cart.jsx"
 
 ReactDOM.render(
   <BrowserRouter>
@@ -33,6 +34,7 @@ ReactDOM.render(
       <Route path="/admin" render={props => <AdminLayout {...props} />} />
 			<Route path="/student" render={props => <StudentLayout {...props} />} />
       <Route path="/auth" render={props => <AuthLayout {...props} />} />
+			<Route path="/cart" component={Cart} />
       <Redirect from="/" to="/admin/index" />
     </Switch>
   </BrowserRouter>,

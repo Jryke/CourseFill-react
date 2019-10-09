@@ -29,8 +29,7 @@ import {
   Container,
   Row,
   Col,
-	Progress,
-	CardFooter
+	Progress
 } from "reactstrap";
 import { Link } from "react-router-dom"
 import axios from 'axios'
@@ -61,6 +60,15 @@ class CourseInfo extends React.Component {
 				console.log("Error")
 			})
 	}
+
+	addToCart = () => {
+		let cart = localStorage.getItem('cart')
+		 	? JSON.parse(localStorage.getItem('cart')) : []
+		let data = {name: this.state.data.name, price: this.state.data.price}
+		cart.push(data)
+		localStorage.setItem('cart', JSON.stringify(cart))
+	}
+
 	renderEditButton = () => {
 		let courseId = this.state.data._id
 		// MAKE THIS IF STATEMENT CHECK THAT USER IS ADMIN (NOT TEACHER OR STUDENT)
@@ -82,16 +90,23 @@ class CourseInfo extends React.Component {
 					</Button>
 				</Col>
 			)
+		} else {
+			return (
+				<Col className="text-right" xs="4">
+					<Button
+						color="primary"
+						size="sm"
+						onClick={this.addToCart}>Add to cart
+					</Button>
+				</Col>
+
+			)
 		}
 	}
-	sendInputToState = (e, stateRef, stateObj) => {
-		let data = this.state.data
-		if (stateObj) {
-			data[stateObj][stateRef] = e.target.value
-		} else {
-			data[stateRef] = e.target.value
-		}
-		this.setState({data})
+	sendInputToState = (e, stateRef) => {
+		let state = this.state
+		state.data[stateRef] = e.target.value
+		this.setState({state})
 	}
 	updateDays = (e, i, day) => {
 		if (e.target.checked) {
@@ -111,16 +126,18 @@ class CourseInfo extends React.Component {
 			this.setState({state})
 		}
 	}
+
 	submitUpdates = (e) => {
 		e.preventDefault()
-		axios.patch(`${process.env.REACT_APP_API_PORT}/courses/${this.props.match.params.id}`, this.state.data)
-			.then(data => {
-					this.setState({
-						editable: !this.state.editable
-					})
+		// PATCH REQUEST THEN
+		axios.patch(`${process.env.REACT_APP_API_PORT}/courses/${this.props.match.params.id}`)
+			.then(res => {
+					const data = res.data;
+					this.setState({data: data})
 			}).catch(err => {
 				console.log("Error")
 			})
+		console.log('form submitted')
 	}
 
 	cancelUpdates = (e) => {
@@ -140,6 +157,7 @@ class CourseInfo extends React.Component {
     return (
       <>
         <DetailsHeader title={this.state.data.name} subtitle={this.state.data.subject} info={this.state.data.description} />
+
 				{/* Page content */}
 				{
 					!this.state.editable ? (
@@ -160,31 +178,28 @@ class CourseInfo extends React.Component {
 		                <CardBody>
 		                  <div className="pl-lg-4">
 												<h6 className="heading-small text-muted mb-4">General information</h6>
-		                    <Row className="mb-3">
+
+		                    <Row>
 		                      <Col lg="6">
 														{/* Name */}
-		                        <div className="pl-lg-4">
+		                        <div>
 															<small className="form-control-label">Course name</small>
 															<h1>{this.state.data.name}</h1>
 		                        </div>
 		                      </Col>
 		                      <Col lg="6">
 														{/* Subject */}
-														<div className="pl-lg-4">
+														<div>
 															<small className="form-control-label">Subject</small>
 															<h1>{this.state.data.subject}</h1>
 		                        </div>
 		                      </Col>
 		                    </Row>
-												{/* Description */}
-												<Row>
-													<Col lg="6">
-														<div className="pl-lg-4">
-															<small className="form-control-label">Description</small>
-															<h2>{this.state.data.description}</h2>
-					                  </div>
-													</Col>
-												</Row>
+		                  </div>
+		                  {/* Description */}
+		                  <div className="pl-lg-4">
+												<small className="form-control-label">Description</small>
+												<h2>{this.state.data.description}</h2>
 		                  </div>
 											<hr className="my-4" />
 		                  {/* Schedule */}
@@ -234,7 +249,7 @@ class CourseInfo extends React.Component {
 													<Col lg="4">
 														<div className="pl-lg-4">
 															<small className="form-control-label">Availability</small>
-															<h2>{Math.round(100 - (this.state.data.registration.registered / this.state.data.registration.limit * 100))}%</h2>
+															<h2>{100 - (this.state.data.registration.registered / this.state.data.registration.limit * 100)}%</h2>
 															<Progress
 																max={this.state.data.registration.limit}
 																value={this.state.data.registration.registered}
@@ -271,7 +286,7 @@ class CourseInfo extends React.Component {
 														this.state.data.teachers.map((teacher, key) => {
 															return(
 																<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
-																	<Link to={`../teacher/${teacher._id}`}>
+																	<Link to={teacher.first_name}>
 																		<span className="avatar avatar-sm" >
 																			<img
 																				alt="..."
@@ -294,11 +309,12 @@ class CourseInfo extends React.Component {
 													Students
 												</h6>
 												<div className="pl-lg-4">
+													{/*
 													{
-														this.state.data.students.map((student, key) => {
+														this.state.students.map((student, key) => {
 															return(
 																<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
-																	<Link to={`../student/${student._id}`}>
+																	<Link to={student.name}>
 																		<span className="avatar avatar-sm" >
 																			<img
 																				alt="..."
@@ -312,17 +328,10 @@ class CourseInfo extends React.Component {
 															)
 														})
 													}
+													*/}
 												</div>
 											</div>
 		                </CardBody>
-										<CardFooter>
-											<Row className="align-items-center">
-												<Col xs="8"></Col>
-												{
-													this.renderEditButton()
-												}
-											</Row>
-										</CardFooter>
 		              </Card>
 		            </Col>
 								<Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
@@ -382,7 +391,7 @@ class CourseInfo extends React.Component {
 		                              id="input-course-name"
 		                              placeholder={this.state.data.name}
 		                              type="text"
-																	onChange={e => this.sendInputToState(e, 'name')}
+																	onChange={(e, stateRef) => this.sendInputToState(e, 'name')}
 		                            />
 		                          </FormGroup>
 		                        </Col>
@@ -400,7 +409,7 @@ class CourseInfo extends React.Component {
 		                              id="input-subject"
 		                              placeholder={this.state.data.subject}
 		                              type="text"
-																	onChange={(e) => this.sendInputToState(e, 'subject')}
+																	onChange={(e, stateRef) => this.sendInputToState(e, 'subject')}
 		                            />
 		                          </FormGroup>
 		                        </Col>
@@ -408,19 +417,13 @@ class CourseInfo extends React.Component {
 													<Row>
 														<Col>
 															<FormGroup>
-																<label
-		                              className="form-control-label"
-		                              htmlFor="input-description"
-		                            >
-																	Description
-																</label>
+				                        <label>Description</label>
 				                        <Input
 				                          className="form-control-alternative"
 																	defaultValue={this.state.data.description}
-																	id="input-description"
 				                          rows="4"
 				                          type="textarea"
-																	onChange={(e) => this.sendInputToState(e, 'description')}
+																	onChange={(e, stateRef) => this.sendInputToState(e, 'description')}
 				                        />
 				                      </FormGroup>
 														</Col>
@@ -449,7 +452,7 @@ class CourseInfo extends React.Component {
 		                              id="input-reg-limit"
 		                              placeholder="# of students"
 		                              type="number"
-																	onChange={(e) => this.sendInputToState(e, 'limit', 'registration')}
+																	onChange={(e, stateRef) => this.sendInputToState(e, 'registration.limit')}
 		                            />
 															</FormGroup>
 														</Col>
@@ -462,7 +465,7 @@ class CourseInfo extends React.Component {
 														<Col lg="4">
 															<div className="pl-lg-4">
 																<small className="form-control-label">Availability</small>
-																<h2>{Math.round(100 - (this.state.data.registration.registered / this.state.data.registration.limit * 100))}%</h2>
+																<h2>{100 - (this.state.data.registration.registered / this.state.data.registration.limit * 100)}%</h2>
 																<Progress
 																	max={this.state.data.registration.limit}
 																	value={this.state.data.registration.registered}
@@ -496,6 +499,7 @@ class CourseInfo extends React.Component {
 																	onChange={(e, stateRef) => this.sendInputToState(e, 'price')}
 																/>
 															</FormGroup>
+
 														</Col>
 													</Row>
 												</div>
@@ -510,7 +514,7 @@ class CourseInfo extends React.Component {
 														this.state.data.teachers.map((teacher, key) => {
 															return(
 																<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
-																	<Link to={`../teacher/${teacher._id}`}>
+																	<Link to={teacher.first_name}>
 																		<span className="avatar avatar-sm" >
 																			<img
 																				alt="..."
@@ -535,7 +539,7 @@ class CourseInfo extends React.Component {
 														this.state.data.students.map((student, key) => {
 															return(
 																<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
-																	<Link to={`../student/${student._id}`}>
+																	<Link to={student.name}>
 																		<span className="avatar avatar-sm" >
 																			<img
 																				alt="..."
@@ -552,32 +556,9 @@ class CourseInfo extends React.Component {
 		                    </div>
 		                  </Form>
 		                </CardBody>
-										<CardFooter>
-											<Row className="align-items-center">
-												<Col xs="8"></Col>
-												<Col className="text-right" xs="4">
-		                      <Button
-		                        color="default"
-		                        href="#pablo"
-		                        onClick={this.cancelUpdates}
-		                        size="sm"
-		                      >
-		                        Cancel changes
-		                      </Button>
-		                      <Button
-		                        color="primary"
-		                        form="course-edit"
-		                        type="submit"
-		                        size="sm"
-														onClick={this.submitUpdates}
-		                      >
-		                        Save changes
-		                      </Button>
-		                    </Col>
-											</Row>
-										</CardFooter>
 		              </Card>
 		            </Col>
+
 								<Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
 									<TeacherCard />
 		            </Col>
