@@ -30,7 +30,11 @@ import {
   Row,
   Col,
 	Progress,
-	CardFooter
+	CardFooter,
+	Dropdown,
+	DropdownToggle,
+	DropdownMenu,
+	DropdownItem
 } from "reactstrap";
 import { Link } from "react-router-dom"
 import axios from 'axios'
@@ -42,6 +46,8 @@ import Schedule from "./Schedule.jsx";
 class CourseInfo extends React.Component {
 	state = {
 		editable: false,
+		dropdownOpen: false,
+		allTeachers: [{}],
 		days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
 		data: {
 			schedule: {
@@ -144,8 +150,30 @@ class CourseInfo extends React.Component {
 		let data = this.state.data
 		data.teachers = teachersArr
 		this.setState({data})
-	} 
+	}
+	toggleTeacherDropdown = (e) => {
+		e.preventDefault()
+		axios.get(`${process.env.REACT_APP_API_PORT}/teachers`)
+			.then(res => {
+				const allTeachers = res.data
+				this.setState({
+					dropdownOpen: !this.state.dropdownOpen,
+					allTeachers: allTeachers
+				})
+			}).catch(err => {
+				console.log("Error")
+			})
+	}
+	selectTeacher = (e, teacher) => {
+		e.preventDefault()
+		console.log('teacher info', teacher)
+		let data = this.state.data
+		data.teachers.push(teacher)
+		this.setState(data)
+		console.log('teacher id', teacher._id)
+	}
   render() {
+		// console.log(this.state)
     return (
       <>
         <DetailsHeader title={this.state.data.name} subtitle={this.state.data.subject} info={this.state.data.description} />
@@ -516,6 +544,31 @@ class CourseInfo extends React.Component {
 												<h6 className="heading-small text-muted mb-4">
 													Teachers
 												</h6>
+
+
+
+												<Dropdown isOpen={this.state.dropdownOpen} toggle={e => this.toggleTeacherDropdown(e)}>
+													<DropdownToggle caret>
+														Add teacher
+													</DropdownToggle>
+													<DropdownMenu>
+														{
+															this.state.allTeachers.map(teacher => {
+																return(
+																	<DropdownItem 
+																		onClick={(e) => this.selectTeacher(e, teacher)}
+																		key={teacher._id}
+																	>
+																		{teacher.first_name} {teacher.last_name}
+																	</DropdownItem>
+																)
+															})
+														}
+													</DropdownMenu>
+												</Dropdown>
+
+
+
 												<div className="pl-lg-4">
 													{
 														this.state.data.teachers.map(teacher => {
