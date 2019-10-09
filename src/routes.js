@@ -22,6 +22,7 @@ import Signup from "./views/examples/Signup.jsx";
 import AdminRegister from "./views/examples/AdminRegister.jsx";
 import StudentRegister from "./views/examples/StudentRegister.jsx";
 import CourseInfo from "./views/examples/CourseInfo.jsx";
+import CourseCreate from "./views/examples/CourseCreate.jsx";
 import SubjectInfo from "./views/examples/SubjectInfo.jsx";
 import TeacherInfo from "./views/examples/TeacherInfo.jsx";
 import StudentInfo from "./views/examples/StudentInfo.jsx";
@@ -71,9 +72,17 @@ var routes = [
 	},
 	{
 		path: "/course/:id",
-		name: "Class Info",
+		name: "Course Info",
 		icon: "ni ni-bullet-list-67 text-red",
 		component: CourseInfo,
+		layout: "/admin",
+		invisible: true
+	},
+	{
+		path: "/course-create",
+		name: "Course Create",
+		icon: "ni ni-bullet-list-67 text-red",
+		component: CourseCreate,
 		layout: "/admin",
 		invisible: true
 	},

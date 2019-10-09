@@ -27,7 +27,9 @@ import {
   PaginationLink,
   Table,
   Container,
-  Row,
+	Row,
+	Col,
+	Button
 } from "reactstrap";
 // core components
 import Header from "../../components/Headers/Header.jsx";
@@ -343,6 +345,29 @@ class Tables extends React.Component {
 			return <StudentsTable students={this.state.students}  {...this.props} />
 		}
 	}
+	renderAddCourse = () => {
+		if (this.props.location.pathname === "/admin/courses") {
+			return(
+				<Col className="text-right">
+					<Button
+						color="primary"
+						onClick={e => {
+							e.preventDefault()
+							this.props.history.push({
+								pathname: "/admin/course-create"
+							})
+							this.setState({
+								editable: true
+							})
+						}}
+						size="sm"
+					>
+						Add new course
+					</Button>
+				</Col>
+			)
+		}
+	}
   render() {
     return (
       <>
@@ -355,6 +380,9 @@ class Tables extends React.Component {
               <Card className="shadow">
                 <CardHeader className="border-0">
                   <h3 className="mb-0">{this.renderCardHeader()}</h3>
+									{
+										this.renderAddCourse()
+									}
                 </CardHeader>
                 <Table className="align-items-center table-flush" responsive>
                   <thead className="thead-light">
