@@ -48,7 +48,7 @@ class CourseInfo extends React.Component {
 				days: []
 			},
 			students: [{}],
-			teachers: [],
+			teachers: [{}],
 			registration: {}
 		}
 	}
@@ -136,6 +136,15 @@ class CourseInfo extends React.Component {
 				console.log("Error")
 			})
 	}
+	removeTeacher = (e, teacherId) => {
+		e.preventDefault()
+		let index = this.state.data.teachers.findIndex(el => el._id === teacherId)
+		let teachersArr = this.state.data.teachers
+		teachersArr.splice(index, 1)
+		let data = this.state.data
+		data.teachers = teachersArr
+		this.setState({data})
+	} 
   render() {
     return (
       <>
@@ -325,8 +334,8 @@ class CourseInfo extends React.Component {
 		            </Col>
 								<Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
 									{
-										this.state.data.teachers.map((teacher, key) => {
-											return <TeacherCard teacher={teacher} key={key} />
+										this.state.data.teachers.map(teacher => {
+											return <TeacherCard teacher={teacher} key={teacher._id} />
 										})
 									}
 		            </Col>
@@ -509,9 +518,17 @@ class CourseInfo extends React.Component {
 												</h6>
 												<div className="pl-lg-4">
 													{
-														this.state.data.teachers.map((teacher, key) => {
+														this.state.data.teachers.map(teacher => {
 															return(
-																<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
+																<div className="avatar-group" key={teacher._id} style={{display: "inline-block", padding: '40px'}}>
+																<Button
+																	color="danger"
+																	href="#pablo"
+																	onClick={e => this.removeTeacher(e, teacher._id)}
+																	size="sm"
+																>
+																	remove
+																</Button>
 																	<Link to={`../teacher/${teacher._id}`}>
 																		<span className="avatar avatar-sm" >
 																			<img
