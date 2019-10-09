@@ -13,7 +13,6 @@ import { Link } from 'react-router-dom'
 
 class TeacherCard extends React.Component {
 	render() {
-		console.log(this.props)
 		return(
 			<Link to={`../teacher/${this.props.teacher._id}`}>
 				<Card className="card-profile shadow mb-6">
