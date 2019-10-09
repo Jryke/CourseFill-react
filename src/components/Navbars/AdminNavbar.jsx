@@ -47,6 +47,7 @@ class AdminNavbar extends React.Component {
             >
               {this.props.brandText}
             </Link>
+            {/* 
             <Form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
               <FormGroup className="mb-0">
                 <InputGroup className="input-group-alternative">
@@ -104,6 +105,10 @@ class AdminNavbar extends React.Component {
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
+            */}
+            <Link to="">
+              <i class="fas fa-shopping-cart fa-5x" style={{color: "white"}}></i>
+            </Link>
           </Container>
         </Navbar>
       </>
