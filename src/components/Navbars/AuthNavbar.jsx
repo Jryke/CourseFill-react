@@ -53,7 +53,7 @@ class AdminNavbar extends React.Component {
                       <img
 												height="2 rem"
                         alt="..."
-                        src={require("../../assets/img/brand/logo.png")}
+                        src={require("../../assets/img/brand/argon-react.png")}
                       />
                     </Link>
                   </Col>
