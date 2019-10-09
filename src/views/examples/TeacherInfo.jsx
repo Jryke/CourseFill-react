@@ -222,36 +222,44 @@ class TeacherInfo extends React.Component {
 		                      Contact information
 		                    </h6>
 												<div className="pl-lg-4">
-		                      <Row>
+												<Row>
 		                        <Col md="12">
 															<div>
-																<small className="form-control-label">Address</small>
-																<h3>{this.renderAddressInfo("streetAddress")}</h3>
+																<small className="form-control-label">Street address</small>
+																<h2>{this.renderAddressInfo("streetAddress")}</h2>
 			                        </div>
 		                        </Col>
 		                      </Row>
 		                      <Row>
-		                        <Col lg="4">
+		                        <Col lg="6">
 		                          <FormGroup>
 																<div>
 																	<small className="form-control-label">City</small>
-																	<h3>{this.renderAddressInfo("city")}</h3>
+																	<h2>{this.renderAddressInfo("city")}</h2>
 				                        </div>
 		                          </FormGroup>
 		                        </Col>
-		                        <Col lg="4">
+		                        <Col lg="6">
+															<div>
+																<small className="form-control-label">State</small>
+																<h2>{this.renderAddressInfo("state")}</h2>
+															</div>
+		                        </Col>
+													</Row>
+													<Row>
+														<Col lg="6">
 															<div>
 																<small className="form-control-label">Country</small>
-																<h3>{this.renderAddressInfo("country")}</h3>
+																<h2>{this.renderAddressInfo("country")}</h2>
 															</div>
 		                        </Col>
-		                        <Col lg="4">
+														<Col lg="6">
 															<div>
 																<small className="form-control-label">Postal code</small>
-																<h3>{this.renderAddressInfo("zipCode")}</h3>
+																<h2>{this.renderAddressInfo("zipCode")}</h2>
 															</div>
 		                        </Col>
-		                      </Row>
+													</Row>
 		                    </div>
 												<hr className="my-4" />
 		                    {/* Courses */}
@@ -430,81 +438,102 @@ class TeacherInfo extends React.Component {
 		                      Contact information
 		                    </h6>
 		                    <div className="pl-lg-4">
-		                      <Row>
-		                        <Col md="12">
-		                          <FormGroup>
-		                            <label
-		                              className="form-control-label"
-		                              htmlFor="input-address"
-		                            >
-		                              Address
-		                            </label>
-		                            <Input
-		                              className="form-control-alternative"
-																	defaultValue={this.state.teacher.address.streetAddress}		                              id="input-address"
-		                              placeholder="Home Address"
-		                              type="text"
-																	onChange={e => this.sendInputToState(e, "streetAddress", "address")}
-		                            />
-		                          </FormGroup>
-		                        </Col>
-		                      </Row>
-		                      <Row>
-		                        <Col lg="4">
-		                          <FormGroup>
-		                            <label
-		                              className="form-control-label"
-		                              htmlFor="input-city"
-		                            >
-		                              City
-		                            </label>
-		                            <Input
-		                              className="form-control-alternative"
-		                              defaultValue={this.state.teacher.address.city}
-		                              id="input-city"
-		                              placeholder="City"
-		                              type="text"
-																	onChange={e => this.sendInputToState(e, "city", "address")}
-		                            />
-		                          </FormGroup>
-		                        </Col>
-		                        <Col lg="4">
-		                          <FormGroup>
-		                            <label
-		                              className="form-control-label"
-		                              htmlFor="input-country"
-		                            >
-		                              Country
-		                            </label>
-		                            <Input
-		                              className="form-control-alternative"
-		                              defaultValue={this.state.teacher.address.country}
-		                              id="input-country"
-		                              placeholder="Country"
-		                              type="text"
-																	onChange={e => this.sendInputToState(e, "country", "address")}
-		                            />
-		                          </FormGroup>
-		                        </Col>
-		                        <Col lg="4">
-		                          <FormGroup>
-		                            <label
-		                              className="form-control-label"
-		                              htmlFor="input-country"
-		                            >
-		                              Postal code
-		                            </label>
-		                            <Input
-		                              className="form-control-alternative"
-																	defaultValue={this.state.teacher.address.zipCode}
-		                              id="input-postal-code"
-		                              placeholder="Postal code"
-		                              type="number"
-																	onChange={e => this.sendInputToState(e, "zipCode", "address")}
-		                            />
-		                          </FormGroup>
-		                        </Col>
-		                      </Row>
+												<Row>
+														<Col md="12">
+															<FormGroup>
+																<label
+																	className="form-control-label"
+																	htmlFor="input-address"
+																>
+																	Street address
+																</label>
+																<Input
+																	className="form-control-alternative"
+																	placeholder="Street address"
+																	defaultValue={this.renderAddressInfo("streetAddress")}
+																	id="input-address"
+																	type="text"
+																	onChange={e => this.sendInputToState(e, 'streetAddress', 'address')}
+																/>
+															</FormGroup>
+														</Col>
+													</Row>
+													<Row>
+														<Col lg="6">
+															<FormGroup>
+																<label
+																	className="form-control-label"
+																	htmlFor="input-city"
+																>
+																	City
+																</label>
+																<Input
+																	className="form-control-alternative"
+																	placeholder="City"
+																	defaultValue={this.renderAddressInfo("city")}
+																	id="input-city"
+																	type="text"
+																	onChange={e => this.sendInputToState(e, 'city', 'address')}
+																/>
+															</FormGroup>
+														</Col>
+														<Col lg="6">
+															<FormGroup>
+																<label
+																	className="form-control-label"
+																	htmlFor="input-state"
+																>
+																	State
+																</label>
+																<Input
+																	className="form-control-alternative"
+																	placeholder="State"
+																	defaultValue={this.renderAddressInfo("state")}
+																	id="input-state"
+																	type="text"
+																	onChange={e => this.sendInputToState(e, 'country', 'address')}
+																/>
+															</FormGroup>
+														</Col>
+													</Row>
+													<Row>
+														<Col lg="6">
+															<FormGroup>
+																<label
+																	className="form-control-label"
+																	htmlFor="input-country"
+																>
+																	Country
+																</label>
+																<Input
+																	className="form-control-alternative"
+																	placeholder="Country"
+																	defaultValue={this.renderAddressInfo("country")}
+																	id="input-country"
+																	type="text"
+																	onChange={e => this.sendInputToState(e, 'country', 'address')}
+																/>
+															</FormGroup>
+														</Col>
+														<Col lg="6">
+															<FormGroup>
+																<label
+																	className="form-control-label"
+																	htmlFor="input-country"
+																>
+																	Postal code
+																</label>
+																<Input
+																	className="form-control-alternative"
+																	id="input-postal-code"
+																	placeholder="Postal code"
+																	defaultValue={this.renderAddressInfo("zipCode")}
+																	type="number"
+																	onChange={e => this.sendInputToState(e, 'zipCode', 'address')}
+																/>
+															</FormGroup>
+														</Col>
+													</Row>
 		                    </div>
 												<hr className="my-4" />
 		                    {/* Students */}
