@@ -47,7 +47,7 @@ class CourseInfo extends React.Component {
 			schedule: {
 				days: []
 			},
-			students: [],
+			students: [{}],
 			teachers: [],
 			registration: {}
 		}
@@ -228,16 +228,16 @@ class CourseInfo extends React.Component {
 													<Col lg="4">
 														<div className="pl-lg-4">
 															<small className="form-control-label">Currently registered</small>
-															<h2>{this.state.data.registration.registered}</h2>
+															<h2>{this.state.data.students.length}</h2>
 														</div>
 													</Col>
 													<Col lg="4">
 														<div className="pl-lg-4">
 															<small className="form-control-label">Availability</small>
-															<h2>{Math.round(100 - (this.state.data.registration.registered / this.state.data.registration.limit * 100))}%</h2>
+															<h2>{Math.round(100 - (this.state.data.students.length / this.state.data.registration.limit * 100))}%</h2>
 															<Progress
 																max={this.state.data.registration.limit}
-																value={this.state.data.registration.registered}
+																value={this.state.data.students.length}
 																barClassName="bg-danger"
 															/>
 														</div>
@@ -258,8 +258,6 @@ class CourseInfo extends React.Component {
 													</Col>
 												</Row>
 											</div>
-
-
 											<hr className="my-4" />
 											{/* Teachers */}
 											<div className="pl-lg-4">
@@ -303,10 +301,10 @@ class CourseInfo extends React.Component {
 																			<img
 																				alt="..."
 																				className="rounded-circle"
-																				src={student.img.src}
+																				src={student.avatar}
 																			/>
 																		</span>
-																		<span>{student.name}</span>
+																		<span>{student.first_name} {student.last_name}</span>
 																	</Link>
 																</div>
 															)
@@ -460,16 +458,16 @@ class CourseInfo extends React.Component {
 														<Col lg="4">
 															<div className="pl-lg-4">
 																<small className="form-control-label">Currently registered</small>
-																<h2>{this.state.data.registration.registered}</h2>
+																<h2>{this.state.data.students.length}</h2>
 															</div>
 														</Col>
 														<Col lg="4">
 															<div className="pl-lg-4">
 																<small className="form-control-label">Availability</small>
-																<h2>{Math.round(100 - (this.state.data.registration.registered / this.state.data.registration.limit * 100))}%</h2>
+																<h2>{Math.round(100 - (this.state.data.students.length / this.state.data.registration.limit * 100))}%</h2>
 																<Progress
 																	max={this.state.data.registration.limit}
-																	value={this.state.data.registration.registered}
+																	value={this.state.data.students.length}
 																	barClassName="bg-danger"
 																/>
 															</div>
@@ -535,7 +533,7 @@ class CourseInfo extends React.Component {
 		                      Students
 		                    </h6>
 		                    <div className="pl-lg-4">
-													{
+												{
 														this.state.data.students.map((student, key) => {
 															return(
 																<div className="avatar-group" key={key} style={{display: "inline-block", padding: '40px'}}>
@@ -544,10 +542,10 @@ class CourseInfo extends React.Component {
 																			<img
 																				alt="..."
 																				className="rounded-circle"
-																				src={student.img.src}
+																				src={student.avatar}
 																			/>
 																		</span>
-																		<span>{student.name}</span>
+																		<span>{student.first_name} {student.last_name}</span>
 																	</Link>
 																</div>
 															)
@@ -583,7 +581,11 @@ class CourseInfo extends React.Component {
 		              </Card>
 		            </Col>
 								<Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
-									<TeacherCard />
+									{
+										this.state.data.teachers.map((teacher, key) => {
+											return <TeacherCard teacher={teacher} key={key} />
+										})
+									}
 		            </Col>
 		          </Row>
 		        </Container>
