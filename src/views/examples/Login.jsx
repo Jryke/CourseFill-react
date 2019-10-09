@@ -54,8 +54,13 @@ class Login extends React.Component {
 		})
 	  .then(res => {
 	    if (res.status === 200) {
-			localStorage.setItem('token', res.data.token)
-	    this.props.history.push('/admin/classes')
+      localStorage.setItem('token', res.data.token)
+        console.log(res.data.data)
+        if (res.data.data === "student") {
+          this.props.history.push('/student/courses')
+        } else {
+          this.props.history.push('/admin/courses')
+        }
 	    } else {
 			  alert('Error logging in please try again');
 	    }

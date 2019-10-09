@@ -63,7 +63,7 @@ class Register extends React.Component {
 		.then(res => {
 			if (res.status === 200) {
 				localStorage.setItem('token', res.data.token )
-				this.props.history.push('/student/index')
+				this.props.history.push('/student/courses')
 			} else {
 				const error = new Error(res.error);
 				throw error;
