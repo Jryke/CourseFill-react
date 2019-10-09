@@ -84,7 +84,7 @@ class CoursesTable extends React.Component {
 										</Link>
 									</td>
 									<td>
-										<Link to={`subject/${course.subject}`}>
+										<Link to={`course/${course._id}`}>
 											{course.subject}
 										</Link>
 									</td>
