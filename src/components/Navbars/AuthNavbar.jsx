@@ -51,8 +51,9 @@ class AdminNavbar extends React.Component {
                   <Col className="collapse-brand" xs="6">
                     <Link to="/">
                       <img
+												height="2 rem"
                         alt="..."
-                        src={require("../../assets/img/brand/argon-react.png")}
+                        src={require("../../assets/img/brand/logo.png")}
                       />
                     </Link>
                   </Col>

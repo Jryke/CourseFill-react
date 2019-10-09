@@ -8,7 +8,7 @@
 // Creates a vertically aligned version of the navbar
 .navbar-vertical {
     box-shadow: $navbar-vertical-box-shadow;
-    
+
     .navbar {
         border-width: 0 0 1px 0;
         border-style: solid;
@@ -31,8 +31,8 @@
 
     .navbar-brand-img,
     .navbar-brand > img {
-        max-width: 100%;
-        max-height: 2rem;
+        width: 200px;
+        height: 200px;
     }
 
 
