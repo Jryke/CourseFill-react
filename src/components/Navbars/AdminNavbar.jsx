@@ -32,7 +32,8 @@ import {
   Navbar,
   Nav,
   Container,
-  Media
+  Media,
+  Button
 } from "reactstrap";
 
 class AdminNavbar extends React.Component {
@@ -44,6 +45,12 @@ class AdminNavbar extends React.Component {
         </Link>
       )
     }
+  }
+  logout = () => {
+    localStorage.removeItem("token")
+    this.props.history.push({
+      pathname: "/auth/login"
+    })
   }
   render() {
     return (
@@ -118,6 +125,13 @@ class AdminNavbar extends React.Component {
             {
               this.renderCart()
             }
+            <Button
+              color="secondary"
+              onClick={this.logout}
+              size="md"
+            >
+              Logout
+            </Button>
           </Container>
         </Navbar>
       </>
