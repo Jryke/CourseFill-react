@@ -34,6 +34,7 @@ class AdminNavbar extends React.Component {
   render() {
     return (
       <>
+      {/*
         <Navbar
           className="navbar-top navbar-horizontal navbar-dark"
           expand="md"
@@ -109,6 +110,7 @@ class AdminNavbar extends React.Component {
             </UncontrolledCollapse>
           </Container>
         </Navbar>
+        */}
       </>
     );
   }
