@@ -9,12 +9,14 @@ class Checkout extends React.Component {
 		this.props.stripe.createToken({})
 		.then(res => {
 			axios.post(`${process.env.REACT_APP_API_PORT}/pay`, {
-				amount: 325,
+				amount: this.props.total * 100,
 				currency: 'usd',
-				description: 'Courses',
+				description: 'Course',
 				source: res.token.id
 			}).then(res => {
 				alert('Payment successful')
+			}).then(res => {
+				window.location.assign('https://media.giphy.com/media/3oeSALRyH4rYS3Nt8Q/giphy.gif');
 			})
 		}).catch(err => console.log(err))
 	}
