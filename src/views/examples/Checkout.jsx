@@ -11,7 +11,7 @@ class Checkout extends React.Component {
 			axios.post(`${process.env.REACT_APP_API_PORT}/pay`, {
 				amount: this.props.total * 100,
 				currency: 'usd',
-				description: '',
+				description: 'Courses',
 				source: res.token.id
 			}).then(res => {
 				alert('Payment successful')
