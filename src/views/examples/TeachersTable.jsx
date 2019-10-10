@@ -104,7 +104,7 @@ class TeachersTable extends React.Component {
 										>
 											<img
 												alt="..."
-												src={teacher.avatar}
+												src={require("../../assets/img/theme/team-4-800x800.jpg")}
 											/>
 										</Link>
 										<Media>

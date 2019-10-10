@@ -365,7 +365,7 @@ class CourseInfo extends React.Component {
 																			<img
 																				alt="..."
 																				className="rounded-circle"
-																				src={teacher.avatar}
+																				src={require("../../assets/img/theme/team-4-800x800.jpg")}
 																			/>
 																		</span>
 																		<span>{teacher.first_name}</span>
@@ -392,7 +392,7 @@ class CourseInfo extends React.Component {
 																			<img
 																				alt="..."
 																				className="rounded-circle"
-																				src={student.avatar}
+																				src={require("../../assets/img/theme/team-4-800x800.jpg")}
 																			/>
 																		</span>
 																		<span>{student.first_name} {student.last_name}</span>
@@ -640,7 +640,7 @@ class CourseInfo extends React.Component {
 																			<img
 																				alt="..."
 																				className="rounded-circle"
-																				src={teacher.avatar}
+																				src={require("../../assets/img/theme/team-4-800x800.jpg")}
 																			/>
 																		</span>
 																		<span>{teacher.first_name}</span>
@@ -665,7 +665,7 @@ class CourseInfo extends React.Component {
 																			<img
 																				alt="..."
 																				className="rounded-circle"
-																				src={student.avatar}
+																				src={require("../../assets/img/theme/team-4-800x800.jpg")}
 																			/>
 																		</span>
 																		<span>{student.first_name} {student.last_name}</span>

@@ -142,7 +142,7 @@ class CoursesTable extends React.Component {
 																<img
 																	alt="..."
 																	className="rounded-circle"
-																	src='{teacher.avatar}'
+																	src={require("../../assets/img/theme/team-4-800x800.jpg")}
 																/>
 															</span>
 															<span>{teacher.first_name} {teacher.last_name}</span>

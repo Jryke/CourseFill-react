@@ -106,7 +106,7 @@ class StudentsTable extends React.Component {
 											className="avatar rounded-circle mr-3"
 										>
 											<img
-												src={student.avatar}
+											src={require("../../assets/img/theme/team-4-800x800.jpg")}
 											/>
 										</Link>
 										<Media>
@@ -142,7 +142,7 @@ class StudentsTable extends React.Component {
 																<img
 																	alt="..."
 																	className="rounded-circle"
-																	src={teacher.avatar}
+																	src={require("../../assets/img/theme/team-4-800x800.jpg")}
 																/>
 															</span>
 															<span>
