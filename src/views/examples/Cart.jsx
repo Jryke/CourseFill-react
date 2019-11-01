@@ -1,9 +1,6 @@
 import React from 'react'
 import {StripeProvider, Elements} from 'react-stripe-elements'
 import Checkout from './Checkout'
-
-
-
 import {
   Button,
   Card,
@@ -16,7 +13,7 @@ import {
   Row,
   Col
 } from "reactstrap";
-//
+
 class Cart extends React.Component {
 	state = {
 		name: [],
@@ -60,7 +57,7 @@ class Cart extends React.Component {
 	clearCart = () => {
 		 localStorage.removeItem('cart');
 		 this.setState({cart: []});
-	 }
+	}
 	render () {
 		return (
 			<>
@@ -89,15 +86,8 @@ class Cart extends React.Component {
           </Card>
         </Col>
       </>
-
-				)
-
-
-
-
-
-
+		)
+	}
 }
-}
-//
+
 export default Cart
