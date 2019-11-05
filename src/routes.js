@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import Profile from "./views/examples/Profile.jsx";
+import AdminSettings from "./views/examples/AdminSettings.jsx";
 import Login from "./views/examples/Login.jsx";
 import Tables from "./views/examples/Tables.jsx";
 import Signup from "./views/examples/Signup.jsx";
@@ -67,7 +67,7 @@ var routes = [
 		path: "/settings",
 		name: "Settings",
 		icon: "ni ni-single-02 text-yellow",
-		component: Profile,
+		component: AdminSettings,
 		layout: "/admin",
 		invisible: false
 	},
