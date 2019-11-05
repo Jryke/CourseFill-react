@@ -55,7 +55,6 @@ class Login extends React.Component {
 	  .then(res => {
 	    if (res.status === 200) {
       localStorage.setItem('token', res.data.token)
-        console.log(res.data.data)
         if (res.data.data === "student") {
           this.props.history.push('/student/courses')
         } else {
