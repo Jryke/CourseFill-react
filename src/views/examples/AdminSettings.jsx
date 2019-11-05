@@ -32,8 +32,28 @@ import {
 } from "reactstrap";
 // core components
 import UserHeader from "../../components/Headers/UserHeader.jsx";
+import axios from "axios";
 
 class Profile extends React.Component {
+  state = {
+    user: {
+      courses: []
+    }
+  }
+
+  componentDidMount() {
+    let token = localStorage.getItem('token')
+    axios.post(`${process.env.REACT_APP_API_PORT}/auth`, {}, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then(res => {
+      console.log(res.data)
+      let user = res.data
+      this.setState({user})
+    })
+  }
+
   render() {
     return (
       <>
@@ -157,6 +177,22 @@ class Profile extends React.Component {
                           <FormGroup>
                             <label
                               className="form-control-label"
+                              htmlFor="input-email"
+                            >
+                              Email address
+                            </label>
+                            <Input
+                              className="form-control-alternative"
+                              id="input-email"
+                              placeholder="jesse@example.com"
+                              type="email"
+                            />
+                          </FormGroup>
+                        </Col>
+                        <Col lg="6">
+                          <FormGroup>
+                            <label
+                              className="form-control-label"
                               htmlFor="input-username"
                             >
                               Username
@@ -170,22 +206,7 @@ class Profile extends React.Component {
                             />
                           </FormGroup>
                         </Col>
-                        <Col lg="6">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-email"
-                            >
-                              Email address
-                            </label>
-                            <Input
-                              className="form-control-alternative"
-                              id="input-email"
-                              placeholder="jesse@example.com"
-                              type="email"
-                            />
-                          </FormGroup>
-                        </Col>
+                        
                       </Row>
                       <Row>
                         <Col lg="6">
