@@ -26,6 +26,7 @@ import CourseCreate from "./views/examples/CourseCreate.jsx";
 import SubjectInfo from "./views/examples/SubjectInfo.jsx";
 import TeacherInfo from "./views/examples/TeacherInfo.jsx";
 import StudentInfo from "./views/examples/StudentInfo.jsx";
+import StudentProfile from "./views/examples/StudentProfile.jsx";
 import Cart from "./views/examples/Cart.jsx"
 
 var routes = [
@@ -44,7 +45,7 @@ var routes = [
     icon: "ni ni-bullet-list-67 text-red",
     component: Tables,
     layout: "/admin",
-		invisible: true
+		invisible: false
   },
 	{
     path: "/teachers",
@@ -125,7 +126,7 @@ var routes = [
     icon: "ni ni-bullet-list-67 text-red",
     component: Tables,
     layout: "/student",
-		invisible: true
+		invisible: false
   },
 	{
     path: "/teachers",
@@ -139,7 +140,7 @@ var routes = [
 		path: "/profile",
 		name: "Student Info",
 		icon: "ni ni-single-02 text-yellow",
-		component: Profile,
+		component: StudentProfile,
 		layout: "/student",
 		invisible: false
 	},
