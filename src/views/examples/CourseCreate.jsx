@@ -19,7 +19,6 @@ import React from "react";
 
 // reactstrap components
 import {
-	Alert,
 	Button,
   Card,
   CardHeader,

@@ -35,7 +35,6 @@ import { Link } from 'react-router-dom'
 // core components
 import axios from 'axios'
 import DetailsHeader from "../../components/Headers/DetailsHeader.jsx";
-import TeacherCard from "./TeacherCard.jsx";
 
 class StudentInfo extends React.Component {
 	state = {

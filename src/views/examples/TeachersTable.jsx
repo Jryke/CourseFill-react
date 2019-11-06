@@ -20,15 +20,10 @@ import React from "react";
 // reactstrap components
 import {
   Badge,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  DropdownToggle,
   Media
 } from "reactstrap";
 import {Link} from "react-router-dom"
 import axios from 'axios'
-// core components
 
 class TeachersTable extends React.Component {
 	state = {

@@ -6,11 +6,6 @@ import {
   Card,
   CardHeader,
   CardBody,
-  FormGroup,
-  Form,
-  Input,
-  Container,
-  Row,
   Col
 } from "reactstrap";
 

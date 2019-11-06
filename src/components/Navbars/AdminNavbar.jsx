@@ -19,20 +19,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 // reactstrap components
 import {
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  DropdownToggle,
-  Form,
-  FormGroup,
-  InputGroupAddon,
-  InputGroupText,
-  Input,
-  InputGroup,
   Navbar,
-  Nav,
   Container,
-  Media,
   Button
 } from "reactstrap";
 
@@ -41,7 +29,7 @@ class AdminNavbar extends React.Component {
     if (this.props.match.path === "/student") {
       return(
         <Link to="../../auth/cart">
-          <i class="fas fa-shopping-cart fa-5x" style={{color: "white"}}></i>
+          <i className="fas fa-shopping-cart fa-5x" style={{color: "white"}}></i>
         </Link>
       )
     }

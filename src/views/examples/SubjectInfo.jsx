@@ -31,7 +31,6 @@ import {
   Row,
   Col
 } from "reactstrap";
-import { Link } from 'react-router-dom'
 // core components
 import DetailsHeader from "../../components/Headers/DetailsHeader.jsx";
 

@@ -106,7 +106,7 @@ class StudentsTable extends React.Component {
 											className="avatar rounded-circle mr-3"
 										>
 											<img
-											src={require("../../assets/img/theme/team-4-800x800.jpg")}
+											src={require("../../assets/img/theme/team-4-800x800.jpg")} alt="avatar"
 											/>
 										</Link>
 										<Media>
