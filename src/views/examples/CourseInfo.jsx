@@ -226,7 +226,6 @@ class CourseInfo extends React.Component {
 		console.log('teacher id', teacher._id)
 	}
   render() {
-		console.log(this.props)
     return (
       <>
         <DetailsHeader title={this.state.data.name} subtitle={this.state.data.subject} info={this.state.data.description} />
