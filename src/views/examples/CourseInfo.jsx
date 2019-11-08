@@ -71,7 +71,7 @@ class CourseInfo extends React.Component {
 	addToCart = () => {
 	let cart = localStorage.getItem('cart')
 		? JSON.parse(localStorage.getItem('cart')) : []
-	let data = {name: this.state.data.name, price: this.state.data.price}
+	let data = {_id: this.state.data._id, name: this.state.data.name, price: this.state.data.price}
 	cart.push(data)
 	localStorage.setItem('cart', JSON.stringify(cart))
 	alert("Course added succesfully")

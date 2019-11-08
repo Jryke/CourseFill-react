@@ -65,17 +65,17 @@ class CoursesTable extends React.Component {
 				console.log("Error")
 			})
 	}
-	addToCart = (courseName, price) => {
+	addToCart = (courseId, courseName, price) => {
 		let cart = localStorage.getItem('cart')
 			? JSON.parse(localStorage.getItem('cart')) : []
-		let data = {name: courseName, price: price}
+		let data = {_id: courseId, name: courseName, price: price}
 		cart.push(data)
 		localStorage.setItem('cart', JSON.stringify(cart))
 	}
-	addToCartAndCheckout = (courseName, price) => {
+	addToCartAndCheckout = (courseId, courseName, price) => {
 		let cart = localStorage.getItem('cart')
 			? JSON.parse(localStorage.getItem('cart')) : []
-		let data = {name: courseName, price: price}
+		let data = {_id: courseId, name: courseName, price: price}
 		cart.push(data)
 		localStorage.setItem('cart', JSON.stringify(cart))
 		this.props.history.push({
@@ -99,12 +99,12 @@ class CoursesTable extends React.Component {
 						</DropdownToggle>
 						<DropdownMenu className="dropdown-menu-arrow" right>
 							<DropdownItem
-								onClick={() => this.addToCart(course.name, course.price)}
+								onClick={() => this.addToCart(course._id, course.name, course.price)}
 							>
 								Add to cart
 							</DropdownItem>
 							<DropdownItem
-								onClick={() => this.addToCartAndCheckout(course.name, course.price)}
+								onClick={() => this.addToCartAndCheckout(course._id, course.name, course.price)}
 							>
 								Add to cart and register
 							</DropdownItem>
