@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import {StripeProvider, Elements} from 'react-stripe-elements'
 import Checkout from './Checkout'
 import {
@@ -11,14 +12,21 @@ import {
 
 class Cart extends React.Component {
 	state = {
-		name: [],
-		price: 0,
+		user: {},
 		cart: [],
 		total: ''
 	}
 	componentDidMount() {
-		let cart = JSON.parse(localStorage.getItem('cart'))
-		this.setState({cart})
+		let token = localStorage.getItem('token')
+    axios.post(`${process.env.REACT_APP_API_PORT}/auth`, {}, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then(res => {
+			let user = res.data
+			let cart = JSON.parse(localStorage.getItem('cart'))
+      this.setState({user, cart})
+    })
 	}
 	renderItems = () => {
 		if (this.state.cart) {
@@ -75,7 +83,7 @@ class Cart extends React.Component {
             </CardBody>
 						<StripeProvider apiKey="pk_test_P55aXLui6UUIKIktSJYLq56p00uE4eoJif">
 							<Elements>
-								<Checkout total={this.renderTotal()} />
+								<Checkout user={this.state.user} cart={this.state.cart} total={this.renderTotal()} />
 							</Elements>
 						</StripeProvider>
           </Card>
