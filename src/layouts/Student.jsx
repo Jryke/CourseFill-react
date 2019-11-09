@@ -17,6 +17,7 @@
 */
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import axios from "axios";
 // reactstrap components
 import { Container } from "reactstrap";
 // core components
@@ -27,10 +28,33 @@ import Sidebar from "../components/Sidebar/Sidebar.jsx";
 import routes from "../routes.js";
 
 class Student extends React.Component {
+  state = {
+    user: {}
+  }
+  componentDidMount() {
+    let token = localStorage.getItem("token")
+    axios.post(`${process.env.REACT_APP_API_PORT}/auth`, {}, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then(res => {
+      let user = res.data
+      this.setState({user})
+    })
+    .catch(err => {
+      console.log(err)
+    }) 
+  }
   componentDidUpdate(e) {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
     this.refs.mainContent.scrollTop = 0;
+    if (this.state.user.role !== "student") {
+      this.props.history.push({
+      pathname: `/admin/${this.props.location.pathname.split('/')[2]}`
+      })
+    }
   }
   getRoutes = routes => {
     return routes.map((prop, key) => {
