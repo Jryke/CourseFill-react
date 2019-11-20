@@ -56,6 +56,26 @@ class SubjectsTable extends React.Component {
 			pathname: "/auth/cart",
 		})
 	}
+	renderRegistration = (course) => {
+		if (this.props.location.pathname === "/admin/subjects") {
+			return (
+				<td>
+					<Link to={`subject/${course.subject}`}>
+						<div className="d-flex align-items-center">
+							<span className="mr-2">{`${course.registration.registered / course.registration.limit * 100}%`}</span>
+							<div>
+								<Progress
+									max={course.registration.limit}
+									value={course.registration.registered}
+									barClassName="bg-danger"
+								/>
+							</div>
+						</div>
+					</Link>
+				</td>
+			)
+		}
+	}
 	renderDropdown = (course) => {
 		if (this.props.location.pathname === "/student/subjects") {
 			return(
@@ -128,20 +148,9 @@ class SubjectsTable extends React.Component {
 									}
 								</td>
 
-								<td>
-									<Link to={`subject/${course.subject}`}>
-										<div className="d-flex align-items-center">
-											<span className="mr-2">{`${course.registration.registered / course.registration.limit * 100}%`}</span>
-											<div>
-												<Progress
-													max={course.registration.limit}
-													value={course.registration.registered}
-													barClassName="bg-danger"
-												/>
-											</div>
-										</div>
-									</Link>
-								</td>
+								{
+									this.renderRegistration(course)
+								}
 
 								<td>
 									<Link to={`subject/${course.subject}`}>

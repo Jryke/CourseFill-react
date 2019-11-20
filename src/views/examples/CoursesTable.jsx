@@ -82,6 +82,26 @@ class CoursesTable extends React.Component {
 			pathname: "/auth/cart",
 		})
 	}
+	renderRegistration = (course) => {
+		if (this.props.location.pathname === "/admin/courses") {
+			return (
+				<td>
+					<Link to={`course/${course._id}`}>
+						<div className="d-flex align-items-center">
+							<span className="mr-2">{`${Math.round(course.students.length / course.registration.limit * 100)}%`}</span>
+							<div>
+								<Progress
+									max={course.registration.limit}
+									value={course.students.length}
+									barClassName="bg-danger"
+								/>
+							</div>
+						</div>
+					</Link>
+				</td>
+			)
+		}
+	}
 	renderDropdown = (course) => {
 		if (this.props.location.pathname === "/student/courses") {
 			return(
@@ -152,20 +172,9 @@ class CoursesTable extends React.Component {
 										}
 									</td>
 
-									<td>
-										<Link to={`course/${course._id}`}>
-											<div className="d-flex align-items-center">
-												<span className="mr-2">{`${Math.round(course.students.length / course.registration.limit * 100)}%`}</span>
-												<div>
-													<Progress
-														max={course.registration.limit}
-														value={course.students.length}
-														barClassName="bg-danger"
-													/>
-												</div>
-											</div>
-										</Link>
-									</td>
+									{
+										this.renderRegistration(course)
+									}
 
 									<td>
 										<Link to={`course/${course._id}`}>
