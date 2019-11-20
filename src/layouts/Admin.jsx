@@ -71,7 +71,6 @@ class Admin extends React.Component {
             path={prop.layout + prop.path}
             component={prop.component}
             key={key}
-            user={this.state.user}
           />
         );
       } else {
