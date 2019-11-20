@@ -107,7 +107,7 @@ class Student extends React.Component {
         />
         <div className="main-content" ref="mainContent">
           <UserNavbar
-            {...this.props}
+            {...this.props} user={this.state.user}
             brandText={this.getBrandText(this.props.location.pathname)}
           />
           <Switch>{this.getRoutes(routes)}</Switch>
