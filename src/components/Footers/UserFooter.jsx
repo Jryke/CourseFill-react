@@ -21,7 +21,7 @@ import React from "react";
 // reactstrap components
 import { Container, Row, Col, Nav, NavItem, NavLink } from "reactstrap";
 
-class Footer extends React.Component {
+class UserFooter extends React.Component {
   render() {
     return (
       <footer className="footer">
@@ -38,4 +38,4 @@ class Footer extends React.Component {
   }
 }
 
-export default Footer;
+export default UserFooter;

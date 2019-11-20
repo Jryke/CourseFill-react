@@ -21,8 +21,8 @@ import axios from "axios";
 // reactstrap components
 import { Container } from "reactstrap";
 // core components
-import AdminNavbar from "../components/Navbars/AdminNavbar.jsx";
-import AdminFooter from "../components/Footers/AdminFooter.jsx";
+import UserNavbar from "../components/Navbars/UserNavbar.jsx";
+import UserFooter from "../components/Footers/UserFooter.jsx";
 import Sidebar from "../components/Sidebar/Sidebar.jsx";
 
 import routes from "../routes.js";
@@ -106,13 +106,13 @@ class Student extends React.Component {
           }}
         />
         <div className="main-content" ref="mainContent">
-          <AdminNavbar
+          <UserNavbar
             {...this.props}
             brandText={this.getBrandText(this.props.location.pathname)}
           />
           <Switch>{this.getRoutes(routes)}</Switch>
           <Container fluid>
-            <AdminFooter />
+            <UserFooter />
           </Container>
         </div>
       </>

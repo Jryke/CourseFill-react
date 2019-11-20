@@ -165,13 +165,13 @@ Argon Dashboard React
     │           └── fonts
     ├── components
     │   ├── Footers
-    │   │   ├── AdminFooter.jsx
+    │   │   ├── UserFooter.jsx
     │   │   └── AuthFooter.jsx
     │   ├── Headers
     │   │   ├── Header.jsx
     │   │   └── UserHeader.jsx
     │   ├── Navbars
-    │   │   ├── AdminNavbar.jsx
+    │   │   ├── UserNavbar.jsx
     │   │   └── AuthNavbar.jsx
     │   └── Sidebar
     │       └── Sidebar.jsx

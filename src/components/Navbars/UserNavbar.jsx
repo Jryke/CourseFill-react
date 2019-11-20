@@ -36,7 +36,7 @@ import {
   Button
 } from "reactstrap";
 
-class AdminNavbar extends React.Component {
+class UserNavbar extends React.Component {
   renderCart = () => {
     if (this.props.match.path === "/student") {
       return(
@@ -138,4 +138,4 @@ class AdminNavbar extends React.Component {
   }
 }
 
-export default AdminNavbar;
+export default UserNavbar;
