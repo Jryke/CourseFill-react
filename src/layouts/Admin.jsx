@@ -27,7 +27,7 @@ import Sidebar from "../components/Sidebar/Sidebar.jsx";
 
 import routes from "../routes.js";
 
-class Student extends React.Component {
+class Admin extends React.Component {
   state = {
     user: {}
   }
@@ -71,6 +71,7 @@ class Student extends React.Component {
             path={prop.layout + prop.path}
             component={prop.component}
             key={key}
+            user={this.state.user}
           />
         );
       } else {
@@ -117,4 +118,4 @@ class Student extends React.Component {
   }
 }
 
-export default Student;
+export default Admin;
