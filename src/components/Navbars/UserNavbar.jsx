@@ -139,14 +139,6 @@ class UserNavbar extends React.Component {
             {
               this.renderCart()
             }
-            <Button
-              color="secondary"
-              onClick={this.logout}
-              size="md"
-              className="ml-4"
-            >
-              Logout
-            </Button>
           </Container>
         </Navbar>
       </>
