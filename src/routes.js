@@ -142,7 +142,7 @@ var routes = [
 		icon: "ni ni-single-02 text-yellow",
 		component: StudentInfo,
 		layout: "/student",
-		invisible: false
+		invisible: true
 	},
 	{
 		path: "/course/:id",
