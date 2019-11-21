@@ -46,6 +46,13 @@ class UserNavbar extends React.Component {
       )
     }
   }
+  renderProfileLink = () => {
+    if (this.props.user.role === "student") {
+      return `/student/profile/${this.props.user._id}`
+    } else {
+      return `/admin/teacher/${this.props.user._id}`
+    }
+  }
   renderDropDownOption = () => {
     if (this.props.match.path === "/student") {
       return(
@@ -113,7 +120,7 @@ class UserNavbar extends React.Component {
                   <DropdownItem className="noti-title" header tag="div">
                     <h6 className="text-overflow m-0">Welcome!</h6>
                   </DropdownItem>
-                  <DropdownItem to={`/admin/teacher/${this.props.user._id}`} tag={Link}>
+                  <DropdownItem to={this.renderProfileLink()} tag={Link}>
                     <i className="ni ni-single-02" />
                     <span>My profile</span>
                   </DropdownItem>

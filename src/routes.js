@@ -137,10 +137,10 @@ var routes = [
 		invisible: false
   },
 	{
-		path: "/profile",
+		path: "/profile/:id",
 		name: "Student Info",
 		icon: "ni ni-single-02 text-yellow",
-		component: StudentProfile,
+		component: StudentInfo,
 		layout: "/student",
 		invisible: false
 	},
