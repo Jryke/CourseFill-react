@@ -106,7 +106,7 @@ class UserNavbar extends React.Component {
                     <span className="avatar avatar-sm rounded-circle">
                       <img
                         alt="..."
-                        src={require("../../assets/img/theme/team-4-800x800.jpg")}
+                        src={this.props.user.avatar}
                       />
                     </span>
                     <Media className="ml-2 d-none d-lg-block">
