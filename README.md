@@ -1,6 +1,6 @@
 # CourseFill
 
-Welcome to CourseFill, an web app for use by educational institutions to manage the course registration and payment for students.  
+Welcome to CourseFill, an web app for use by educational institutions to manage the course registration and payment by students.  
 
 CourseFill is still in the development phase but you can see the progress live online at:
 
@@ -9,6 +9,8 @@ https://coursefill-react.herokuapp.com.
 <a href="https://coursefill-react.herokuapp.com" target="_blank">
     <img src="https://github.com/Jryke/CourseFill-react/blob/master/src/assets/img/theme/coursefill-login.jpg" />
 </a>
+
+## Functionality
 
 **User roles and views**
 CourseFill has 3 roles for users; student, teacher and administrator.  Access to information is dependent on the role of the user.  
