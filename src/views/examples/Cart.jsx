@@ -61,6 +61,11 @@ class Cart extends React.Component {
 		 localStorage.removeItem('cart');
 		 this.setState({cart: []});
 	}
+	goBackToCourses = () => {
+		this.props.history.push({
+			pathname: "/student/courses"
+		})
+  }
 	render () {
 		return (
 			<>
@@ -87,6 +92,9 @@ class Cart extends React.Component {
 							</Elements>
 						</StripeProvider>
           </Card>
+					<Button size="sm" color="primary" onClick={this.goBackToCourses}>
+						Back to course selection
+					</Button>
         </Col>
       </>
 		)
