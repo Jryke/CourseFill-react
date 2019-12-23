@@ -81,7 +81,7 @@ class Cart extends React.Component {
 								<div className="text-center text-heavy mb-4">
 									Total:	${this.renderTotal()}
 								</div>
-								<Button size="sm" color="danger" onClick={this.clearCart} style={{ marginRight: "10px" }}>
+								<Button size="sm" color="danger" onClick={this.clearCart}>
 									Clear Cart
 								</Button>
               </div>
