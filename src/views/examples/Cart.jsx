@@ -92,7 +92,7 @@ class Cart extends React.Component {
 							</Elements>
 						</StripeProvider>
           </Card>
-					<Button size="sm" color="primary" onClick={this.goBackToCourses}>
+					<Button className="btn-block my-5" size="sm" color="primary" onClick={this.goBackToCourses}>
 						Back to course selection
 					</Button>
         </Col>
