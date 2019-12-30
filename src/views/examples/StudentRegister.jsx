@@ -40,7 +40,8 @@ class Register extends React.Component {
 	state = {
 		first_name: '',
 		middle_name: '',
-		last_name: '',
+    last_name: '',
+    avatar: {},
 		email: '',
 		password: ''
 	}
@@ -51,7 +52,12 @@ class Register extends React.Component {
 		 this.setState({state})
 		}
 
-		submitForm = (e) => {
+  uploadAvatar = (e) => {
+    let avatar = e.target.files[0]
+		this.setState({avatar})
+  }
+  
+	submitForm = (e) => {
 		e.preventDefault();
 		axios.post(`${process.env.REACT_APP_API_PORT}/signup`, {
 			first_name: this.state.first_name,
@@ -122,6 +128,19 @@ class Register extends React.Component {
 										<span>*required</span>
                   </InputGroup>
                 </FormGroup>
+
+                <FormGroup>
+                  <InputGroup className="input-group-alternative mb-3">
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="ni ni-single-02" />
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <small style={{paddingTop: "10px", paddingLeft: "10px"}}>Profile Picture</small>
+                    <Input type="file" onChange={this.uploadAvatar} />
+                  </InputGroup>
+                </FormGroup>
+
                 <FormGroup>
                   <InputGroup className="input-group-alternative mb-3">
                     <InputGroupAddon addonType="prepend">
