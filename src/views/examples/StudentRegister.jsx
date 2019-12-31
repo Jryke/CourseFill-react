@@ -58,27 +58,55 @@ class Register extends React.Component {
   }
   
 	submitForm = (e) => {
-		e.preventDefault();
-		axios.post(`${process.env.REACT_APP_API_PORT}/signup`, {
-			first_name: this.state.first_name,
-			middle_name: this.state.middle_name,
-			last_name: this.state.last_name,
-			email: this.state.email,
-			password: this.state.password
-		})
-		.then(res => {
-			if (res.status === 200) {
-				localStorage.setItem('token', res.data.token )
-				this.props.history.push('/student/courses')
-			} else {
-				const error = new Error(res.error);
-				throw error;
-			}
-		})
-		.catch(err => {
-			console.error(err);
-			alert('Error signing up please try again');
-		});
+    e.preventDefault();
+    if (this.state.first_name && this.state.last_name && this.state.email && this.state.password) {
+      let formData = new FormData()
+      formData.append('avatar', this.state.avatar)
+      formData.append('first_name', this.state.first_name)
+      formData.append('middle_name', this.state.middle_name)
+      formData.append('last_name', this.state.last_name)
+      formData.append('email', this.state.email)
+      formData.append('password', this.state.password)
+      axios.post(`${process.env.REACT_APP_API_PORT}/signup`, formData)
+      .then(res => {
+        if (res.status === 200) {
+          localStorage.setItem('token', res.data.token )
+          this.props.history.push('/student/courses')
+        } else {
+          const error = new Error(res.error);
+          throw error;
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert('Error signing up please try again');
+      });
+    } else {
+      alert('please complete all information to sign up')
+    }
+
+		// axios.post(`${process.env.REACT_APP_API_PORT}/signup`, {
+		// 	first_name: this.state.first_name,
+		// 	middle_name: this.state.middle_name,
+    //   last_name: this.state.last_name,
+      
+		// 	email: this.state.email,
+		// 	password: this.state.password
+		// })
+		// .then(res => {
+		// 	if (res.status === 200) {
+		// 		localStorage.setItem('token', res.data.token )
+		// 		this.props.history.push('/student/courses')
+		// 	} else {
+		// 		const error = new Error(res.error);
+		// 		throw error;
+		// 	}
+		// })
+		// .catch(err => {
+		// 	console.error(err);
+		// 	alert('Error signing up please try again');
+    // });
+    
 	}
 
   render() {
