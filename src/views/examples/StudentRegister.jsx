@@ -84,29 +84,6 @@ class Register extends React.Component {
     } else {
       alert('please complete all information to sign up')
     }
-
-		// axios.post(`${process.env.REACT_APP_API_PORT}/signup`, {
-		// 	first_name: this.state.first_name,
-		// 	middle_name: this.state.middle_name,
-    //   last_name: this.state.last_name,
-      
-		// 	email: this.state.email,
-		// 	password: this.state.password
-		// })
-		// .then(res => {
-		// 	if (res.status === 200) {
-		// 		localStorage.setItem('token', res.data.token )
-		// 		this.props.history.push('/student/courses')
-		// 	} else {
-		// 		const error = new Error(res.error);
-		// 		throw error;
-		// 	}
-		// })
-		// .catch(err => {
-		// 	console.error(err);
-		// 	alert('Error signing up please try again');
-    // });
-    
 	}
 
   render() {
