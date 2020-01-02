@@ -204,6 +204,21 @@ class Register extends React.Component {
               </Form>
             </CardBody>
           </Card>
+          <Row className="mt-3">
+            <Col xs="6"></Col>
+            <Col className="text-right" xs="6">
+              <a
+                className="text-light"
+                href=""
+                onClick={e => {
+									e.preventDefault()
+									this.props.history.push('/auth/login')
+									}}
+	              >
+                <span>Account login</span>
+              </a>
+            </Col>
+          </Row>
         </Col>
       </>
     );
@@ -211,5 +226,3 @@ class Register extends React.Component {
 }
 
 export default Register;
-
-//Test 
