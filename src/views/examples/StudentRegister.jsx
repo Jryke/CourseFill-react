@@ -215,7 +215,7 @@ class Register extends React.Component {
 									this.props.history.push('/auth/login')
 									}}
 	              >
-                <span>Account login</span>
+                <span>Go to login</span>
               </a>
             </Col>
           </Row>
