@@ -66,17 +66,22 @@ class CoursesTable extends React.Component {
 			})
 	}
 	addToCart = (courseId, courseName, price) => {
-		let cart = localStorage.getItem('cart')
-			? JSON.parse(localStorage.getItem('cart')) : []
+		let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []
 		let data = {_id: courseId, name: courseName, price: price}
-		cart.push(data)
+		let courseIds = cart.map(course => course._id)
+		if (courseIds.includes(data._id)) {
+			alert('course already selected')
+		} else {
+			cart.push(data)
+			alert('Course added successfully')
+		}
 		localStorage.setItem('cart', JSON.stringify(cart))
 	}
 	addToCartAndCheckout = (courseId, courseName, price) => {
-		let cart = localStorage.getItem('cart')
-			? JSON.parse(localStorage.getItem('cart')) : []
+		let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []
 		let data = {_id: courseId, name: courseName, price: price}
-		cart.push(data)
+		let courseIds = cart.map(course => course._id)
+		if (!courseIds.includes(data._id)) {cart.push(data)}
 		localStorage.setItem('cart', JSON.stringify(cart))
 		this.props.history.push({
 			pathname: "/auth/cart",

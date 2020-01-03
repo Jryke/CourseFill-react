@@ -69,13 +69,16 @@ class CourseInfo extends React.Component {
 	}
 
 	addToCart = () => {
-	let cart = localStorage.getItem('cart')
-		? JSON.parse(localStorage.getItem('cart')) : []
+	let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []
 	let data = {_id: this.state.data._id, name: this.state.data.name, price: this.state.data.price}
-	cart.push(data)
+	let courseIds = cart.map(course => course._id)
+	if (courseIds.includes(data._id)) {
+		alert('course already selected, click on the cart to complete registration')
+	} else {
+		cart.push(data)
+		alert('Course added successfully')
+	}
 	localStorage.setItem('cart', JSON.stringify(cart))
-	alert("Course added succesfully")
-
 }
 
 	renderEditButton = () => {
