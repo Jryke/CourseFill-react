@@ -29,7 +29,10 @@ import {
 	Input,
   Container,
   Row,
-  Col
+	Col,
+	InputGroup,
+	InputGroupAddon,
+	InputGroupText
 } from "reactstrap";
 import { Link } from 'react-router-dom'
 // core components
@@ -53,8 +56,35 @@ class StudentInfo extends React.Component {
 				console.log("Error")
 			})
 	}
+	uploadAvatar = (e) => {
+		let newAvatar = e.target.files[0]
+		this.setState({newAvatar})
+  }
 	submitUpdates = (e) => {
 		e.preventDefault()
+		if (this.state.newAvatar) {
+			let formData = new FormData()
+			formData.append('avatar', this.state.newAvatar)
+			// formData.append('first_name', this.state.first_name)
+			// formData.append('middle_name', this.state.middle_name)
+			// formData.append('last_name', this.state.last_name)
+			// formData.append('about', this.state.about)
+			// formData.append('email', this.state.email)
+			// formData.append('phone', this.state.phone)
+			// formData.append('streetAddress', this.state.address.streetAddress)
+			// formData.append('city', this.state.address.city)
+			// formData.append('country', this.state.address.country)
+			// formData.append('zipCode', this.state.address.zipCode)
+			axios.patch(`${process.env.REACT_APP_API_PORT}/user/avatar/${this.props.match.params.id}`, formData)
+				.then(res => {
+					let data = this.state.data
+					data.avatar = res.config.url
+					this.setState({data})
+				})
+				.catch(err => {
+					console.log("Error uploading avatar")
+				})
+		}
 		axios.patch(`${process.env.REACT_APP_API_PORT}/students/${this.props.match.params.id}`, this.state.data)
 			.then(data => {
 					this.setState({
@@ -119,6 +149,12 @@ class StudentInfo extends React.Component {
 										<CardHeader className="bg-white border-0">
 											<Row className="align-items-center">
 												<Col xs="8">
+													<span className="avatar avatar-sm rounded-circle">
+														<img
+															alt="..."
+															src={this.state.data.avatar}
+														/>
+													</span>
 													<h3 className="mb-0">Student information</h3>
 												</Col>
 												<Col className="text-right" xs="4">
@@ -319,6 +355,23 @@ class StudentInfo extends React.Component {
 										<CardHeader className="bg-white border-0">
 											<Row className="align-items-center">
 												<Col xs="8">
+													<span className="avatar avatar-sm rounded-circle">
+														<img
+															alt="..."
+															src={this.state.data.avatar}
+														/>
+													</span>
+													<FormGroup>
+														<InputGroup className="input-group-alternative mb-3">
+															<InputGroupAddon addonType="prepend">
+																<InputGroupText>
+																	<i className="ni ni-single-02" />
+																</InputGroupText>
+															</InputGroupAddon>
+															<small style={{paddingTop: "10px", paddingLeft: "10px"}}>Profile Picture</small>
+															<Input type="file" onChange={this.uploadAvatar} />
+														</InputGroup>
+													</FormGroup>	
 													<h3 className="mb-0">Student information</h3>
 												</Col>
 												<Col className="text-right" xs="4">
@@ -464,7 +517,7 @@ class StudentInfo extends React.Component {
 																	defaultValue={this.state.data.phone}
 																	id="input-phone"
 																	type="tel"
-																	onChange={e => this.sendInputToState(e, 'email')}
+																	onChange={e => this.sendInputToState(e, 'phone')}
 																/>
 															</FormGroup>
 														</Col>
@@ -529,7 +582,7 @@ class StudentInfo extends React.Component {
 																	defaultValue={this.renderAddressInfo("state")}
 																	id="input-state"
 																	type="text"
-																	onChange={e => this.sendInputToState(e, 'country', 'address')}
+																	onChange={e => this.sendInputToState(e, 'state', 'address')}
 																/>
 															</FormGroup>
 														</Col>
