@@ -65,20 +65,10 @@ class StudentInfo extends React.Component {
 		if (this.state.newAvatar) {
 			let formData = new FormData()
 			formData.append('avatar', this.state.newAvatar)
-			// formData.append('first_name', this.state.first_name)
-			// formData.append('middle_name', this.state.middle_name)
-			// formData.append('last_name', this.state.last_name)
-			// formData.append('about', this.state.about)
-			// formData.append('email', this.state.email)
-			// formData.append('phone', this.state.phone)
-			// formData.append('streetAddress', this.state.address.streetAddress)
-			// formData.append('city', this.state.address.city)
-			// formData.append('country', this.state.address.country)
-			// formData.append('zipCode', this.state.address.zipCode)
 			axios.patch(`${process.env.REACT_APP_API_PORT}/user/avatar/${this.props.match.params.id}`, formData)
 				.then(res => {
 					let data = this.state.data
-					data.avatar = res.config.url
+					data.avatar = res.data.avatar
 					this.setState({data})
 				})
 				.catch(err => {
