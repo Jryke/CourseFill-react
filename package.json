@@ -1,11 +1,11 @@
 {
-  "name": "argon-dashboard-react",
+  "name": "coursefill",
   "version": "1.0.0",
-  "description": "React version of Argon Dashboard by Creative Tim",
+  "description": "Web app for online course registration",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/creativetimofficial/argon-dashboard-react.git"
+    "url": "git+https://github.com/Jryke/CourseFill-react.git"
   },
   "keywords": [
     "react",
@@ -17,12 +17,12 @@
     "argon-dashboard",
     "argon-dashboard-react"
   ],
-  "author": "Creative Tim",
+  "author": "Jesse Rykerson",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/creativetimofficial/argon-dashboard-react/issues"
+    "url": "https://github.com/Jryke/CourseFill-react/issues"
   },
-  "homepage": "https://demos.creative-tim.com/argon-dashboard-react/",
+  "homepage": "https://coursefill-react.herokuapp.com",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
