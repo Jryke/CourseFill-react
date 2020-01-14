@@ -23,7 +23,10 @@ import {
   Input,
   Container,
   Row,
-  Col
+	Col,
+	InputGroup,
+	InputGroupAddon,
+	InputGroupText
 } from "reactstrap";
 import { Link } from 'react-router-dom'
 import axios from 'axios'
@@ -69,6 +72,10 @@ class TeacherInfo extends React.Component {
 			)
 		}
 	}
+	uploadAvatar = (e) => {
+		let newAvatar = e.target.files[0]
+		this.setState({newAvatar})
+  }
 	sendInputToState = (e, stateRef, stateObj) => {
 		let teacher = this.state.teacher
 		if (stateObj) {
@@ -80,6 +87,19 @@ class TeacherInfo extends React.Component {
 	}
 	submitUpdates = (e) => {
 		e.preventDefault()
+		if (this.state.newAvatar) {
+			let formData = new FormData()
+			formData.append('avatar', this.state.newAvatar)
+			axios.patch(`${process.env.REACT_APP_API_PORT}/user/avatar/${this.props.match.params.id}`, formData)
+				.then(res => {
+					let teacher = this.state.teacher
+					teacher.avatar = res.data.avatar
+					this.setState({teacher})
+				})
+				.catch(err => {
+					console.log("Error uploading avatar")
+				})
+		}
 		axios.patch(`${process.env.REACT_APP_API_PORT}/teachers/${this.props.match.params.id}`, this.state.teacher)
 			.then(data => {
 					this.setState({
@@ -163,6 +183,12 @@ class TeacherInfo extends React.Component {
 		                <CardHeader className="bg-white border-0">
 		                  <Row className="align-items-center">
 		                    <Col xs="8">
+													<span className="avatar avatar-sm rounded-circle">
+														<img
+															alt="..."
+															src={this.state.teacher.avatar}
+														/>
+													</span>
 		                      <h3 className="mb-0">Teacher</h3>
 		                    </Col>
 		                    {
@@ -304,6 +330,23 @@ class TeacherInfo extends React.Component {
 		                <CardHeader className="bg-white border-0">
 		                  <Row className="align-items-center">
 		                    <Col xs="8">
+													<span className="avatar avatar-sm rounded-circle">
+														<img
+															alt="..."
+															src={this.state.teacher.avatar}
+														/>
+													</span>
+													<FormGroup>
+														<InputGroup className="input-group-alternative mb-3">
+															<InputGroupAddon addonType="prepend">
+																<InputGroupText>
+																	<i className="ni ni-single-02" />
+																</InputGroupText>
+															</InputGroupAddon>
+															<small style={{paddingTop: "10px", paddingLeft: "10px"}}>Profile Picture</small>
+															<Input type="file" onChange={this.uploadAvatar} />
+														</InputGroup>
+													</FormGroup>	
 		                      <h3 className="mb-0">Teacher</h3>
 		                    </Col>
 												<Col className="text-right" xs="4">
