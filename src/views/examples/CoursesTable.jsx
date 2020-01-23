@@ -140,6 +140,7 @@ class CoursesTable extends React.Component {
 		}
 	}
   render() {
+		console.log(this.orderList())
     return (
 			<>
 				{
@@ -184,8 +185,16 @@ class CoursesTable extends React.Component {
 									<td>
 										<Link to={`course/${course._id}`}>
 											<Badge color="" className="badge-dot mr-4">
-												<i className="bg-warning" />
-												pending
+												{/* <i className="bg-warning" /> */}
+												{
+													course.schedule.days.map((day, i) => {
+														return (
+															<span style={{display: "block"}} className="pb-2 text-left">
+																{day}s: {course.schedule.startTime} - {course.schedule.endTime}
+															</span>
+														)
+													})
+												}
 											</Badge>
 										</Link>
 									</td>
