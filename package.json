@@ -45,7 +45,7 @@
     "classnames": "2.2.6",
     "jsonwebtoken": "^8.5.1",
     "moment": "2.24.0",
-    "node-sass": "4.11.0",
+    "node-sass": "4.13.1",
     "nouislider": "13.1.1",
     "rc-datetime-picker": "^1.6.1",
     "react": "16.8.4",
